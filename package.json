@@ -1,9 +1,14 @@
 {
-  "name": "project-template",
+  "name": "project-amber-ayeaye",
   "version": "0.1.0",
   "private": true,
   "contributors": [
-    "Your names here"
+    "Assadou Nzigamasabo",
+    "Brendan Philbin",
+    "Maja Cannavo",
+    "Matthew Kushwaha",
+    "Myles Stokowski",
+    "Simon Scharf"
   ],
   "scripts": {
     "dev": "next dev",
