@@ -6,6 +6,11 @@ To ensure consistent style, this template is also set up with [Prettier](https:/
 
 **Note: I've provided the processes for interacting with this project if you have a local installation. Running on Replit simplifies many of these steps (but not all of them, so please do read through).**
 
+## Sprint 0 Deliverables
+
+#### Travis CI Badge
+
+[![Build Status](https://travis-ci.com/csci312-s21/project-amber-ayeaye.svg?branch=main)](https://travis-ci.com/csci312-s21/project-amber-ayeaye)
 
 ## Getting Started
 
