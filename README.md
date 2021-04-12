@@ -6,8 +6,6 @@ To ensure consistent style, this template is also set up with [Prettier](https:/
 
 **Note: I've provided the processes for interacting with this project if you have a local installation. Running on Replit simplifies many of these steps (but not all of them, so please do read through).**
 
-## Sprint 0 Deliverables
-
 #### Travis CI Badge
 
 [![Build Status](https://travis-ci.com/csci312-s21/project-amber-ayeaye.svg?branch=main)](https://travis-ci.com/csci312-s21/project-amber-ayeaye)
@@ -16,7 +14,7 @@ To ensure consistent style, this template is also set up with [Prettier](https:/
 This application will serve as a new website for the WRMC radio station. The current website is run through WordPress and although many of the features in the current website will remain in this application they will be implemented in React and streamlined for easier use by listeners, DJs, and WRMC board members. This application will also address the troubling fact that any Middlebury student can edit the WRMC WordPress site without being affiliated with the radio station.
 
 #### Heroku Link
-https://dashboard.heroku.com/apps/project-amber-ayeaye
+https://project-amber-ayeaye.herokuapp.com/
 
 ## Getting Started
 
