@@ -6,6 +6,8 @@ import styles from "../styles/Home.module.css";
 
 import Playlist from "../components/Playlist";
 
+import SongAdder from "../components/SongAdder";
+
 import sampleData from "../../data/songseed.json";
 
 export default function Home() {
@@ -14,6 +16,11 @@ export default function Home() {
     
     const deleteSong = (song) => {
         const newSongs = currentSongs.filter( (s) => s.id !== song.id);
+        setCurrentSongs(newSongs);
+    };
+
+    const addSong = (newSong) => {
+        const newSongs = [...currentSongs, newSong];
         setCurrentSongs(newSongs);
     };
     
@@ -29,6 +36,7 @@ export default function Home() {
             <h1>
             Welcome to WRMC!
             </h1>
+            <SongAdder addSong={addSong}/>
             <Playlist songs={currentSongs} deleteSong={deleteSong}/>
         </main>
     
