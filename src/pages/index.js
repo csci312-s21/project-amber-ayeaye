@@ -8,6 +8,8 @@ import Playlist from "../components/Playlist";
 
 import SongAdder from "../components/SongAdder";
 
+import SearchBar from "../components/SearchBar";
+
 import sampleData from "../../data/songseed.json";
 
 export default function Home() {
@@ -37,6 +39,7 @@ export default function Home() {
             Welcome to WRMC!
             </h1>
             <SongAdder addSong={addSong}/>
+            <SearchBar callback={addSong}/>
             <Playlist songs={currentSongs} deleteSong={deleteSong}/>
         </main>
     
