@@ -9,7 +9,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 export default function Song({song, deleteSong}) {
     return (
         <div>
-            <Avatar variant="square" alt="album artwork" src="/data/images/example_img.png"/>
+            <Avatar variant="square" alt="album artwork" src="https://lastfm.freetls.fastly.net/i/u/174s/54b37d139a3e4656817f66e794492302.png"/>
             
             <h3>
                 {song.title}
