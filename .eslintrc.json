@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parserOptions": {
     "ecmaVersion": 2020,
     "ecmaFeatures": {
@@ -10,12 +7,11 @@
     },
     "sourceType": "module"
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "env": {
     "es6": true,
-    "jest": true
+    "jest": true,
+    "browser": true
   },
   "settings": {
     "react": {
@@ -84,10 +80,7 @@
         "variables": true
       }
     ],
-    "curly": [
-      "error",
-      "multi-line"
-    ],
+    "curly": ["error", "multi-line"],
     "eqeqeq": [
       "error",
       "always",
@@ -103,10 +96,7 @@
         "allowTemplateLiterals": true
       }
     ],
-    "jsx-quotes": [
-      "error",
-      "prefer-double"
-    ],
+    "jsx-quotes": ["error", "prefer-double"],
     "react/jsx-boolean-value": [
       "error",
       "never",
@@ -114,13 +104,8 @@
         "always": []
       }
     ],
-    "react/no-deprecated": [
-      "error"
-    ],
-    "react/prefer-es6-class": [
-      "error",
-      "always"
-    ],
+    "react/no-deprecated": ["error"],
+    "react/prefer-es6-class": ["error", "always"],
     "react/prefer-stateless-function": [
       "warn",
       {
@@ -136,9 +121,5 @@
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "react/jsx-key": "error"
-  },
-  "globals": {
-  "fetch": false
-}
-
+  }
 }
