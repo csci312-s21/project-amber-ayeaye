@@ -4,17 +4,29 @@ export default function SearchBar({callback}){
   const [artist, setArtist] = useState(""); 
   const [album, setAlbum] = useState("");
   const [song, setSong] = useState()  //object
-  //const [artwork, setArtwork] = useState("")
-
 
   const apikey ="c3c30675cd237fa2a114de419139da9b";
 
-  const authenticate = `https://www.last.fm/api/auth/?api_key=${apikey}&cb=https://project-amber-ayeaye-1.ntare62.repl.co/`
-  const getToken =` http://ws.audioscrobbler.com/2.0/?method=auth.gettoken&api_key=${apikey}&format=json`
+  //const authenticate = `https://www.last.fm/api/auth/?api_key=${apikey}&cb=https://project-amber-ayeaye-1.ntare62.repl.co/`
+  //const getToken =` http://ws.audioscrobbler.com/2.0/?method=auth.gettoken&api_key=${apikey}&format=json`
+
+
+  const getAlbumcover = async () => {
+    const getAlbum = `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${apikey}&artist=${artist}&album=${album}&format=json`
+    const getData = async () =>{
+      const response = await fetch(getAlbum);
+      if(!response.ok){
+        throw new Error (response.statusText);
+      }
+      const albumFromServer = await response.json();
+
+      return albumFromServer.album.image[2]["#text"]
+    }
+    return await getData();
+  }
 
   const searchTrack = async() => {
     const url= `https://ws.audioscrobbler.com/2.0/?method=track.search&artist=${artist}&track=${track}&limit=1&api_key=${apikey}&format=json`
-    //console.log(url);
     const artwork = await getAlbumcover();
     
     const getData = async () => {
@@ -23,40 +35,19 @@ export default function SearchBar({callback}){
         throw new Error(response.statusText);
       }
       const songData = await response.json();
-      //console.log(`state of artwork in searchTrack: ${artwork}`)
       setSong({title : songData.results.trackmatches.track[0].name, 
                artist: songData.results.trackmatches.track[0].artist, 
                artwork: artwork, 
                album: album, 
                id:songData.results.trackmatches.track[0].mbid })
-      console.log(song)
     };
     
     getData();
 
   }
   
-  const getAlbumcover = async () => {
-    const getAlbum = `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${apikey}&artist=${artist}&album=${album}&format=json`
-    //console.log(getAlbum)
-    const getData = async () =>{
-      const response = await fetch (getAlbum);
-      if(!response.ok){
-        throw new Error (response.statusText);
-      }
-      const albumFromServer = await response.json();
-
-      // setArtwork(albumFromServer.album.image[2]['#text'])
-      // console.log(`artwork:${albumFromServer.album.image[2]['#text']}`)
-      // console.log(`state of artwork: ${artwork}`)
-
-      return albumFromServer.album.image[2]['#text']
-    }
-    return await getData();
-  }
 
   useEffect(()=>{
-    console.log(song)
     song && callback(song);
   }, [song])
 

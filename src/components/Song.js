@@ -1,6 +1,5 @@
 // Song.js
 // Visual component for presenting a song in a playlist
-import {useState, useEffect} from "react";
 import PropTypes from "prop-types";
 import IconButton from "@material-ui/core/IconButton";
 import Avatar from "@material-ui/core/Avatar";
