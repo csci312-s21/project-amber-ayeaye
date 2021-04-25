@@ -3,6 +3,7 @@
 
 import PropTypes from "prop-types";
 import { useState } from "react";
+import TextField from "@material-ui/core/TextField";
 
 export default function ManualEntry({addSong, switchMode}) {
   const [title, setTitle] = useState("");
@@ -19,8 +20,7 @@ export default function ManualEntry({addSong, switchMode}) {
   const titleInput =
   <div>
     <label>Title: </label>
-    <input
-      type="text"
+    <TextField
       id="titleInput"
       placeholder="Enter a song title"
       value={title}
@@ -31,8 +31,7 @@ export default function ManualEntry({addSong, switchMode}) {
   const artistInput =
     <div>
       <label>Artist: </label>
-      <input
-        type="text"
+      <TextField
         id="artistInput"
         placeholder="Enter an artist name"
         value={artist}
@@ -43,8 +42,7 @@ export default function ManualEntry({addSong, switchMode}) {
     const albumInput =
       <div>
         <label>Album: </label>
-        <input
-          type="text"
+        <TextField
           id="albumInput"
           placeholder="Enter an album name"
           value={album}
