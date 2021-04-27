@@ -1,11 +1,11 @@
-import sampleSongs from "../../data/song-database-test-data.json";
+import sampleSongs from "../../data/song-database-seeds/song-database-test-data.json";
 import {
     knex,
     getSongs,
     getSong,
     deleteSong,
     addSong
-} from "./song-database-utils";
+} from "../lib/song-database-utils";
 
 describe("Tests of the Song database utility function", () => {
 
@@ -20,8 +20,8 @@ describe("Tests of the Song database utility function", () => {
 
         test("getSongs gets all songs", async () => {
             const songs = await getSongs();
-            sampleSongs.sort( (a, b) -> a.title.localeCompare(b.title));
-            songs.sort( (a, b) -> a.title.localeCompare(b.title)); 
+            sampleSongs.sort( (a, b) => a.title.localeCompare(b.title));
+            songs.sort( (a, b) => a.title.localeCompare(b.title)); 
             expect(songs).toEqual(sampleSongs);
         });
 
@@ -120,4 +120,4 @@ describe("Tests of the Song database utility function", () => {
         });
     });
 
-})
+});
