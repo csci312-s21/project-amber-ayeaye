@@ -59,7 +59,7 @@ export async function deletePlaylist(id) {
  * @param {object} playlist 
  * @returns the playlist with a new id attached
  */
-export async function addSong(playlist) {
+export async function addPlaylist(playlist) {
     const newId = await knex("Playlist").insert(playlist);
     const newPlaylist = getPlaylist(newId[0]);
     return newPlaylist;

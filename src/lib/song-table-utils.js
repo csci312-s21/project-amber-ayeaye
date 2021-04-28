@@ -14,22 +14,11 @@ export const knex = knexInitializer(
 
     Available functions:
 
-    getSongs - reads all of the songs out of the database and returns them
     getSong(id) - reads the song with the specified id
-    deleteSong(id) - deletes the song with the specified id
+    getSongBySpotifyID(spotify_id) - reads the song with the specified spotify ID
     addSong(song) - adds the specified song to the database
 
 */
-
-/**
- * Read all songs from the database
- * 
- * @returns array of Song objects
- */
-export async function getSongs() {
-    const rows = await knex("Song").select();
-    return rows;
-}
 
 /**
  * Read the song with the specified id
@@ -42,15 +31,14 @@ export async function getSong(id) {
     return song[0] ? song[0] : null;
 }
 
-/**
- * Delete the song with the specified id
- * 
- * @param {number} id
- * @returns a Boolean indicating success
- */
-export async function deleteSong(id) {
-    const numDeleted = await knex("Song").where({id:id}).del();
-    return numDeleted ? true : false;
+
+// getSongBySpotifyID
+export async function getSongBySpotifyId(id){
+  const song = await knex("Song")
+    .select()
+    .where({"spotify_id": id});
+
+  return song[0] ? song[0] : null;
 }
 
 /**

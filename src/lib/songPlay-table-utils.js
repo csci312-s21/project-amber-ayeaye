@@ -16,6 +16,10 @@ export const knex = knexInitializer(
 
     addSongPlay(song, playlist_id) - adds a songPlay element when a song is played
 
+    deleteSongPlay(id) - delete the songPlay element corresponding to the provided id
+
+    changeOrder(id_list) - reorders songPlay elements for a given playlist based on the provided list of id's
+
 */
 
 /**
