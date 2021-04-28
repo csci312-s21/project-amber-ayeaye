@@ -9,6 +9,7 @@ export default function SearchBar({callback}){
   const [artist, setArtist] = useState(""); 
   const [album, setAlbum] = useState("");
   const [song, setSong] = useState()  //object
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     const authenticate = async () => {
@@ -31,12 +32,15 @@ export default function SearchBar({callback}){
     }
 
     const auth = await response.json();
-    console.log(auth)
+
+    setToken(auth);
   };
 
   authenticate();
-  
+
   }, []);
+
+  console.log(token);
 
 
   const getAlbumcover = async () => {
