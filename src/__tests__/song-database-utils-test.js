@@ -1,4 +1,4 @@
-import sampleSongs from "../../data/song-database-seeds/song-database-test-data.json";
+import sampleSongs from "../../data/song-database-test-data.json";
 import {
     knex,
     getSongs,
@@ -26,7 +26,7 @@ describe("Tests of the Song database utility function", () => {
         });
 
         test("getSong gets a single song", async () => {
-            const sampleSong = sampleSongs[Math.floor(sampleSongs.lengh / 2)];
+            const sampleSong = sampleSongs[Math.floor(sampleSongs.length / 2)];
             const song = await getSong(sampleSong.id);
             expect(song).toEqual(sampleSong);
         });
@@ -97,7 +97,7 @@ describe("Tests of the Song database utility function", () => {
             expect(newSong.title).toBe(sample.title);
             expect(newSong.artist).toBe(sample.artist);
             expect(newSong.album).toBe(sample.album);
-            expect(newSong).artwork.not.toBeNull();
+            expect(newSong.artwork).not.toBeNull();
         })
         
 
@@ -106,7 +106,7 @@ describe("Tests of the Song database utility function", () => {
     describe("delete songs", () => {
 
         test("deleteSong deletes song", async () => {
-            const sample = sampleSong[0];
+            const sample = sampleSongs[0];
             const success = await deleteSong(sample.id);
             expect(success).toBeTruthy();
 

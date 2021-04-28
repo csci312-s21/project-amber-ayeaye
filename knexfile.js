@@ -12,7 +12,7 @@ module.exports = {
         connection: ":memory:",
         useNullAsDefault: true,
         seeds: {
-            directory: './data/song-database-seeds',
+            directory: './seeds/test',
         },
     },
 
