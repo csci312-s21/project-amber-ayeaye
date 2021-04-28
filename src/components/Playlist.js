@@ -2,30 +2,37 @@
 // Visual component to present a playlist of Songs
 
 import PropTypes from "prop-types";
-
+import { makeStyles } from '@material-ui/core/styles';
 import Song from "./Song";
+import List from '@material-ui/core/List';
 
-export default function Playlist({songs, deleteSong}) {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
 
-    const songComponents = songs.map( (song) =>
-        <li key={song.id}>
-            <Song song={song} deleteSong={deleteSong}/>
-        </li>
-    );
+export default function Playlist({ songs, deleteSong }) {
+  const classes = useStyles();
+  const songComponents = songs.map((song) =>
+    <Song song={song} deleteSong={deleteSong} />
+  );
 
-    return (
-        <div>
-            <h2>
-              Current Playlist:
-            </h2>
-            <ul>
-                {songComponents}
-            </ul>
-        </div>
-    );
+  return (
+    <div className={classes.root}>
+      <h2>
+        Current Playlist:
+      </h2>
+      <List>
+        {songComponents}
+      </List>
+    </div>
+  );
 }
 
 Playlist.propTypes = {
-  songs:PropTypes.arrayOf(PropTypes.object).isRequired,
+  songs: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
