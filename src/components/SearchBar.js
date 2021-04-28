@@ -1,14 +1,42 @@
+import {config} from "../../config";
+
 import {useState, useEffect} from "react";
+
+
+
 export default function SearchBar({callback}){
   const [track, setTrack] = useState("");
   const [artist, setArtist] = useState(""); 
   const [album, setAlbum] = useState("");
   const [song, setSong] = useState()  //object
 
-  const apikey ="c3c30675cd237fa2a114de419139da9b";
+  useEffect(() => {
+    const authenticate = async () => {
+    const BASE_URL = 'https://accounts.spotify.com/api/token';
+    
+    const response = await fetch(BASE_URL, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + (new Buffer(config.CLIENT_ID + ':' + config.CLIENT_SECRET).toString('base64'))
+      },
+      body: new URLSearchParams({
+        'grant_type': 'client_credentials'
+      }),
 
-  //const authenticate = `https://www.last.fm/api/auth/?api_key=${apikey}&cb=https://project-amber-ayeaye-1.ntare62.repl.co/`
-  //const getToken =` http://ws.audioscrobbler.com/2.0/?method=auth.gettoken&api_key=${apikey}&format=json`
+    });
+
+    if (!response.ok) {
+      throw new Error (response.statusText);
+    }
+
+    const auth = await response.json();
+    console.log(auth)
+  };
+
+  authenticate();
+  
+  }, []);
 
 
   const getAlbumcover = async () => {
