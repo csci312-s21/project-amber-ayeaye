@@ -7,7 +7,7 @@ export const knex = knexInitializer(
 
 /*
 
-    song-database-utils.js
+    song-table-utils.js
 
     This is a collection of utility functions to be called on the server backend.
     These functions interact directly with the database.
