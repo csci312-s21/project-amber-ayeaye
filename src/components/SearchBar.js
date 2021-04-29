@@ -9,19 +9,20 @@ export default function SearchBar({callback}){
   const [artist, setArtist] = useState(""); 
   const [album, setAlbum] = useState("");
   const [song, setSong] = useState()  //object
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     const authenticate = async () => {
-    const BASE_URL = 'https://accounts.spotify.com/api/token';
+    const BASE_URL = "https://accounts.spotify.com/api/token";
     
     const response = await fetch(BASE_URL, {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Basic ' + (new Buffer(config.CLIENT_ID + ':' + config.CLIENT_SECRET).toString('base64'))
+      method: "POST",
+      headers: { 
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Authorization": `Basic ${(new Buffer(`${config.CLIENT_ID}:${config.CLIENT_SECRET}`).toString("base64"))}`
       },
       body: new URLSearchParams({
-        'grant_type': 'client_credentials'
+        "grant_type": "client_credentials"
       }),
 
     });
@@ -31,15 +32,19 @@ export default function SearchBar({callback}){
     }
 
     const auth = await response.json();
-    console.log(auth)
+
+    setToken(auth);
   };
 
   authenticate();
-  
+
   }, []);
+
+  console.log(token);
 
 
   const getAlbumcover = async () => {
+    const apikey = "";
     const getAlbum = `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${apikey}&artist=${artist}&album=${album}&format=json`
     const getData = async () =>{
       const response = await fetch(getAlbum);
@@ -54,6 +59,7 @@ export default function SearchBar({callback}){
   }
 
   const searchTrack = async() => {
+    const apikey = ""
     const url= `https://ws.audioscrobbler.com/2.0/?method=track.search&artist=${artist}&track=${track}&limit=1&api_key=${apikey}&format=json`
     const artwork = await getAlbumcover();
     
