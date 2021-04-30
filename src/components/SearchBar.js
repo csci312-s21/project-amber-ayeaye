@@ -2,13 +2,11 @@ import {config} from "../../config";
 
 import {useState, useEffect} from "react";
 
+import TextField from "@material-ui/core/TextField";
 
-
-export default function SearchBar({callback}){
-  const [track, setTrack] = useState("");
-  const [artist, setArtist] = useState(""); 
-  const [album, setAlbum] = useState("");
-  const [song, setSong] = useState()  //object
+export default function SearchBar({addSong}){
+  const [searchText, setSearchText] = useState("");
+  const [searchResults, setSearchResults] = useState("");
   const [token, setToken] = useState("");
 
   useEffect(() => {
@@ -40,63 +38,53 @@ export default function SearchBar({callback}){
 
   }, []);
 
-  console.log(token);
-
-
-  const getAlbumcover = async () => {
-    const apikey = "";
-    const getAlbum = `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${apikey}&artist=${artist}&album=${album}&format=json`
-    const getData = async () =>{
-      const response = await fetch(getAlbum);
-      if(!response.ok){
-        throw new Error (response.statusText);
+  const searchSong = async () => {
+    const url = `https://api.spotify.com/v1/search?q=${searchText}&type=track&limit=10`;
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer " + token.access_token
       }
-      const albumFromServer = await response.json();
-
-      return albumFromServer.album.image[2]["#text"]
+    });
+    if(!response.ok){
+      throw new Error(response.statusText);
     }
-    return await getData();
+
+    const searchResults = await response.json();
+    
+    console.log(searchResults);
+
+    setSearchResults(searchResults)
   }
 
-  const searchTrack = async() => {
-    const apikey = ""
-    const url= `https://ws.audioscrobbler.com/2.0/?method=track.search&artist=${artist}&track=${track}&limit=1&api_key=${apikey}&format=json`
-    const artwork = await getAlbumcover();
-    
-    const getData = async () => {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      const songData = await response.json();
-      setSong({title : songData.results.trackmatches.track[0].name, 
-               artist: songData.results.trackmatches.track[0].artist, 
-               artwork: artwork, 
-               album: album, 
-               id:songData.results.trackmatches.track[0].mbid })
-    };
-    
-    getData();
+  //relevant fields 
+  //const songName = searchResults.tracks.items[0].name;
+  //const songArtist = searchResults.tracks.items[0].artists[0].name;
+  //const songAlbum = searchResults.tracks.items[0].album.name;
+  //const songArtwork = searchResults.tracks.items[0].album.images[0].url;
 
-  }
   
 
-  useEffect(()=>{
-    song && callback(song);
-  }, [song])
-
-    return(
+ return(
       <div>
-      <label>Song: 
-      <input type="text" name="songTitle" id="title" placeholder="Song"value={track} onChange={((event)=>setTrack(event.target.value))}/>
-      </label>
-      <label>Artist: 
-      <input type="text" name="artist" id="artist" placeholder="Artist" value={artist} onChange={((event)=>setArtist(event.target.value))}/>
-      </label>
-      <label>Album:
-      <input type="text" name="album" id="album" placeholder="Album" value={album} onChange={((event)=>setAlbum(event.target.value))}/>
-      </label>
-      <button  onClick={() => searchTrack()}> search song</button> 
+
+        <label>Keyword Search: 
+        <TextField 
+          name="keywordSearch" 
+          id="keywordSearch" 
+          placeholder="Enter song name, artist, and/or album" 
+          value={searchText} 
+          onChange={((event)=>setSearchText(event.target.value))}/>
+        </label>
+      
+        <button  
+          onClick={() => searchSong()} 
+          disabled={searchText === ""}>
+          Search
+        </button> 
+
       </div>
     )
+
+    
 }
