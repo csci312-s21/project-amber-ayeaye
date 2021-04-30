@@ -5,7 +5,7 @@ exports.seed = function (knex, Promise) {
   const data = JSON.parse(contents);
 
   // Deletes ALL existing entries
-  // Use batch insert because we have too many articles for simple insert
+  // Use batch insert to insert mulitple songs at the same time
   return knex('Song')
     .del()
     .then(() => knex.batchInsert('Song', data, 100));
