@@ -52,7 +52,7 @@ export default function Home() {
             {/*<SongAdder addSong={addSong}/>*/}
             <SearchBar addSong={addSong}/>
             <ManualEntry addSong={addSong} switchMode={switchMode}/>
-            <Playlist songs={currentSongs} deleteSong={deleteSong}/>
+            <Playlist songs={currentSongs} deleteSong={deleteSong} mode={"inPlaylist"}/>
         </main>
     
         <footer>A CS 312 Project</footer>

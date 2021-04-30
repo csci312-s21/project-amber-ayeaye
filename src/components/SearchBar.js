@@ -1,3 +1,4 @@
+import Playlist from "./Playlist";
 import {config} from "../../config";
 
 import {useState, useEffect} from "react";
@@ -6,7 +7,7 @@ import TextField from "@material-ui/core/TextField";
 
 export default function SearchBar({addSong}){
   const [searchText, setSearchText] = useState("");
-  const [searchResults, setSearchResults] = useState("");
+  const [searchResults, setSearchResults] = useState();
   const [token, setToken] = useState("");
 
   useEffect(() => {
@@ -50,19 +51,22 @@ export default function SearchBar({addSong}){
       throw new Error(response.statusText);
     }
 
-    const searchResults = await response.json();
+    const rawResults = await response.json();
     
-    console.log(searchResults);
+    console.log(rawResults);
 
-    setSearchResults(searchResults)
+    setSearchResults(
+      rawResults.tracks.items.map((track) =>
+        ({
+          title: track.name,
+          artist: track.artists[0].name,
+          album: track.album.name,
+          artwork: track.album.images[0],
+          id: `${track.name}${track.artists[0].name}${track.album.name}`
+        })
+      )
+    );
   }
-
-  //relevant fields 
-  //const songName = searchResults.tracks.items[0].name;
-  //const songArtist = searchResults.tracks.items[0].artists[0].name;
-  //const songAlbum = searchResults.tracks.items[0].album.name;
-  //const songArtwork = searchResults.tracks.items[0].album.images[0].url;
-
   
 
  return(
@@ -82,6 +86,8 @@ export default function SearchBar({addSong}){
           disabled={searchText === ""}>
           Search
         </button> 
+
+        {searchResults && <Playlist songs={searchResults} addSong={addSong} mode="inSearchResults" />}
 
       </div>
     )
