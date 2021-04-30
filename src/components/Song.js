@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import IconButton from "@material-ui/core/IconButton";
 import Avatar from "@material-ui/core/Avatar";
 import DeleteIcon from "@material-ui/icons/Delete";
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from "@material-ui/icons/Add";
 import AlbumIcon from "@material-ui/icons/Album";
 
 export default function Song({song, deleteSong, addSong, mode}) {

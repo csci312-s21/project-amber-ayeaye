@@ -44,7 +44,7 @@ export default function SearchBar({addSong}){
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Bearer " + token.access_token
+        "Authorization": `Bearer ${token.access_token}`
       }
     });
     if(!response.ok){
