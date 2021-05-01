@@ -3,48 +3,48 @@
         "title": "Piano Man",
         "artist": "Billy Joel",
         "album": "Piano Man",
-        "id": 100000
+        "id": 1
     },
     {
         "title": "House Of The Rising Sun",
         "artist": "The Animals",
         "album": "Power Company",
-        "id": 100001
+        "id": 2 
     },
     {
         "title": "Memories",
         "artist": "Maroon 5",
         "album": "Memories-Single",
-        "id": 100002
+        "id": 3 
     },
     {
         "title": "All You Need is Love",
         "artist": "The Beatles",
         "album": "Magical Mystery Tour",
-        "id": 100003
+        "id": 4
     },
     {
         "title": "Bad Liar",
         "artist": "Imagine Dragons",
         "album": "Origins (Deluxe)",
-        "id": 100004
+        "id": 5
     },
     {
         "title": "Shameless",
         "artist": "Camila Cabello",
         "album": "Romance",
-        "id": 100005
+        "id": 6 
     },
     {
         "title": "2002",
         "artist": "Anne-Marie",
         "album": "Speak Your Mind (Deluxe)",
-        "id": 100006
+        "id": 7
     },
         {
         "title": "Bohemian Rhapsody",
         "artist": "Queen",
         "album": "Queen: Greatest Hits",
-        "id": 100007
+        "id": 8
     }
 ]
