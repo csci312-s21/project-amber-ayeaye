@@ -4,6 +4,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 export default function ManualEntry({addSong, switchMode}) {
   const [title, setTitle] = useState("");
@@ -52,21 +53,25 @@ export default function ManualEntry({addSong, switchMode}) {
 
     const addButton = 
       <div>
-        <button
+        <Button
           id="addButton"
-          onClick={() => addAndReset({title: title, artist: artist, album: album})}
+          variant="contained"
+          size="small"
+          onClick={() => addAndReset({title: title, artist: artist, album: album, id: `${title}${artist}${album}`})}
           disabled={title === "" || artist === "" || album === ""}>
           Add
-          </button>
+          </Button>
       </div>
 
     const switchButton = 
       <div>
-        <button
+        <Button
           id="switchButton"
+          variant="outlined"
+          size="small"
           onClick={() => switchMode()}>
           Switch to Song Search
-          </button>
+          </Button>
       </div>
 
   return (

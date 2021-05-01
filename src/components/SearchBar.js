@@ -1,24 +1,37 @@
 import Playlist from "./Playlist";
 import {config} from "../../config";
-
+import PropTypes from "prop-types";
 import {useState, useEffect} from "react";
-
 import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
-export default function SearchBar({addSong}){
+export default function SearchBar({addSong, switchMode}){
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState();
   const [token, setToken] = useState("");
+
+  const mySecret = process.env["CLIENT_SECRET"]
+  console.log(mySecret)
+
+  const addAndReset = (song) => {
+    addSong(song);
+    setSearchText("");
+  }
 
   useEffect(() => {
     const authenticate = async () => {
     const BASE_URL = "https://accounts.spotify.com/api/token";
     
+    //console.log(`Basic ${(new Buffer(`${config.CLIENT_ID}:${config.CLIENT_SECRET}`).toString("base64"))}`)
+    //console.log(`Basic ${(new Buffer(`${process.env['CLIENT_ID']}:${process.env['CLIENT_SECRET']}`))}`)
+
     const response = await fetch(BASE_URL, {
       method: "POST",
       headers: { 
           "Content-Type": "application/x-www-form-urlencoded",
-          "Authorization": `Basic ${(new Buffer(`${config.CLIENT_ID}:${config.CLIENT_SECRET}`).toString("base64"))}`
+         "Authorization": `Basic ${(new Buffer(`${config.CLIENT_ID}:${config.CLIENT_SECRET}`).toString("base64"))}`
+          // "Authorization": `Basic ${(new Buffer(`${process.env['CLIENT_ID']}:${process.env['CLIENT_SECRET']}`).toString("base64"))}`
+
       },
       body: new URLSearchParams({
         "grant_type": "client_credentials"
@@ -61,16 +74,25 @@ export default function SearchBar({addSong}){
           title: track.name,
           artist: track.artists[0].name,
           album: track.album.name,
-          artwork: track.album.images[0],
+          artwork: track.album.images[0].url,
           id: `${track.name}${track.artists[0].name}${track.album.name}`
         })
       )
     );
   }
-  
 
- return(
+  return(
       <div>
+
+        <Button
+        id="switchButton"
+        variant="outlined"
+        size="small"
+        onClick={() => switchMode()}>
+        Switch to Manual Entry
+        </Button>
+
+        <br /><br />
 
         <label>Keyword Search: 
         <TextField 
@@ -87,10 +109,14 @@ export default function SearchBar({addSong}){
           Search
         </button> 
 
-        {searchResults && <Playlist songs={searchResults} addSong={addSong} mode="inSearchResults" />}
+        {searchResults && <Playlist songs={searchResults} addSong={addAndReset} mode="inSearchResults" />}
 
       </div>
     )
-
-    
+  
 }
+
+SearchBar.propTypes = {
+  addSong: PropTypes.func.isRequired,
+  switchMode: PropTypes.func.isRequired,
+};

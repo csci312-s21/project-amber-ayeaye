@@ -8,11 +8,9 @@ import AddIcon from "@material-ui/icons/Add";
 import AlbumIcon from "@material-ui/icons/Album";
 
 export default function Song({song, deleteSong, addSong, mode}) {
-    
-    const image= "https://lastfm.freetls.fastly.net/i/u/174s/54b37d139a3e4656817f66e794492302.png"
 
     const defaultAvatar = <Avatar> <AlbumIcon /> </Avatar>;
-    const customAvatar = <Avatar variant="square" alt="album artwork" src={image}/>;
+    const customAvatar = <Avatar variant="square" alt="album artwork" src={song.artwork}/>;
 
     return (
 

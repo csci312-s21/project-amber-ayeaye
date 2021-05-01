@@ -50,8 +50,8 @@ export default function Home() {
             Welcome to WRMC!
             </h1>
             {/*<SongAdder addSong={addSong}/>*/}
-            <SearchBar addSong={addSong}/>
-            <ManualEntry addSong={addSong} switchMode={switchMode}/>
+            {addingMode==="search" ? <SearchBar addSong={addSong} switchMode={switchMode}/> :
+            <ManualEntry addSong={addSong} switchMode={switchMode}/>}
             <Playlist songs={currentSongs} deleteSong={deleteSong} mode={"inPlaylist"}/>
         </main>
     

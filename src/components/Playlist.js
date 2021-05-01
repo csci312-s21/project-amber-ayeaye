@@ -16,7 +16,8 @@ export default function Playlist({songs, deleteSong, addSong, mode}) {
     return (
         <div>
             <h2>
-              Current Playlist:
+              {mode==="inPlaylist" ? 
+                "Current Playlist" : "Search Results"}
             </h2>
             <ul>
                 {songComponents}
