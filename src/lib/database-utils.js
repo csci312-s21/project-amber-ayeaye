@@ -1,20 +1,9 @@
-/**
- * DJ side:
- *     addSongToPlaylist
- *     deleteSongFromPlaylist
- *     changePlaylistOrder
- * 
- * Listener side:
- *     getSongsFromPlaylist
- *     getAllShows
- * 
- */
-
 import knexConfig from "../../knexfile";
 import knexInitializer from "knex";
 
 import { getPlaylist } from "./playlist-table-utils";
 import { addSongPlay } from "./songPlay-table-utils";
+import { addSong } from "./song-table"
 
 export const knex = knexInitializer(
   knexConfig[process.env.NODE_ENV || "development"]
@@ -33,7 +22,7 @@ export const knex = knexInitializer(
         - Creates a new entry in SongPlay
         - Creates a new entry in Song if first play
 
-    deleteSongFromPlaylist(song_id, playlist_id) - deletes a song from the playlist
+    deleteSongFromPlaylist(songPlay_id) - deletes a song from the playlist
         - Removes an entry in SongPlay only
 
         changePlaylistOrder(playlist_id, new_order) - changes the order of songs in the playlist
@@ -50,9 +39,9 @@ export const knex = knexInitializer(
  * @param {object} song
  * @param {number} playlist_id
  * 
- * @returns new song object with a new id
+ * @returns new Song object with songId and songPlayId attached
  */
-export async function addSongToPlaylist(song, playlist_id) {
+export async function addSongToPlaylist(song, playlist_id, order) {
 
     // Check that the playlist exists
     const playlist = await getPlaylist(playlist_id);
@@ -60,17 +49,34 @@ export async function addSongToPlaylist(song, playlist_id) {
         return "Error: Playlist not found"; // Make this an actual Error
     }
 
-    // Get the song's ID in the Song database, whether it's being added or not
-    const find_song_id = await findSong(song.spotify_id);
-    const song_id = (find_song_id === -1) ? await addSong(song).id : find_song_id;
-
-    // Get the new Song object
-    const newSong = await getSong(song_id);
+    // Attempt to add the new song to the Song table 
+    // Note: if song already in database, its entry is returned
+    const newSong = await addSong(song);
 
     // Add the SongPlay to the database
-    const result = await addSongPlay(newSong.id, playlist_id);
+    const songPlay = {
+        playlist_id: playlist_id,
+        song_id : newSong.id,
+        order: order
+    };
+    const songplay_id = await knex("SongPlay").insert(songPlay);
 
-    // Return the new Song object
-    return newSong;
+    // Attach the songPlayID to the Song object
+    const songWithBothIds = { ...newSong, songplay_id };
 
+    // Return the new Song object with both IDs
+    return songWithBothIds;
+
+}
+
+/**
+ * Deletes a SongPlay entry from the SongPlay table
+ * 
+ * @param {number} songPlay_id
+ * 
+ * @returns boolean indicating success of deletion
+ */
+export async function deleteSongFromPlaylist(songplay_id) {
+    const numDeleted = await knex("SongPlay").where({id:songplay_id}).del();
+    return numDeleted ? true : false;
 }
