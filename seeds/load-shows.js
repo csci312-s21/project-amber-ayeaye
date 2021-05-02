@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-exports.seed = function(knex) {
+exports.seed = function(knex, Promise) {
 
   const contents = fs.readFileSync('./data/showseed.json');
   const data = JSON.parse(contents);

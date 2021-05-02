@@ -5,8 +5,8 @@ exports.up = function(knex, Promise) {
         table.string('title').notNullable();
         table.string('artist').notNullable();
         table.string('album').notNullable();
-        table.string('spotify_id').unique();
         table.string('artwork');
+        table.string('spotify_id').unique();
     })
     .createTable('Show', (table) => {
         table.increments('id').unique().notNullable();
