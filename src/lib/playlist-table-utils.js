@@ -65,8 +65,8 @@ export async function createPlaylist(show_id) {
 
     // Construct the date string for the database
     const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
     const yyyy = today.getFullYear();
     const dateString = mm + dd + yyyy;
 
@@ -75,7 +75,7 @@ export async function createPlaylist(show_id) {
     const showTimeWindow = show.schedule.split("T").pop();
 
     // Combine the date and time window strings
-    const playlistTimeWindow = "D" + dateString + "T" + showTimeWindow;
+    const playlistTimeWindow = `D${dateString}T${showTimeWindow}`;
 
     // Construct the new Playlist object
     const playlist = {

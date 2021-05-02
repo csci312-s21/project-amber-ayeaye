@@ -26,7 +26,7 @@ export const knex = knexInitializer(
  * 
  * @returns array of Show objects
  */
-export async function getShow() {
+export async function getShows() {
     const rows = await knex("Show").select();
     return rows;
 }

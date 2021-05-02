@@ -5,8 +5,6 @@ export const knex = knexInitializer(
   knexConfig[process.env.NODE_ENV || "development"]
 )
 
-import { addSong } from "./song-table-utils";
-
 /*
 
     songPlay-test-utils.js
@@ -33,17 +31,4 @@ import { addSong } from "./song-table-utils";
 export async function getSongPlay(id) {
     const songPlay = await knex("SongPlay").select().where({id:id});
     return songPlay[0] ? songPlay[0] : null;
-}
-
-/**
- * Add a SongPlay entry to the database
- * 
- * @param {object} song
- * @param {number} playlist_id
- * 
- * @returns the SongPlay entry with its new ID
- */
-export async function addSongPlay(song, playlist_id) {
-    const rows = await knex("Song").select();
-    return rows;
 }

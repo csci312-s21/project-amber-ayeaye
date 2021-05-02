@@ -43,7 +43,7 @@ export async function getSong(id) {
 export async function getSongBySpotifyId(spotify_id){
   const song = await knex("Song")
     .select()
-    .where({"spotify_id": id});
+    .where({spotify_id: spotify_id});
 
   return song[0] ? song[0] : null;
 }

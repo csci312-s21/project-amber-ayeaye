@@ -2,7 +2,6 @@ import knexConfig from "../../knexfile";
 import knexInitializer from "knex";
 
 import { getPlaylist } from "./playlist-table-utils";
-import { addSongPlay } from "./songPlay-table-utils";
 import { addSong } from "./song-table"
 
 export const knex = knexInitializer(
