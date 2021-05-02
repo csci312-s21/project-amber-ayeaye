@@ -5,7 +5,7 @@ export const knex = knexInitializer(
   knexConfig[process.env.NODE_ENV || "development"]
 )
 
-import { addSong } from 
+import { addSong } from "./song-table-utils";
 
 /*
 
