@@ -19,11 +19,12 @@ import QueueMusic from '@material-ui/icons/QueueMusic';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    maxWidth: 500,
   },
   nested: {
     paddingLeft: theme.spacing(4),
+    backgroundColor: 'teal',
+
   },
 }));
 
@@ -34,6 +35,13 @@ export default function NestedList() {
   const handleClick = () => {
     setOpen(!open);
   };
+
+//automated starter code to fill the schedule
+const items= []
+const sevenDaySchedule = items.map(item => 
+  <li> 
+    {item}
+ </li>)
 
   return (
     <List
@@ -51,17 +59,33 @@ export default function NestedList() {
         <ListItemIcon>
           <ViewDayIcon />
         </ListItemIcon>
-        <ListItemText primary="Monday" />
+        <ListItemText primary= "Monday" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+      
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
+          
           <ListItem button className={classes.nested}>
             <ListItemIcon>
               <QueueMusic />
             </ListItemIcon>
-            <ListItemText primary="Chad's Show" />
+
+            <ListItemText primary="Chad's Show" /> {/* write in Title and timeslot */}
+            <ListItemText secondary="8:00-9:00 pm" />
           </ListItem>
+
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <QueueMusic />
+            </ListItemIcon>
+
+            <ListItemText primary="That 70's Show" /> 
+            {/* write in Title and timeslot */}
+            <ListItemText secondary="9:00-10:00 pm" />
+          </ListItem>
+      
+          
         </List>
       </Collapse>
     </List>
