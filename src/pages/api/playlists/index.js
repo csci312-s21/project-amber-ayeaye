@@ -1,5 +1,5 @@
 import nc from "next-connect";
-import { getPlaylists } from "../../../lib/playlist-table-utils";
+import { getPlaylists } from "../../../lib/database-utils";
 import { onError } from "../../../lib/middleware";
 
 const handler = nc({ onError })

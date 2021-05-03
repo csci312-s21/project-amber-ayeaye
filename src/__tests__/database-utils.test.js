@@ -1,7 +1,11 @@
 import seedSongs from "../../data/songseed.json";
+import seedPlaylists from "../../data/playlistseed.json";
+import seedShows from "../../data/showseed.json";
 import {
     knex,
-    getSongsFromPlaylist
+    getSongsFromPlaylist,
+    getPlaylists,
+    getShows
 } from "../lib/database-utils";
 
 describe("Test of the database utility functions", () => {
@@ -24,13 +28,31 @@ describe("Test of the database utility functions", () => {
             const returnedSongs2 = await getSongsFromPlaylist(playlist_id2);
             const expectedSongs2 = seedSongs.filter( (song) => song.id === 2 || song.id === 4 );
             expect(returnedSongs2).toEqual(expectedSongs2);
-        })
+        });
 
         test("getSongsFromPlaylist returns empty array on invalid playlist_id", async () => {
             const playlist_id = -1;
             const returnedSongs = await getSongsFromPlaylist(playlist_id);
             const expectedSongs = [];
             expect(returnedSongs).toEqual(expectedSongs);
+        });
+
+    });
+
+    describe("getPlaylists", () => {
+
+        test("getPlaylists returns the list of playlists", async () => {
+            const playlists = await getPlaylists();
+            expect(playlists).toEqual(seedPlaylists);
+        })
+
+    });
+
+    describe("getShows", () => {
+
+        test("getShows returns the list of shows", async () => {
+            const shows = await getShows();
+            expect(shows).toEqual(seedShows);
         })
 
     });

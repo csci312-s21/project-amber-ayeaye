@@ -1,5 +1,5 @@
 import nc from "next-connect";
-import { getShows } from "../../../lib/show-table-utils";
+import { getShows } from "../../../lib/database-utils";
 import { onError } from "../../../lib/middleware";
 
 const handler = nc({ onError })

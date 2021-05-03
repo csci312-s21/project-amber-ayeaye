@@ -1,92 +1,92 @@
 [
     {
-        "id":"1",
-        "playlist_id":"1",
-        "song_id":"1",
-        "order":"1"
+        "id": 1,
+        "playlist_id": 1,
+        "song_id": 1,
+        "order": 1
     },
     {
-        "id":"2",
-        "playlist_id":"2",
-        "song_id":"2",
-        "order":"1"
+        "id": 2,
+        "playlist_id": 2,
+        "song_id": 2,
+        "order": 1
     },
     {
-        "id":"3",
-        "playlist_id":"2",
-        "song_id":"4",
-        "order":"2"
+        "id": 3,
+        "playlist_id": 2,
+        "song_id": 4,
+        "order": 2
     },
     {
-        "id":"4",
-        "playlist_id":"3",
-        "song_id":"3",
-        "order":"3"
+        "id": 4,
+        "playlist_id": 3,
+        "song_id": 3,
+        "order": 3
     },
     {
-        "id":"5",
-        "playlist_id":"3",
-        "song_id":"1",
-        "order":"2"
+        "id": 5,
+        "playlist_id": 3,
+        "song_id": 1,
+        "order": 2
     },
     {
-        "id":"6",
-        "playlist_id":"3",
-        "song_id":"5",
-        "order":"1"
+        "id": 6,
+        "playlist_id": 3,
+        "song_id": 5,
+        "order": 1
     },
     {
-        "id":"7",
-        "playlist_id":"4",
-        "song_id":"7",
-        "order":"1"
+        "id": 7,
+        "playlist_id": 4,
+        "song_id": 7,
+        "order": 1
     },
     {
-        "id":"8",
-        "playlist_id":"4",
-        "song_id":"1",
-        "order":"3"
+        "id": 8,
+        "playlist_id": 4,
+        "song_id": 1,
+        "order": 3
     },
     {
-        "id":"9",
-        "playlist_id":"4",
-        "song_id":"6",
-        "order":"2"
+        "id": 9,
+        "playlist_id": 4,
+        "song_id": 6,
+        "order": 2
     },
     {
-        "id":"10",
-        "playlist_id":"4",
-        "song_id":"4",
-        "order":"4"
+        "id": 10,
+        "playlist_id": 4,
+        "song_id": 4,
+        "order": 4
     },
     {
-        "id":"11",
-        "playlist_id":"5",
-        "song_id":"3",
-        "order":"5"
+        "id": 11,
+        "playlist_id": 5,
+        "song_id": 3,
+        "order": 5
     },
     {
-        "id":"12",
-        "playlist_id":"5",
-        "song_id":"8",
-        "order":"1"
+        "id": 12,
+        "playlist_id": 5,
+        "song_id": 8,
+        "order": 1
     },
     {
-        "id":"13",
-        "playlist_id":"5",
-        "song_id":"1",
-        "order":"3"
+        "id": 13,
+        "playlist_id": 5,
+        "song_id": 1,
+        "order": 3
     },
     {
-        "id":"14",
-        "playlist_id":"5",
-        "song_id":"4",
-        "order":"2"
+        "id": 14,
+        "playlist_id": 5,
+        "song_id": 4,
+        "order": 2
     },
     {
-        "id":"15",
-        "playlist_id":"5",
-        "song_id":"2",
-        "order":"4"
+        "id": 15,
+        "playlist_id": 5,
+        "song_id": 2,
+        "order": 4
     }
 ]
