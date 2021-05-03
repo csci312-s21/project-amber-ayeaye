@@ -6,8 +6,6 @@ import styles from "../styles/Home.module.css";
 
 import Playlist from "../components/Playlist";
 
-//import SongAdder from "../components/SongAdder";
-
 import SearchBar from "../components/SearchBar";
 
 import ManualEntry from "../components/ManualEntry";
@@ -49,7 +47,6 @@ export default function Home() {
             <h1>
             Welcome to WRMC!
             </h1>
-            {/*<SongAdder addSong={addSong}/>*/}
             {addingMode==="search" ? <SearchBar addSong={addSong} switchMode={switchMode}/> :
             <ManualEntry addSong={addSong} switchMode={switchMode}/>}
             <Playlist songs={currentSongs} deleteSong={deleteSong} mode={"inPlaylist"}/>
