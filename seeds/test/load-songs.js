@@ -1,10 +1,12 @@
-const fs = require("fs");
+const fs = require('fs');
 
-exports.seed = async function(knex) {
-  const contents = fs.readFileSync("./data/song-database-test-data.json");
+exports.seed = function (knex, Promise) {
+  const contents = fs.readFileSync('./data/songseed.json');
   const data = JSON.parse(contents);
+
   // Deletes ALL existing entries
-  await knex("Song").del();
-  // load in the sample articles
-  await knex.batchInsert("Song", data, 100);
+  // Use batch insert to insert mulitple songs at the same time
+  return knex('Song')
+    .del()
+    .then(() => knex.batchInsert('Song', data, 100));
 }

@@ -2,7 +2,7 @@ import knexConfig from "../../knexfile";
 import knexInitializer from "knex";
 
 import { getPlaylist } from "./playlist-table-utils";
-import { addSong } from "./song-table"
+import { addSong } from "./song-table-utils";
 
 export const knex = knexInitializer(
   knexConfig[process.env.NODE_ENV || "development"]
@@ -78,4 +78,28 @@ export async function addSongToPlaylist(song, playlist_id, order) {
 export async function deleteSongFromPlaylist(songplay_id) {
     const numDeleted = await knex("SongPlay").where({id:songplay_id}).del();
     return numDeleted ? true : false;
+}
+
+/**
+ * Gets all songs for a specified playlist
+ * 
+ * @param {number} playlist_id
+ * 
+ * @returns array of Song objects with IDs
+ */
+export async function getSongsFromPlaylist(playlist_id) {
+
+    const songs = await knex("Playlist")
+        .join("SongPlay", "SongPlay.playlist_id", "Playlist.id")
+        .join("Song", "Song.id", "SongPlay.song_id")
+        .select(
+            "Song.id",
+            "Song.title",
+            "Song.artist",
+            "Song.album",
+            "Song.artwork",
+            "Song.spotify_id",
+        )
+        .where("Playlist.id", "=", playlist_id);
+    return songs;
 }

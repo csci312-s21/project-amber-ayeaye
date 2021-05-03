@@ -1,3 +1,3 @@
-describe("Placeholder suite", () => {
+describe.skip("Placeholder suite", () => {
    test("Placeholder test", () => {}) 
 });
