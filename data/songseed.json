@@ -1,50 +1,66 @@
 [
     {
+        "id": 1,
         "title": "Piano Man",
         "artist": "Billy Joel",
         "album": "Piano Man",
-        "id": 100000
+        "artwork": "https://i.scdn.co/image/ab67616d00001e02db9c8abe838bbfb28ed5cc06",
+        "spotify_id": "a"
     },
     {
+        "id": 2,
         "title": "House Of The Rising Sun",
         "artist": "The Animals",
         "album": "Power Company",
-        "id": 100001
+        "artwork": "https://i.scdn.co/image/ab67616d00001e023c534611bd3658006378a2d7",
+        "spotify_id": "b"
     },
     {
+        "id": 3,
         "title": "Memories",
         "artist": "Maroon 5",
         "album": "Memories-Single",
-        "id": 100002
+        "artwork": "https://i.scdn.co/image/ab67616d00001e02b8c0135a218de2d10a8435f5",
+        "spotify_id": "c"
     },
     {
+        "id": 4,
         "title": "All You Need is Love",
         "artist": "The Beatles",
         "album": "Magical Mystery Tour",
-        "id": 100003
+        "artwork": "https://i.scdn.co/image/ab67616d00001e02692d9189b2bd75525893f0c1",
+        "spotify_id": "d"
     },
     {
+        "id": 5,
         "title": "Bad Liar",
         "artist": "Imagine Dragons",
-        "album": "Origins (Deluxe)",        
-        "id": 100004
+        "album": "Origins (Deluxe)",
+        "artwork": "https://i.scdn.co/image/ab67616d00001e02da6f73a25f4c79d0e6b4a8bd",
+        "spotify_id": "e"
     },
     {
+        "id": 6,
         "title": "Shameless",
         "artist": "Camila Cabello",
         "album": "Romance",
-        "id": 100005
+        "artwork": "https://i.scdn.co/image/ab67616d00001e025f53c0dbe5190a0af0fa28f3",
+        "spotify_id": "f"
     },
     {
+        "id": 7,
         "title": "2002",
         "artist": "Anne-Marie",
         "album": "Speak Your Mind (Deluxe)",
-        "id": 100006
+        "artwork": "https://i.scdn.co/image/ab67616d00001e0238aae75dc37fb42457866ffd",
+        "spotify_id": "g"
     },
-        {
+    {
+        "id": 8,
         "title": "Bohemian Rhapsody",
         "artist": "Queen",
         "album": "Queen: Greatest Hits",
-        "id": 100007
+        "artwork": "https://i.scdn.co/image/ab67616d00001e02ba84c3e2d930822ae1c3ce22",
+        "spotify_id": "h"
     }
 ]
