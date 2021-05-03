@@ -6,15 +6,24 @@ import styles from "../styles/Home.module.css";
 
 import Playlist from "../components/Playlist";
 
-import SongAdder from "../components/SongAdder";
-
 import SearchBar from "../components/SearchBar";
+
+import ManualEntry from "../components/ManualEntry";
 
 import sampleData from "../../data/songseed.json";
 
 export default function Home() {
 
     const [currentSongs, setCurrentSongs] = useState(sampleData);
+    const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
+
+    const switchMode = () => {
+      if (addingMode === "search") {
+        setAddingMode("manual");
+      } else {
+        setAddingMode("search");
+      }
+    }
     
     const deleteSong = (song) => {
         const newSongs = currentSongs.filter( (s) => s.id !== song.id);
@@ -38,9 +47,9 @@ export default function Home() {
             <h1>
             Welcome to WRMC!
             </h1>
-            <SongAdder addSong={addSong}/>
-            <SearchBar callback={addSong}/>
-            <Playlist songs={currentSongs} deleteSong={deleteSong}/>
+            {addingMode==="search" ? <SearchBar addSong={addSong} switchMode={switchMode}/> :
+            <ManualEntry addSong={addSong} switchMode={switchMode}/>}
+            <Playlist songs={currentSongs} deleteSong={deleteSong} mode={"inPlaylist"}/>
         </main>
     
         <footer>A CS 312 Project</footer>
