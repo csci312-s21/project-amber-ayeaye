@@ -1,11 +1,11 @@
 import nc from "next-connect";
-import { getShows } from "../../../lib/show-table-utils";
+import { getPlaylists } from "../../../lib/playlist-table-utils";
 import { onError } from "../../../lib/middleware";
 
 const handler = nc({ onError })
     .get(async (req, res) => {
-        const shows = await getShows();
-        res.status(200).json(shows);
+        const playlists = await getPlaylists();
+        res.status(200).json(playlists);
     });
 
 export default handler;
