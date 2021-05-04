@@ -10,6 +10,9 @@ import SearchBar from "../components/SearchBar";
 
 import ManualEntry from "../components/ManualEntry";
 
+// Minimal implementation
+import ShowsSample from "../components/ShowsSample";
+
 import sampleData from "../../data/songseed.json";
 
 export default function Home() {
@@ -50,6 +53,7 @@ export default function Home() {
             {addingMode==="search" ? <SearchBar addSong={addSong} switchMode={switchMode}/> :
             <ManualEntry addSong={addSong} switchMode={switchMode}/>}
             <Playlist songs={currentSongs} deleteSong={deleteSong} mode={"inPlaylist"}/>
+            <ShowsSample/>
         </main>
     
         <footer>A CS 312 Project</footer>
