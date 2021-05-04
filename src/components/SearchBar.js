@@ -3,8 +3,21 @@ import PropTypes from "prop-types";
 import {useState, useEffect} from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import SearchIcon from '@material-ui/icons/Search';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  entryField: {
+    margin: '15px !important',
+    width: '25ch !important',
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
 
 export default function SearchBar({addSong, switchMode}) {
+  const classes = useStyles();
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState();
   const [token, setToken] = useState("");
@@ -67,22 +80,27 @@ export default function SearchBar({addSong, switchMode}) {
 
         <br/><br/>
 
-        <label>Keyword Search: <br/><br/>
         <TextField 
-          name="keywordSearch" 
           id="keywordSearch" 
           placeholder="Enter title, artist, and/or album" 
+          className={classes.entryField}
+          required id="searchText"
+          label="Keyword search"
+          type="search"
+          variant="filled"
           value={searchText} 
           fullWidth
           onChange={((event)=>setSearchText(event.target.value))}/>
-        </label>
-
+   
         <br/><br/>
 
         <Button
           id="addButton"
           variant="contained"
+          color="primary"
           size="small"
+          className={classes.button}
+          startIcon={<SearchIcon />}
           onClick={() => searchSong()} 
           disabled={searchText === ""}>
           Search
