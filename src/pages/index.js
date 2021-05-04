@@ -8,6 +8,9 @@ import PlayButton from "../components/PlayButton";
 import sampleData from "../../data/songseed.json";
 import Grid from "@material-ui/core/Grid";
 
+// Minimal implementation
+import ShowsSample from "../components/ShowsSample";
+
 export default function Home() {
 
     const [currentSongs, setCurrentSongs] = useState(sampleData);
@@ -83,6 +86,8 @@ export default function Home() {
             </Grid>
 
           </Grid>
+          
+           <ShowsSample/>
 
         </main>
     
