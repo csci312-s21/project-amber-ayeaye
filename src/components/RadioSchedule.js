@@ -6,8 +6,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
@@ -19,22 +17,31 @@ import QueueMusic from '@material-ui/icons/QueueMusic';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: 500,
+    minWidth: 400,
   },
   nested: {
     paddingLeft: theme.spacing(4),
-    backgroundColor: 'teal',
-
   },
 }));
 
 export default function NestedList() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
 
-  const handleClick = () => {
-    setOpen(!open);
+  const [openMonday, setOpenMonday] = React.useState(true);
+  const handleClickMonday = () => {
+    setOpenMonday(!openMonday);
   };
+
+  const [openTuesday, setOpenTuesday] = React.useState(true);
+  const handleClickTuesday = () => {
+    setOpenTuesday(!openTuesday);
+  };
+
+  const [openWednesday, setOpenWednesday] = React.useState(true);
+  const handleClickWednesday = () => {
+    setOpenWednesday(!openWednesday);
+  };
+  
 
 //automated starter code to fill the schedule
 const items= []
@@ -55,15 +62,15 @@ const sevenDaySchedule = items.map(item =>
       className={classes.root}
     >
       
-      <ListItem button onClick={handleClick}>
+      <ListItem button onClick={handleClickMonday}>
         <ListItemIcon>
           <ViewDayIcon />
         </ListItemIcon>
-        <ListItemText primary= "Monday" />
-        {open ? <ExpandLess /> : <ExpandMore />}
+        <ListItemText primary= "Monday              " />
+        {openMonday ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse in={openMonday} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           
           <ListItem button className={classes.nested}>
@@ -84,10 +91,76 @@ const sevenDaySchedule = items.map(item =>
             {/* write in Title and timeslot */}
             <ListItemText secondary="9:00-10:00 pm" />
           </ListItem>
-      
-          
         </List>
       </Collapse>
+
+
+
+      <ListItem button onClick={handleClickTuesday}>
+        <ListItemIcon>
+          <ViewDayIcon />
+        </ListItemIcon>
+        <ListItemText primary= "Tuesday" />
+        {openTuesday ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      
+      <Collapse in={openTuesday} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <QueueMusic />
+            </ListItemIcon>
+
+            <ListItemText primary="Chad's Show" /> {/* write in Title and timeslot */}
+            <ListItemText secondary="8:00-9:00 pm" />
+          </ListItem>
+
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <QueueMusic />
+            </ListItemIcon>
+
+            <ListItemText primary="That 70's Show" /> 
+            {/* write in Title and timeslot */}
+            <ListItemText secondary="9:00-10:00 pm" />
+          </ListItem>
+        </List>
+      </Collapse>
+
+
+      <ListItem button onClick={handleClickWednesday}>
+        <ListItemIcon>
+          <ViewDayIcon />
+        </ListItemIcon>
+        <ListItemText primary= "Wednesday" />
+        {openWednesday ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      
+      <Collapse in={openWednesday} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <QueueMusic />
+            </ListItemIcon>
+
+            <ListItemText primary="Chad's Show" /> {/* write in Title and timeslot */}
+            <ListItemText secondary="8:00-9:00 pm" />
+          </ListItem>
+
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <QueueMusic />
+            </ListItemIcon>
+
+            <ListItemText primary="That 70's Show" /> 
+            {/* write in Title and timeslot */}
+            <ListItemText secondary="9:00-10:00 pm" />
+          </ListItem>
+        </List>
+      </Collapse>
+
     </List>
   );
 }
