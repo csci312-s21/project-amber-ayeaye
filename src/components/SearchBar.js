@@ -65,16 +65,19 @@ export default function SearchBar({addSong, switchMode}) {
         Switch to Manual Entry
         </Button>
 
-        <br /><br />
+        <br/><br/>
 
-        <label>Keyword Search: 
+        <label>Keyword Search: <br/><br/>
         <TextField 
           name="keywordSearch" 
           id="keywordSearch" 
-          placeholder="Enter song name, artist, and/or album" 
+          placeholder="Enter title, artist, and/or album" 
           value={searchText} 
+          fullWidth
           onChange={((event)=>setSearchText(event.target.value))}/>
         </label>
+
+        <br/><br/>
 
         <Button
           id="addButton"
