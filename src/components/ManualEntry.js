@@ -5,8 +5,23 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import SaveIcon from "@material-ui/icons/Save";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  entryField: {
+    margin: "15px !important",
+    width: "25ch !important",
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
 
 export default function ManualEntry({addSong, switchMode}) {
+
+  const classes = useStyles();
+
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [album, setAlbum] = useState("");
@@ -19,49 +34,46 @@ export default function ManualEntry({addSong, switchMode}) {
   }
 
   const titleInput =
-  <div>
-    <label>Title: </label>
     <TextField
       id="titleInput"
       placeholder="Enter a song title"
+      className={classes.entryField}
+      required 
+      label="Song title" 
+      type="search" 
+      variant="filled"
       value={title}
       onChange={(event) => setTitle(event.target.value)}
     />
-  </div>
 
   const artistInput =
-    <div>
-      <label>Artist: </label>
-      <TextField
-        id="artistInput"
-        placeholder="Enter an artist name"
-        value={artist}
-        onChange={(event) => setArtist(event.target.value)}
-      />
-    </div>
+    <TextField
+      className={classes.entryField}
+      required id="artistInput" label="Artist name" type="search" variant="filled"
+      value={artist}
+      onChange={(event) => setArtist(event.target.value)}
+    />
 
     const albumInput =
-      <div>
-        <label>Album: </label>
-        <TextField
-          id="albumInput"
-          placeholder="Enter an album name"
-          value={album}
-          onChange={(event) => setAlbum(event.target.value)}
-        />
-      </div>
+      <TextField
+        className={classes.entryField}
+        required id="albumInput" label="Album title" type="search" variant="filled"
+        value={album}
+        onChange={(event) => setAlbum(event.target.value)}
+      />
 
-    const addButton = 
-      <div>
-        <Button
-          id="addButton"
-          variant="contained"
-          size="small"
-          onClick={() => addAndReset({title: title, artist: artist, album: album, id: `${title}${artist}${album}`})}
-          disabled={title === "" || artist === "" || album === ""}>
-          Add
-          </Button>
-      </div>
+    const addButton =
+      <Button
+        id="addButton"
+        variant="contained"
+        color="primary"
+        size="small"
+        className={classes.button}
+        startIcon={<SaveIcon />}
+        onClick={() => addAndReset({ title: title, artist: artist, album: album })}
+        disabled={title === "" || artist === "" || album === ""}>
+        Save
+      </Button>
 
     const switchButton = 
       <div>

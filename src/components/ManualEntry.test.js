@@ -28,7 +28,7 @@ describe("ManualEntry tests", () => {
     const albumInput = container.querySelector("input[id=albumInput");
     expect(albumInput).toHaveValue("");
 
-    const addButton = screen.getByRole("button", { name: "Add" });
+    const addButton = screen.getByRole("button", { name: "Save" });
     expect(addButton).toBeDisabled();
 
     fireEvent.change(titleInput, { target: { value: song.title } });
@@ -51,7 +51,7 @@ describe("ManualEntry tests", () => {
     const titleInput = container.querySelector("input[id=titleInput");
     const artistInput = container.querySelector("input[id=artistInput");
     const albumInput = container.querySelector("input[id=albumInput");
-    const addButton = screen.getByRole("button", { name: "Add" });
+    const addButton = screen.getByRole("button", { name: "Save" });
 
     fireEvent.change(titleInput, { target: { value: song.title } });
     fireEvent.change(artistInput, { target: { value: song.artist } });
@@ -72,7 +72,7 @@ describe("ManualEntry tests", () => {
     const artistInput = container.querySelector("input[id=artistInput");
     const albumInput = container.querySelector("input[id=albumInput");
 
-    const addButton = screen.getByRole("button", { name: "Add" });
+    const addButton = screen.getByRole("button", { name: "Save" });
 
     fireEvent.change(titleInput, { target: { value: song.title } });
     fireEvent.change(artistInput, { target: { value: song.artist } });
