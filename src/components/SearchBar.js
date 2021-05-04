@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import {useState, useEffect} from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import SearchIcon from '@material-ui/icons/Search';
-import { makeStyles } from '@material-ui/core/styles';
+import SearchIcon from "@material-ui/icons/Search";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   entryField: {
-    margin: '15px !important',
-    width: '25ch !important',
+    margin: "15px !important",
+    width: "25ch !important",
   },
   button: {
     margin: theme.spacing(1),
@@ -84,7 +84,7 @@ export default function SearchBar({addSong, switchMode}) {
           id="keywordSearch" 
           placeholder="Enter title, artist, and/or album" 
           className={classes.entryField}
-          required id="searchText"
+          required 
           label="Keyword search"
           type="search"
           variant="filled"

@@ -6,7 +6,7 @@ import SearchBar from "../components/SearchBar";
 import ManualEntry from "../components/ManualEntry";
 import PlayButton from "../components/PlayButton";
 import sampleData from "../../data/songseed.json";
-import Grid from '@material-ui/core/Grid';
+import Grid from "@material-ui/core/Grid";
 
 export default function Home() {
 

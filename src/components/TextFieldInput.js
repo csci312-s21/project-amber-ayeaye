@@ -8,7 +8,7 @@ import clsx from "clsx";
 const styles = {
   root: {
     margin: 8,
-    width: '25ch',
+    width: "25ch",
   }
 };
 

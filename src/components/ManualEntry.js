@@ -5,13 +5,13 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import SaveIcon from '@material-ui/icons/Save';
-import { makeStyles } from '@material-ui/core/styles';
+import SaveIcon from "@material-ui/icons/Save";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   entryField: {
-    margin: '15px !important',
-    width: '25ch !important',
+    margin: "15px !important",
+    width: "25ch !important",
   },
   button: {
     margin: theme.spacing(1),
@@ -37,9 +37,11 @@ export default function ManualEntry({addSong, switchMode}) {
     <TextField
       id="titleInput"
       placeholder="Enter a song title"
-      margin="2"
       className={classes.entryField}
-      required id="titleInput" label="Song title" type="search" variant="filled"
+      required 
+      label="Song title" 
+      type="search" 
+      variant="filled"
       value={title}
       onChange={(event) => setTitle(event.target.value)}
     />

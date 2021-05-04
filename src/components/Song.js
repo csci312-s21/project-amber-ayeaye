@@ -7,18 +7,17 @@ import AlbumIcon from "@material-ui/icons/Album";
 import {
   IconButton,
   Avatar,
-  List,
   ListItem,
   ListItemText,
   ListItemAvatar
-} from '@material-ui/core';
+} from "@material-ui/core";
 
 export default function Song({song, deleteSong, addSong, mode}) {
 
     const defaultAvatar = <Avatar> <AlbumIcon /> </Avatar>;
     const customAvatar = <Avatar variant="square" alt="album artwork" src={song.artwork}/>;
 
-    const songInfo = song.artist + ", " + song.album;
+    const songInfo = `${song.artist  }, ${  song.album}`;
 
     return (
       <ListItem key={song.id}>

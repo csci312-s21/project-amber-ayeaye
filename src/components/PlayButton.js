@@ -1,16 +1,16 @@
 
-import { useState } from "react";
-import { FaPlayCircle, FaPauseCircle } from 'react-icons/fa';
-import Button from '@material-ui/core/Button';
+// import { useState } from "react";
+import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
+import Button from "@material-ui/core/Button";
 
 export default function PlayButton({ isPlaying, playOrPause }) {
 
-  const url = "http://boombox.middlebury.edu:8000/";
-  // const audio = new Audio(url);
+  // const url = "http://boombox.middlebury.edu:8000/";
+  // // const audio = new Audio(url);
   
-  const playAudio = () => {  
-    audio.play()
-  }
+  // const playAudio = () => {  
+  //   audio.play()
+  // }
 
   return (
     <div>
@@ -24,8 +24,7 @@ export default function PlayButton({ isPlaying, playOrPause }) {
       
 
       <audio className="audio-element">
-        <source src="http://boombox.middlebury.edu:8000/" type="audio/mpeg">
-        </source>
+        <source src="http://boombox.middlebury.edu:8000/" type="audio/mpeg" />
       </audio>
     </div>
   );
