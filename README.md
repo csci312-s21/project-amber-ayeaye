@@ -14,7 +14,7 @@ To ensure consistent style, this template is also set up with [Prettier](https:/
 This application will serve as a new website for the WRMC radio station. The current website is run through WordPress and although many of the features in the current website will remain in this application they will be implemented in React and streamlined for easier use by listeners, DJs, and WRMC board members. This application will also address the troubling fact that any Middlebury student can edit the WRMC WordPress site without being affiliated with the radio station.
 
 #### Heroku Link
-https://project-amber-ayeaye-sprint2.herokuapp.com/
+https://project-amber-ayeaye.herokuapp.com/
 
 ## Getting Started
 
@@ -134,4 +134,4 @@ To learn more about Next.js, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are we
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
