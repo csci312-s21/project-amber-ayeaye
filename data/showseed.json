@@ -1,0 +1,60 @@
+[
+    {
+        "title": "REWIND WITH KYLE",
+        "schedule": "D5T21:00/22:00",
+        "dj_name": "Kyle Hooker",
+        "description": "A mixture of oldies music up through the 80’s and 90’s, this show will feature a mixture of several genres: folk, R&B, Rock, Pop/Rock, and Punk. There will be a nice balance of classic hits in addition to many less well known, deeper tracks.",
+        "id": 1
+
+    },
+     {
+        "title": "AFTER HOURS",
+        "schedule": "D4T23:00/00:00",
+        "dj_name": "Rahul Desmet and Stephen Lovett",
+        "description": "After Hours is the soundtrack to your late night drives as you wind down for the day. We want to capture that atmosphere and create a chill soundscape that people can vibe to with us. You can expect a diverse range of music, but mostly hip hop, R&B, and indie. We’ll be talking about the music, the goings on in our lives, and a lil bit of nonsense. Kick back, relax, and enjoy the show!",
+        "id": 2
+    },
+     {
+        "title": "WHATEVER ‘IT’ IS",
+        "schedule": "D3T15:00/16:00",
+        "dj_name": "Ben Knudsen",
+        "description": "Certain songs seem to take on an ineffable quality; they have that ‘it’ factor. We may detect this inner soul of a track on our first listen, or ‘it’ may develop and take shape as we develop a relationship of sorts with a song. ‘It’ is about how a song creates or reflects an atmosphere. A song that has ‘it’ can be a mug of tea that warms you in the center of your chest; it makes you lean back with a subtle smile on your face as you close your eyes. These are the songs that play on your friend’s car speakers as they drive you home on a late syrupy summer evening, when neither of you says anything until the last note fades away. The idea of this show is to explore whatever ‘it’ is. This might involve more detailed descriptions of the artist or analysis of the lyrics/production, Ben’s personal connections to the tracks played, or the simple joy of leaving a song to speak for itself. The beauty of the ‘it’ factor is that it truly is indescribable; it would be foolish to expect to reach some sort of concrete conclusion about what creates ‘it.’ It is enough to share music that makes us feel these inexplicable emotions with others. Tune in to Whatever ‘It’ Is with Ben Knudsen to hear some new tunes and maybe feel things. He promises he doesn’t take himself too seriously.",
+        "id": 3
+    },
+     {
+        "title": "SHORT GIRAFFES",
+        "schedule": "D1T09:00/10:00",
+        "dj_name": " Roya Touran and Jenny Gould",
+        "description": "Join us, two besties, for a lively hour of debate and contradiction as we navigate our trivial and significant disagreements.",
+        "id": 4
+    },
+    {
+        "title": "YOU MIGHT HATE THIS",
+        "schedule": "D2T11:00/12:00",
+        "dj_name": "Katherine Kenny and Bridget Ulian",
+        "description": "Join us, two besties, for a lively hour of debate and contradiction as we navigate our trivial and significant disagreements.",
+        "id": 5
+    },
+    {
+        "title": "FEMI-NOISE",
+        "schedule": "D6T17:00/18:00",
+        "dj_name": "Clare Kemmer",
+        "description": "Join us, two besties, for a lively hour of debate and contradiction as we navigate our trivial and significant disagreements.",
+        "id": 6
+    },
+    {
+        "title": "WHEN YOU WAKE",
+        "schedule": "D7T19:00/20:00",
+        "dj_name": "Maia Sauer",
+        "description": "Dreamy tunes…",
+        "id": 7
+    },
+    {
+        "title": "ANYTHING BUT THE KITCHEN SINK",
+        "schedule": "D7T15:00/16:00",
+        "dj_name": "Adayliah Ley",
+        "description": "Growing up, my biracial household hosted a diverse array of sounds, from my dad’s 90s hip/hop and rap, my mom’s smooth and slow R&B, and my journey through time as I discovered ABBA, the Beatles, Pink Floyd and, later, Still Woozy, Norah Jones, and Steve Lacey. Anything but the kitchen sink retraces my steps as I travel back in time to discover the artists I’ve forgotten while incorporating newer voices.",
+        "id": 8
+    }
+    
+]
