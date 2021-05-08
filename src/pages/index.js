@@ -66,7 +66,7 @@ export default function Home() {
           <Grid container spacing={3}>
             {/*<SongAdder addSong={addSong}/>*/}
             {/*<SearchBar callback={addSong}/>*/}
-            {(true) ? <RadioSchedule/> : 
+            {(false) ? <RadioSchedule/> : 
             <>
             <Grid item xs={12}justify="center" alignItems="center">
             <PlayButton isPlaying = {isPlaying} playOrPause = {playOrPause}/>

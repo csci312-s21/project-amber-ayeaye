@@ -20,12 +20,8 @@ export default function PlayButton({ isPlaying, playOrPause }) {
       <FaPauseCircle size={30}/>
       </Button>}
       
-      
-
-      <audio className="audio-element">
-        <source src="http://boombox.middlebury.edu:8000/" type="audio/mpeg">
-        </source>
-      </audio>
+        <iframe src="https://onlineradiobox.com/us/wrmc/?cs=us.wrmc" width="300" height="380" frameborder="0" allowtransparency="true" ></iframe>
+     
     </div>
   );
 
