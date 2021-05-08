@@ -9,7 +9,7 @@ import sampleData from "../../data/songseed.json";
 import Grid from "@material-ui/core/Grid";
 import Link from "next/link";
 
-export default function Home() {
+export default function DJ() {
 
     const [currentSongs, setCurrentSongs] = useState(sampleData);
     const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
