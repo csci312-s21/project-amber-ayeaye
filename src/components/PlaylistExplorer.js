@@ -1,18 +1,11 @@
 import { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import Song from "./Song";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: "100%",
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-    },
-}));
 
 const ITEM_HEIGHT = 48;
 
@@ -77,10 +70,11 @@ export default function PlaylistExplorer() {
     // Parse the Playlist object's date into a readable format:
     // MM-DD-YYYY
     const getDate = (playlist) => {
-        const time_window = playlist.time_window;
-        const date = time_window.substring(
-            time_window.lastIndexOf("D") + 1,
-            time_window.lastIndexOf("T")
+        const playlistCopy = {...playlist};
+        const time = playlistCopy.time_window;
+        const date = time.substring(
+            time.lastIndexOf("D") + 1,
+            time.lastIndexOf("T")
         );
         const month = date.substring(0, 2);
         const day = date.substring(2, 4);
@@ -159,7 +153,7 @@ export default function PlaylistExplorer() {
                 PaperProps={{
                     style: {
                         maxHeight: ITEM_HEIGHT * 4.5,
-                        width: '40ch',
+                        width: "40ch",
                      },
                  }}
             >{showItems} 
@@ -177,14 +171,14 @@ export default function PlaylistExplorer() {
                 PaperProps={{
                     style: {
                         maxHeight: ITEM_HEIGHT * 4.5,
-                        width: '40ch',
+                        width: "40ch",
                      },
                  }}
             >{(dateItems.length !== 0) ? dateItems : "This show has no playlists."}
             </Menu>
             {(currentPlaylist !== null && currentPlaylist.length !== 0) ? 
             <div>
-            Songs in the Playlist:
+            <p>Songs in the Playlist:</p>
             <List>
                 {(songComponents.length !== 0) ? songComponents : "This playlist is empty."}
             </List>
