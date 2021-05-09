@@ -123,3 +123,15 @@ export async function getPlaylists() {
     const rows = await knex("Playlist").select();
     return rows;
 }
+
+/**
+ * Gets all playlists from a specified show
+ * 
+ * @param {number} show_id
+ * 
+ * @returns array of Playlist objects or an empty array if no playlists exist
+ */
+export async function getShowPlaylists(show_id) {
+    const playlists = await knex("Playlist").select().where({show_id:show_id});
+    return playlists;
+}
