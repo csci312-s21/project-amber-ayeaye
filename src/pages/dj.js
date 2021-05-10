@@ -7,7 +7,6 @@ import ManualEntry from "../components/ManualEntry";
 import PlayButton from "../components/PlayButton";
 import sampleData from "../../data/songseed.json";
 import Grid from "@material-ui/core/Grid";
-import Link from "next/link";
 import Button from "@material-ui/core/Button";
 
 export default function DJ() {
