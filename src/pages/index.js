@@ -20,15 +20,15 @@ export default function Home() {
 
     const [currentSongs, setCurrentSongs] = useState(sampleData);
     const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
-    const [isPlaying, setIsPlaying] = useState(false);
+    // const [isPlaying, setIsPlaying] = useState(false);
 
-    const playOrPause = () => {
-      if(isPlaying){
-        setIsPlaying(false);
-      } else{
-        setIsPlaying(true);
-      }
-    }
+    // const playOrPause = () => {
+    //   if(isPlaying){
+    //     setIsPlaying(false);
+    //   } else{
+    //     setIsPlaying(true);
+    //   }
+    // }
 
 
     const switchMode = () => {
@@ -68,9 +68,14 @@ export default function Home() {
             {/*<SearchBar callback={addSong}/>*/}
             {(false) ? <RadioSchedule/> : 
             <>
-            <Grid item xs={12}justify="center" alignItems="center">
+            {/*
+              <Grid item xs={12}justify="center" alignItems="center">
             <PlayButton isPlaying = {isPlaying} playOrPause = {playOrPause}/>
             </Grid>
+            */
+            <PlayButton/>
+            }
+            
 
             <Grid item xs={6}justify="center" alignItems="center">
               <ManualEntry addSong={addSong} switchMode={switchMode}/>
