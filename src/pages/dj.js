@@ -30,6 +30,7 @@ export default function DJ() {
     const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentPlaylist, setCurrentPlaylist] = useState();
+
     const [currentShowId] = useState(7);
 
     const playOrPause = () => {
