@@ -10,27 +10,14 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import CancelIcon from "@material-ui/icons/Cancel";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-  entryField: {
-    margin: "15px !important",
-    width: "25ch !important",
-  },
-  button: {
-    margin: theme.spacing(1),
-  },
-}));
 
 export default function DJ() {
 
-    const classes = useStyles();
     const [currentSongs, setCurrentSongs] = useState(sampleData);
     const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentPlaylist, setCurrentPlaylist] = useState();
-
-    const [currentShowId] = useState(7);
+    const [currentShowId] = useState(2);
 
     const playOrPause = () => {
       if(isPlaying){
@@ -78,6 +65,30 @@ export default function DJ() {
       setCurrentPlaylist(newPlaylist);
 
     }
+
+
+    const deletePlaylist = async (id) => {
+
+      const response = await fetch(
+        "/api/playlists/",
+        {
+          method: "DELETE",
+          body: JSON.stringify(id),
+          headers: new Headers({"Content-type":"application/json"}),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const deleted = await response.json();
+
+      if(deleted){
+        setCurrentPlaylist();
+      }
+
+    }
     
     return (
         <div className={styles.container}>
@@ -93,9 +104,9 @@ export default function DJ() {
             </h1>
 
             <Button
-                href="/"
                 variant="contained"
                 color="secondary"
+                href="/"
             >
                 Home Page
             </Button>
@@ -105,7 +116,6 @@ export default function DJ() {
               variant="contained"
               color="primary"
               size="medium"
-              className={classes.button}
               startIcon={<AddIcon />}
               onClick={() => createNewPlaylist(currentShowId)}>
               New Playlist
@@ -115,9 +125,8 @@ export default function DJ() {
               variant="contained"
               color="primary"
               size="medium"
-              className={classes.button}
               startIcon={<CancelIcon />}
-              onClick={() => setCurrentPlaylist()}>
+              onClick={() => deletePlaylist(currentPlaylist.id)}>
               Cancel
             </Button>
             }
