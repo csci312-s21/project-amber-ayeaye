@@ -1,5 +1,5 @@
-import nc from 'next-connect';
-import { getSession } from 'next-auth/client';
+import nc from "next-connect";
+import { getSession } from "next-auth/client";
 
 const handler = nc().get(async (req, res) => {
   const session = await getSession({ req });
