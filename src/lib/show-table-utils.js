@@ -35,7 +35,7 @@ export async function getShows() {
  * Read the show with the specified id
  * 
  * @param {number} id
- * @returns a Show object, or null if the song can't be found
+ * @returns a Show object, or null if the show can't be found
  */
 export async function getShow(id) {
     const show = await knex("Show").select().where({id:id});

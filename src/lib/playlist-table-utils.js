@@ -58,10 +58,10 @@ export async function deletePlaylist(id) {
 /**
  * Create a new playlist entry in the database
  * 
- * @param {number} show_id 
+ * @param {number} input_show_id 
  * @returns the playlist entry in the database with an ID
  */
-export async function createPlaylist(show_id) {
+export async function createPlaylist(input_show_id) {
 
     // Construct the date string for the database
     const today = new Date();
@@ -71,7 +71,7 @@ export async function createPlaylist(show_id) {
     const dateString = mm + dd + yyyy;
 
     // Get the show's time window from the database
-    const show = getShow(show_id);
+    const show = await getShow(input_show_id);
     const showTimeWindow = show.schedule.split("T").pop();
 
     // Combine the date and time window strings
@@ -79,7 +79,7 @@ export async function createPlaylist(show_id) {
 
     // Construct the new Playlist object
     const playlist = {
-        show_id: show_id,
+        show_id: input_show_id,
         time_window: playlistTimeWindow
     };
 

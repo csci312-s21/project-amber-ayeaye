@@ -1,6 +1,7 @@
 // import ShowsSample from "../components/ShowsSample";
 import Link from "next/link";
 import PlaylistExplorer from "../components/PlaylistExplorer";
+import ShowsSample from "../components/ShowsSample";
 
 export default function Home() {
     return (
