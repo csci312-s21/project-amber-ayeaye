@@ -8,6 +8,9 @@ import PlayButton from "../components/PlayButton";
 import sampleData from "../../data/songseed.json";
 import Grid from "@material-ui/core/Grid";
 
+import LoginWidget from "../components/LoginWidget";
+import SecureItems from "../components/SecureItems";
+
 // Minimal implementation
 import ShowsSample from "../components/ShowsSample";
 
@@ -57,7 +60,18 @@ export default function Home() {
             </h1>
 
           <Grid container spacing={3}>
-
+            <Grid 
+              item xs={12}
+              justify="center" 
+              alignItems="center">
+              <LoginWidget/>
+            </Grid>
+             <Grid 
+              item xs={12}
+              justify="center" 
+              alignItems="center">
+              <SecureItems/>
+            </Grid>
             <Grid 
               item xs={12}
               justify="center" 
