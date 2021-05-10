@@ -9,6 +9,7 @@ import sampleData from "../../data/songseed.json";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
+import CancelIcon from "@material-ui/icons/Cancel";
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "next/link";
 
@@ -29,7 +30,7 @@ export default function DJ() {
     const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentPlaylist, setCurrentPlaylist] = useState();
-    const [currentShowId, setCurrentShowId] = useState(4);
+    const [currentShowId, setCurrentShowId] = useState(7);
 
     const playOrPause = () => {
       if(isPlaying){
@@ -95,43 +96,51 @@ export default function DJ() {
                 <a>Home Page</a>
             </Link>
 
+            {!currentPlaylist ? <Button
+              id="newPlaylistButton"
+              variant="contained"
+              color="primary"
+              size="medium"
+              className={classes.button}
+              startIcon={<AddIcon />}
+              onClick={() => createNewPlaylist(currentShowId)}>
+              New Playlist
+            </Button> :
+            <Button
+              id="cancelButton"
+              variant="contained"
+              color="primary"
+              size="medium"
+              className={classes.button}
+              startIcon={<CancelIcon />}
+              onClick={() => setCurrentPlaylist()}>
+              Cancel
+            </Button>
+            }
+
           <Grid container spacing={3}>
 
             <Grid 
-              item xs={12}
-              justify="center" 
-              alignItems="center">
+              item xs={12}>
               <PlayButton 
                 isPlaying = {isPlaying} 
                 playOrPause = {playOrPause}/>
             </Grid>
 
-            <Grid 
-              item xs={6}
-              justify="center" 
-              alignItems="center">
+            {currentPlaylist && <Grid 
+              item xs={6}>
               {addingMode==="search" ? 
                 <SearchBar addSong={addSong} switchMode={switchMode}/> :
                 <ManualEntry addSong={addSong} switchMode={switchMode}/>
               }
-            </Grid>
+            </Grid>}
 
             <Grid 
               item xs={6}>
-              <Button
-                id="newPlaylistButton"
-                variant="contained"
-                color="primary"
-                size="medium"
-                className={classes.button}
-                startIcon={<AddIcon />}
-                onClick={() => createNewPlaylist(currentShowId)}>
-                New Playlist
-              </Button>
-              <Playlist 
+              {currentPlaylist && <Playlist 
                 songs={currentSongs} 
                 deleteSong={deleteSong}
-                mode={"inPlaylist"}/>
+                mode={"inPlaylist"}/>}
             </Grid>
 
           </Grid>
