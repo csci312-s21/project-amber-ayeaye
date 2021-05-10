@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 // import {useState} from "react";
 // import Head from "next/head";
@@ -21,11 +22,16 @@ import PlaylistExplorer from "../components/PlaylistExplorer";
 export default function Home() {
     return (     
 
+// import ShowsSample from "../components/ShowsSample";
+import Link from "next/link";
+import PlaylistExplorer from "../components/PlaylistExplorer";
+
+export default function Home() {
+    return (
         <div>
             <Link href="/dj">
                 <a>DJ Page</a>
             </Link>
-            <LoginWidget/>
             <PlaylistExplorer/>
         </div>
     )

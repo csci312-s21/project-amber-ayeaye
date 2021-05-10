@@ -8,7 +8,7 @@ import PlayButton from "../components/PlayButton";
 import sampleData from "../../data/songseed.json";
 import Grid from "@material-ui/core/Grid";
 import Link from "next/link";
-import SecureItems from "../components/SecureItems";
+
 
 export default function DJ() {
 
@@ -60,12 +60,6 @@ export default function DJ() {
             </Link>
 
           <Grid container spacing={3}>
-          <Grid 
-              item xs={12}
-              justify="center" 
-              alignItems="center">
-              <SecureItems/>
-            </Grid>
 
             <Grid 
               item xs={12}
