@@ -18,8 +18,10 @@ export default function SecureItems(){
   }, [session]);
     return (
         <div>
-            <p>{(session) ? `Welcome ${session.user.name}` : "You are not logged in"} </p>
-            <p>Server message:  {secret}</p> 
+        {(session) &&
+            <p> `Welcome ${session.user.name}`</p>
+            <div>{secret}</div> 
+        }
         </div>
     )
 }
