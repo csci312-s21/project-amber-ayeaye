@@ -11,7 +11,6 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import CancelIcon from "@material-ui/icons/Cancel";
 import { makeStyles } from "@material-ui/core/styles";
-import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
   entryField: {
@@ -93,9 +92,13 @@ export default function DJ() {
             Welcome to WRMC!
             </h1>
 
-            <Link href="/">
-                <a>Home Page</a>
-            </Link>
+            <Button
+                href="/"
+                variant="contained"
+                color="secondary"
+            >
+                Home Page
+            </Button>
 
             {!currentPlaylist ? <Button
               id="newPlaylistButton"
