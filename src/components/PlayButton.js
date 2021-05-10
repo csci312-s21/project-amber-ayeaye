@@ -20,7 +20,9 @@ export default function PlayButton(/*{isPlaying, playOrPause }*/) {
       <FaPauseCircle size={30}/>
       </Button>*/}
       
-        <iframe src="https://onlineradiobox.com/us/wrmc/?cs=us.wrmc" 
+        <iframe 
+        title= "Listen to WRMC live"
+        src="https://onlineradiobox.com/us/wrmc/?cs=us.wrmc" 
         width="300" 
         height="155" 
         frameborder="0" 
