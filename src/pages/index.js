@@ -1,5 +1,9 @@
+
 import LoginWidget from "../components/LoginWidget";
 import SecureItems from "../components/SecureItems";
+
+// import ShowsSample from "../components/ShowsSample";
+
 import Link from "next/link";
 import PlaylistExplorer from "../components/PlaylistExplorer";
 
@@ -9,9 +13,10 @@ export default function Home() {
             <Link href="/dj">
                 <a>DJ Page</a>
             </Link>
+
             <LoginWidget/>
             <SecureItems/>
             <PlaylistExplorer/>
         </div>
-    );
+    )
 }
