@@ -19,20 +19,30 @@ export default function Song({song, deleteSong, addSong, mode}) {
 
     const songInfo = `${song.artist  }, ${  song.album}`;
 
+    let render;
+    if( mode === "inPlaylist") {
+        render = (
+            <IconButton color="secondary" size="small" onClick={() => deleteSong(song)}>
+            <DeleteIcon />
+            </IconButton>
+        );
+    } else if (mode === "inSearchResults" ) {
+        render = (
+            <IconButton color="primary" size="small" onClick={() => addSong(song)}>
+            <AddIcon />
+            </IconButton>
+        );
+    } else {
+        render = (<></>);
+    }
+    
     return (
       <ListItem key={song.id}>
         <ListItemAvatar>
           {song.artwork ? customAvatar : defaultAvatar}
         </ListItemAvatar>
         <ListItemText primary={song.title} secondary={songInfo} />
-        {mode==="inPlaylist" ? 
-          <IconButton color="secondary" size="small" onClick={() => deleteSong(song)}>
-          <DeleteIcon />
-          </IconButton> : 
-          <IconButton color="primary" size="small" onClick={() => addSong(song)}>
-          <AddIcon />
-          </IconButton>
-        }
+        {render}
       </ListItem>
     );
 }
