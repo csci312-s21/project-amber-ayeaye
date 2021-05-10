@@ -20,12 +20,7 @@ export default function PlayButton({ isPlaying, playOrPause }) {
       </Button> : <Button variant="link" onClick={() => playOrPause()}>
       <FaPlayCircle size={30}/>
       </Button>}
-      
-      
-
-      <audio className="audio-element">
-        <source src="http://boombox.middlebury.edu:8000/" type="audio/mpeg" />
-      </audio>
+  
     </div>
   );
 
