@@ -8,12 +8,17 @@ import PlayButton from "../components/PlayButton";
 import sampleData from "../../data/songseed.json";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
+import CancelIcon from "@material-ui/icons/Cancel";
+
 
 export default function DJ() {
 
     const [currentSongs, setCurrentSongs] = useState(sampleData);
     const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
     const [isPlaying, setIsPlaying] = useState(false);
+    const [currentPlaylist, setCurrentPlaylist] = useState();
+    const [currentShowId] = useState(2);
 
     const playOrPause = () => {
       if(isPlaying){
@@ -40,6 +45,51 @@ export default function DJ() {
         const newSongs = [newSong, ...currentSongs];
         setCurrentSongs(newSongs);
     };
+
+    const createNewPlaylist = async (show_id) => {
+
+      const response = await fetch(
+        "/api/playlists/",
+        {
+          method: "PUT",
+          body: JSON.stringify(show_id),
+          headers: new Headers({"Content-type":"application/json"}),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const newPlaylist = await response.json();
+
+      setCurrentPlaylist(newPlaylist);
+
+    }
+
+
+    const deletePlaylist = async (id) => {
+
+      const response = await fetch(
+        "/api/playlists/",
+        {
+          method: "DELETE",
+          body: JSON.stringify(id),
+          headers: new Headers({"Content-type":"application/json"}),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const deleted = await response.json();
+
+      if(deleted){
+        setCurrentPlaylist();
+      }
+
+    }
     
     return (
         <div className={styles.container}>
@@ -55,40 +105,56 @@ export default function DJ() {
             </h1>
 
             <Button
-                href="/"
                 variant="contained"
                 color="secondary"
+                href="/"
             >
                 Home Page
             </Button>
 
+            {!currentPlaylist ? <Button
+              id="newPlaylistButton"
+              variant="contained"
+              color="primary"
+              size="medium"
+              startIcon={<AddIcon />}
+              onClick={() => createNewPlaylist(currentShowId)}>
+              New Playlist
+            </Button> :
+            <Button
+              id="cancelButton"
+              variant="contained"
+              color="primary"
+              size="medium"
+              startIcon={<CancelIcon />}
+              onClick={() => deletePlaylist(currentPlaylist.id)}>
+              Cancel
+            </Button>
+            }
+
           <Grid container spacing={3}>
 
             <Grid 
-              item xs={12}
-              justify="center" 
-              alignItems="center">
+              item xs={12}>
               <PlayButton 
                 isPlaying = {isPlaying} 
                 playOrPause = {playOrPause}/>
             </Grid>
 
-            <Grid 
-              item xs={6}
-              justify="center" 
-              alignItems="center">
+            {currentPlaylist && <Grid 
+              item xs={6}>
               {addingMode==="search" ? 
                 <SearchBar addSong={addSong} switchMode={switchMode}/> :
                 <ManualEntry addSong={addSong} switchMode={switchMode}/>
               }
-            </Grid>
+            </Grid>}
 
             <Grid 
               item xs={6}>
-              <Playlist 
+              {currentPlaylist && <Playlist 
                 songs={currentSongs} 
                 deleteSong={deleteSong}
-                mode={"inPlaylist"}/>
+                mode={"inPlaylist"}/>}
             </Grid>
 
           </Grid>
