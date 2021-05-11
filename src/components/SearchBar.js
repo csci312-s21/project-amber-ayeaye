@@ -27,18 +27,18 @@ export default function SearchBar({addSong, switchMode}) {
     setSearchText("");
   }
 
-  useEffect(() => {
-    const getToken = async () => {
-      const response = await fetch("/api/auth");
-      if(!response.ok){
-        throw new Error(response.statusText);
-      }
-      const tokenData = await response.json();
-      setToken(tokenData);
-    };
+  // useEffect(() => {
+  //   const getToken = async () => {
+  //     const response = await fetch("/api/auth");
+  //     if(!response.ok){
+  //       throw new Error(response.statusText);
+  //     }
+  //     const tokenData = await response.json();
+  //     setToken(tokenData);
+  //   };
 
-    getToken();
-  }, []);
+  //   getToken();
+  // }, []);
 
   const searchSong = async () => {
     const url = `https://api.spotify.com/v1/search?q=${searchText}&type=track&limit=10`;

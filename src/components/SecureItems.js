@@ -1,27 +1,27 @@
 import {useSession} from "next-auth/client";
 import {useState, useEffect} from "react";
-export default function SecureItems(){
-  const [session] = useSession();
-  const [secret, setSecret] = useState();
-    useEffect(()=>{
-    const getSecret = async ()=>{
-      const response = await fetch("/api/secret");
+import Link from "next/link";
+import Button from "@material-ui/core/Button";
 
+export default function SecureItems({setUser}){
+  const [session] = useSession();
+ // const [user, setUser] = useState();
+  //const [users, setUsers] = useState();
+    useEffect(()=>{
+    const getUser = async ()=>{
+      const response = await fetch("/api/secret");
       if (response.ok){
         const data = await response.json();
-        setSecret(data.message);
+        setUser(data.username);
       }else{
-        setSecret(response.statusText);
+        setUser(response.statusText);
       }
     };
-    getSecret();
+    getUser();
   }, [session]);
     return (
         <div>
-        {(session) &&
-            <p> `Welcome ${session.user.name}`</p>
-            <div>{secret}</div> 
-        }
+        {(session) && setUser} 
         </div>
     )
 }
