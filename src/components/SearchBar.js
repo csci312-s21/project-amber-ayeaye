@@ -29,7 +29,7 @@ export default function SearchBar({addSong, switchMode}) {
 
   // useEffect(() => {
   //   const getToken = async () => {
-  //     const response = await fetch("/api/auth");
+  //     const response = await fetch("/api/spotifyauth");
   //     if(!response.ok){
   //       throw new Error(response.statusText);
   //     }

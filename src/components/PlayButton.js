@@ -1,12 +1,12 @@
 
 // import { useState } from "react";
-import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
-import Button from "@material-ui/core/Button";
+// import { FaPlayCircle, FaPauseCircle } from 'react-icons/fa';
+// import Button from '@material-ui/core/Button';
 
-export default function PlayButton({ isPlaying, playOrPause }) {
+export default function PlayButton(/*{isPlaying, playOrPause }*/) {
 
   // const url = "http://boombox.middlebury.edu:8000/";
-  // // const audio = new Audio(url);
+  // const audio = new Audio(url);
   
   // const playAudio = () => {  
   //   audio.play()
@@ -15,12 +15,20 @@ export default function PlayButton({ isPlaying, playOrPause }) {
   return (
     <div>
     
-      {isPlaying ? <Button variant="link" onClick={() => playOrPause()}>
-      <FaPauseCircle size={30}/>
-      </Button> : <Button variant="link" onClick={() => playOrPause()}>
+      {/*isPlaying ? <Button variant="link" onClick={() => playOrPause()}>
       <FaPlayCircle size={30}/>
-      </Button>}
-  
+      </Button> : <Button variant="link" onClick={() => playOrPause()}>
+      <FaPauseCircle size={30}/>
+      </Button>*/}
+      
+        <iframe 
+        title= "Listen to WRMC live"
+        src="https://onlineradiobox.com/us/wrmc/?cs=us.wrmc" 
+        width="300" 
+        height="155" 
+        frameBorder="0" 
+        scrolling="no" 
+        style={{padding: "10px 20px"}}></iframe>
     </div>
   );
 

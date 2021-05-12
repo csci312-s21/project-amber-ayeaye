@@ -7,7 +7,7 @@ import List from "@material-ui/core/List";
 import Song from "./Song";
 
 
-const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 480;
 
 export default function PlaylistExplorer() {
 

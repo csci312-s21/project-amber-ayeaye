@@ -13,7 +13,7 @@ export default function LoginWidget() {
   if (session){
 return (<div>
         <p>
-          Signed in as {session.user.email} 
+          Signed in as {session.user.name} 
           <Button
             variant="contained" 
             color="primary"
