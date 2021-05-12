@@ -1,0 +1,88 @@
+import { render, screen, fireEvent, act } from "@testing-library/react";
+import fetchMock from "fetch-mock-jest";
+import Schedule from "./Schedule";
+
+// "clicking on a day opens the collapse"
+// "clicking on a day switches the expand arrow direction"
+// "shows for each day are sorted by time"
+
+const shows = require("../../data/showseed.json");
+
+describe.only("Schedule tests", () => {
+  let localShows;
+
+  beforeAll(() => {
+    localShows = shows.map((show) => ({ ...show }));
+
+    fetchMock.reset();
+    fetchMock.get(`/api/shows/`, () => localShows);
+  });
+
+  test("Smoke test", async () => {
+    render(<Schedule />);
+    await act(async () => {
+      await fetchMock.flush(true);
+    });
+  });
+
+  test("Snapshot test", async () => {
+    const { container } = render(<Schedule />);
+    await act(async () => {
+      await fetchMock.flush(true);
+    });
+
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  test("Clicking day makes shows visible", async () => {
+    render(<Schedule />);
+    await act(async () => {
+      await fetchMock.flush(true);
+    });
+
+    const timeString = /\d\d:\d\d - \d\d:\d\d/;
+
+    let saturdayListItem = screen.queryByText("Saturday");
+    const numberSaturdayShows = localShows.filter(
+      (show) => show.schedule.charAt(1) === "7"
+    ).length;
+
+    let visibleShows = screen.queryAllByText(timeString);
+    expect(saturdayListItem).toBeInTheDocument();
+    expect(visibleShows.length).toBe(0);
+
+    fireEvent.click(saturdayListItem);
+    visibleShows = screen.queryAllByText(timeString);
+    expect(visibleShows).toHaveLength = numberSaturdayShows;
+
+    saturdayListItem = screen.queryByText("Saturday");
+    fireEvent.click(saturdayListItem);
+    visibleShows = screen.queryAllByText(timeString);
+
+    // TODO visible shows retains old value after click
+    // expect(visibleShows[0]).not.toBeVisible()
+    // expect(visibleShows).toHaveLength(0);
+  });
+
+  // test("Shows are sorted by time", async () => {
+  //   render(<Schedule />);
+
+  //   await act(async () => {
+  //     await fetchMock.flush(true);
+  //   })
+
+  //   const timeString = /\d\d:\d\d - \d\d:\d\d/;
+  //   const saturdayListItem = screen.queryByText("Saturday");
+  //   fireEvent.click(saturdayListItem);
+  //   const visibleShows = screen.queryAllByText(timeString);
+
+  //   const saturdayShows = localShows.filter((show) => show.schedule.charAt(1) === "7")
+
+  // });
+
+  // test("title is displayed", () => {
+  //   const { getByText } = render(<Schedule/>);
+  //   expect(getByText(localShows[0].title)).toBeInTheDocument();
+  //   expect(getByText(localShows[0].title)).toBeVisible();
+  // });
+});
