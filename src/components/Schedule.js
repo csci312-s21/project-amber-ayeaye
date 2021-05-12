@@ -65,10 +65,10 @@ export default function Schedule() {
   const showList = (dayNum) => {
     // we add 1 because days are 1-7 in database
     const showObjs =
-      shows &&
-      shows.filter(
-        (show) => show.schedule.charAt(1) === (dayNum + 1).toString()
-      );
+      shows && shows
+        .filter((show) => show.schedule.charAt(1) === (dayNum + 1).toString())
+        .sort((a, b) => parseInt(a.schedule.slice(3,5)) - parseInt(b.schedule.slice(3,5)))
+    
 
     return showObjs.map((showObj) => (
       <List key={showObj.id} component="div" disablePadding>
