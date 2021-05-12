@@ -76,7 +76,9 @@ export default function Schedule() {
           <ListItemIcon>
             <QueueMusic />
           </ListItemIcon>
-          <ListItemText primary={showObj.title} secondary={showObj.dj_name} />
+          <ListItemText primary={`${showObj.title} - ${showObj.dj_name}`} 
+          secondary= {`${showObj.schedule.slice(3, 8)} - ${showObj.schedule.slice(9)}`}/>
+          
         </ListItem>
       </List>
     ));
