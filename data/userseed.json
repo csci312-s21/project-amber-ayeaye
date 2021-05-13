@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "username": "Assadou " ,
-    "email": "anzigamasabo@middlebury.edu",
+    "username": "Assadou",
+    "email": "anzigamasabo@middlebury.edu"
   },
   {
     "id": 2,
@@ -14,11 +14,11 @@
     "username": "Myles",
     "email": "mstokowski@middlebury.edu"
   },
-   {
+  {
     "id": 4,
     "username": "Simon",
     "email": "sscharf@middlebury.edu"
-  }, 
+  },
   {
     "id": 5,
     "username": "Brendan",
@@ -28,5 +28,5 @@
     "id": 6,
     "username": "Matthew",
     "email": "mkushwaha@middlebury.edu"
-  }
+  } 
 ]
