@@ -1,4 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen , fireEvent } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 import path from "path";
 import request from "supertest";
 import fetchMock from "fetch-mock-jest";
@@ -143,11 +144,26 @@ describe("PlaylistExplorer tests", () => {
         expect(screen.queryByText("Click to Select a Show")).toBeInTheDocument();
     });
 
-    test("Shows Appear in Dropdown", () => {
+    test("Shows Appear in Dropdown", async () => {
         render(<PlaylistExplorer/>);
-        let showMenu = screen.queryByText("Click to Select a Show");
+        const showMenu = screen.queryByText("Click to Select a Show");
         fireEvent.click(showMenu);
-        expect(screen.queryByText("Show #1")).toBeInTheDocument();
+        const show1Label = await screen.findByText("Show #1");
+        expect(show1Label).toBeInTheDocument();
+        const show2Label = await screen.findByText("Show #2");
+        expect(show2Label).toBeInTheDocument();
+        const show3Label = await screen.findByText("Show #3");
+        expect(show3Label).toBeInTheDocument();
+    });
+
+    test("Selecting a Show Causes The Date Menu to Appear", async () => {
+        render(<PlaylistExplorer/>);
+        const showMenu = screen.queryByText("Click to Select a Show");
+        fireEvent.click(showMenu);
+        const show1Label = await screen.findByText("Show #1");
+        fireEvent.click(show1Label);
+        const dateMenu = screen.queryByText("Click to choose date of show");
+        expect(dateMenu).toBeInTheDocument();
     });
 
 });
