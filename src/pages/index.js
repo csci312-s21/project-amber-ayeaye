@@ -23,7 +23,7 @@ export default function Home() {
             >
                 DJ Page
             </Button>
-            <PlaylistExplorer/>
+            {setInterval(()=><PlaylistExplorer/>, 2000)}
         </div>
     )
 }
