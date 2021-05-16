@@ -13,36 +13,31 @@ import { getSession, useSession } from "next-auth/client";
 import SecureItems from "../components/SecureItems";
 
 
-const appDir = path.join(__dirname, "../../");
-
-
+const appDir = path.join(__dirname, "../../")
 jest.setTimeout(1000 * 15);
-
 jest.mock("next-auth/client"); 
 
-
 describe("Server tests", ()=>{
- let server;
+  let server;
   beforeAll(() => {
-    //const appDir = path.join(__dirname, "../../");
-    return nextBuild(appDir,[], {stderr:true, stdout: true})
-      .then((results)=>{
-       if (results.stderr){
-          console.log(results.stderr);
-        }
-        const app = nextServer({
-          dir: appDir,
-          dev: false,
-          quiet: true,
-        });
-      return startApp(app)
-      })
-      .then((s)=>{
-        server = s;
-      })
-      .catch((rejection) =>{
-        console.log(rejection);
-      });
+return nextBuild(appDir,[], {stderr:true, stdout: true})
+  .then((results)=>{
+    if (results.stderr){
+      console.log(results.stderr);
+      }
+      const app = nextServer({
+        dir: appDir,
+        dev: false,
+        quiet: true,
+        });
+        return startApp(app)
+        })
+        .then((s)=>{
+          server = s;
+          })
+          .catch((rejection) =>{
+            console.log(rejection);
+            });
 });
 
   /**
