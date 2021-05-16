@@ -16,7 +16,7 @@ export default function DJ() {
     const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
     const [isPlaying, setIsPlaying] = useState(false);
     const [editingPlaylistId, setEditingPlaylistId] = useState();
-    const [currentPlaylistSongs, setCurrentPlaylistSongs] = useState();
+    const [editingPlaylistSongs, setEditingPlaylistSongs] = useState();
     const [currentShowId] = useState(4);
     const [songPlayOrder, setSongPlayOrder] = useState();
 
@@ -67,14 +67,14 @@ export default function DJ() {
       // set the new playlist 
       const editedPlaylist = await response2.json();
       // setEditingPlaylist(editedPlaylist);
-      setCurrentPlaylistSongs(editedPlaylist);
+      setEditingPlaylistSongs(editedPlaylist);
 
     }
     
     const addSongToPlaylist = async (song) => {
 
       // ideally, we would like to send the songPlayOrder as part of the request, but I can't figure out how to make that work
-      
+
       // const requestBody = {
       //   song: song,
       //   songPlayOrder: songPlayOrder
@@ -127,7 +127,7 @@ export default function DJ() {
 
     // set the new playlist 
     const editedPlaylist = await response3.json();
-    setCurrentPlaylistSongs(editedPlaylist);
+    setEditingPlaylistSongs(editedPlaylist);
 
   }
 
@@ -188,7 +188,7 @@ export default function DJ() {
 
       if(deleted){
         setEditingPlaylistId();
-        setCurrentPlaylistSongs();
+        setEditingPlaylistSongs();
       }
 
     }
@@ -253,8 +253,8 @@ export default function DJ() {
 
             <Grid 
               item xs={6}>
-              {currentPlaylistSongs && <Playlist 
-                songs={currentPlaylistSongs} 
+              {editingPlaylistSongs && <Playlist 
+                songs={editingPlaylistSongs} 
                 deleteSong={deleteSongFromPlaylist}
                 mode={"inPlaylist"}/>}
             </Grid>
