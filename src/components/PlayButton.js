@@ -1,5 +1,5 @@
 
-export default function PlayButton{
+export default function PlayButton(){
   return (
     <div>
         <iframe 
