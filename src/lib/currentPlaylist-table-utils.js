@@ -29,7 +29,7 @@ export const knex = knexInitializer(
  */
 export async function makeCurrentPlaylist(id) {
 
-  const currentExists = await knex("CurrentPlaylist").select('id').count();
+  const currentExists = await knex("CurrentPlaylist").select("id").count();
 
   const count = currentExists[0]["count(*)"];
 

@@ -5,7 +5,6 @@ import Playlist from "../components/Playlist";
 import SearchBar from "../components/SearchBar";
 import ManualEntry from "../components/ManualEntry";
 import PlayButton from "../components/PlayButton";
-import sampleData from "../../data/songseed.json";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
@@ -14,13 +13,11 @@ import CancelIcon from "@material-ui/icons/Cancel";
 
 export default function DJ() {
 
-    // const [currentSongs, setCurrentSongs] = useState();
     const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
     const [isPlaying, setIsPlaying] = useState(false);
     const [editingPlaylistId, setEditingPlaylistId] = useState();
-    // const [currentPlaylistId, setCurrentPlaylistId] = useState();
     const [currentPlaylistSongs, setCurrentPlaylistSongs] = useState();
-    const [currentShowId] = useState(5);
+    const [currentShowId] = useState(4);
     const [songPlayOrder, setSongPlayOrder] = useState();
 
     const playOrPause = () => {
@@ -76,6 +73,8 @@ export default function DJ() {
     
     const addSongToPlaylist = async (song) => {
 
+      // ideally, we would like to send the songPlayOrder as part of the request, but I can't figure out how to make that work
+      
       // const requestBody = {
       //   song: song,
       //   songPlayOrder: songPlayOrder
