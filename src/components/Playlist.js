@@ -37,5 +37,8 @@ export default function Playlist({songs, deleteSong, addSong, mode}) {
 
 Playlist.propTypes = {
   songs:PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteSong:PropTypes.func,
+  addSong:PropTypes.func,
+  mode:PropTypes.string.isRequired,
 };
 

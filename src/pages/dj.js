@@ -14,11 +14,14 @@ import CancelIcon from "@material-ui/icons/Cancel";
 
 export default function DJ() {
 
-    const [currentSongs, setCurrentSongs] = useState(sampleData);
+    // const [currentSongs, setCurrentSongs] = useState();
     const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
     const [isPlaying, setIsPlaying] = useState(false);
-    const [currentPlaylist, setCurrentPlaylist] = useState();
-    const [currentShowId] = useState(2);
+    const [editingPlaylistId, setEditingPlaylistId] = useState();
+    // const [currentPlaylistId, setCurrentPlaylistId] = useState();
+    const [currentPlaylistSongs, setCurrentPlaylistSongs] = useState();
+    const [currentShowId] = useState(5);
+    const [songPlayOrder, setSongPlayOrder] = useState();
 
     const playOrPause = () => {
       if(isPlaying){
@@ -36,37 +39,136 @@ export default function DJ() {
       }
     }
     
-    const deleteSong = (song) => {
-        const newSongs = currentSongs.filter( (s) => s.id !== song.id);
-        setCurrentSongs(newSongs);
-    };
+    const deleteSongFromPlaylist = async (song) => {
 
-    const addSong = (newSong) => {
-        const newSongs = [newSong, ...currentSongs];
-        setCurrentSongs(newSongs);
-    };
-
-    const createNewPlaylist = async (show_id) => {
-
-      const response = await fetch(
-        "/api/playlists/",
+      const response1 = await fetch(
+        `/api/songplay/${editingPlaylistId}`,
         {
-          method: "PUT",
-          body: JSON.stringify(show_id),
+          method: "DELETE",
+          body: JSON.stringify(song),
           headers: new Headers({"Content-type":"application/json"}),
         }
       );
 
-      if (!response.ok) {
-        throw new Error(response.statusText);
+      if (!response1.ok) {
+        throw new Error(response1.statusText);
       }
 
-      const newPlaylist = await response.json();
+      // get the new playlist 
+      const response2 = await fetch(
+        `/api/playlistsongs/${editingPlaylistId}`,
+        {
+          method: "GET",
+          headers: new Headers({"Content-type":"application/json"}),
+        }
+      );
 
-      setCurrentPlaylist(newPlaylist);
+      if (!response2.ok) {
+        throw new Error(response2.statusText);
+      }
+
+      // set the new playlist 
+      const editedPlaylist = await response2.json();
+      // setEditingPlaylist(editedPlaylist);
+      setCurrentPlaylistSongs(editedPlaylist);
 
     }
+    
+    const addSongToPlaylist = async (song) => {
 
+      // const requestBody = {
+      //   song: song,
+      //   songPlayOrder: songPlayOrder
+      // };
+
+      const response1 = await fetch(
+        "/api/songs/",
+        {
+          method: "PUT",
+          body: JSON.stringify(song),
+          headers: new Headers({"Content-type":"application/json"}),
+        }
+      );
+
+      if (!response1.ok) {
+        throw new Error(response1.statusText);
+      }
+
+    const newSong = await response1.json();
+      
+    const response2 = await fetch(
+      `/api/songplay/${editingPlaylistId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(newSong),
+        headers: new Headers({"Content-type":"application/json"}),
+      }
+    );
+
+    if (!response2.ok) {
+      throw new Error(response2.statusText);
+    }
+
+    else{
+      setSongPlayOrder(songPlayOrder + 1);
+    }
+
+    // get the new playlist 
+    const response3 = await fetch(
+      `/api/playlistsongs/${editingPlaylistId}`,
+      {
+        method: "GET",
+        headers: new Headers({"Content-type":"application/json"}),
+      }
+    );
+
+    if (!response3.ok) {
+      throw new Error(response3.statusText);
+    }
+
+    // set the new playlist 
+    const editedPlaylist = await response3.json();
+    setCurrentPlaylistSongs(editedPlaylist);
+
+  }
+
+  const createNewPlaylist = async (show_id) => {
+
+    setSongPlayOrder(1);
+
+    const response1 = await fetch(
+      "/api/playlists/",
+      {
+        method: "PUT",
+        body: JSON.stringify(show_id),
+        headers: new Headers({"Content-type":"application/json"}),
+      }
+    );
+
+    if (!response1.ok) {
+      throw new Error(response1.statusText);
+    }
+
+    const newPlaylist = await response1.json();
+    const newPlaylistId = newPlaylist.id;
+
+    // set the current playlist 
+    const response2 = await fetch(
+      `/api/currentplaylist/${newPlaylistId}`,
+      {
+        method: "PUT",
+        headers: new Headers(
+          {"Content-type":"application/json"}),
+      }
+    );
+
+    if(!response2.ok){
+      throw new Error(response2.statusText);
+    }
+
+    setEditingPlaylistId(newPlaylistId);
+
+  }
 
     const deletePlaylist = async (id) => {
 
@@ -86,7 +188,8 @@ export default function DJ() {
       const deleted = await response.json();
 
       if(deleted){
-        setCurrentPlaylist();
+        setEditingPlaylistId();
+        setCurrentPlaylistSongs();
       }
 
     }
@@ -112,7 +215,7 @@ export default function DJ() {
                 Home Page
             </Button>
 
-            {!currentPlaylist ? <Button
+            {!editingPlaylistId ? <Button
               id="newPlaylistButton"
               variant="contained"
               color="primary"
@@ -127,7 +230,7 @@ export default function DJ() {
               color="primary"
               size="medium"
               startIcon={<CancelIcon />}
-              onClick={() => deletePlaylist(currentPlaylist.id)}>
+              onClick={() => deletePlaylist(editingPlaylistId)}>
               Cancel
             </Button>
             }
@@ -141,19 +244,19 @@ export default function DJ() {
                 playOrPause = {playOrPause}/>
             </Grid>
 
-            {currentPlaylist && <Grid 
+            {editingPlaylistId && <Grid 
               item xs={6}>
               {addingMode==="search" ? 
-                <SearchBar addSong={addSong} switchMode={switchMode}/> :
-                <ManualEntry addSong={addSong} switchMode={switchMode}/>
+                <SearchBar addSongToPlaylist={addSongToPlaylist} switchMode={switchMode}/> :
+                <ManualEntry addSongToPlaylist={addSongToPlaylist} switchMode={switchMode}/>
               }
             </Grid>}
 
             <Grid 
               item xs={6}>
-              {currentPlaylist && <Playlist 
-                songs={currentSongs} 
-                deleteSong={deleteSong}
+              {currentPlaylistSongs && <Playlist 
+                songs={currentPlaylistSongs} 
+                deleteSong={deleteSongFromPlaylist}
                 mode={"inPlaylist"}/>}
             </Grid>
 

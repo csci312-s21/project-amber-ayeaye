@@ -76,7 +76,7 @@ export async function addSongToPlaylist(song, playlist_id, order) {
  * @returns boolean indicating success of deletion
  */
 export async function deleteSongFromPlaylist(songplay_id) {
-    const numDeleted = await knex("SongPlay").where({id:songplay_id}).del();
+    const numDeleted = await knex("SongPlay").where({id:+songplay_id}).del();
     return numDeleted ? true : false;
 }
 
@@ -99,6 +99,7 @@ export async function getSongsFromPlaylist(playlist_id) {
             "Song.album",
             "Song.artwork",
             "Song.spotify_id",
+            "SongPlay.id as songplay_id"
         )
         .where("Playlist.id", "=", playlist_id);
     return songs;
