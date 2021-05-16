@@ -21,8 +21,9 @@ session && console.log(session.user.email)
         const response = await fetch("/api/secret");
         if (response.ok){
 
-          const data = await response.json();
-          setShowSecret(data.username);
+          const username = await response.json();
+          setShowSecret(username);
+          console.log(username)
         }
         else{
         setShowSecret(null);

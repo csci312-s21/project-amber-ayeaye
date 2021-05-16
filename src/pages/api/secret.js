@@ -11,7 +11,7 @@ const handler = nc().get(async (req, res) => {
   if (session) {
     const registered_dj = await verify_dj(session.user.email); //checks whether signed in individual is a registered as dj
     if(registered_dj){
-      res.status(200).json({dj: registered_dj});
+      res.status(200).json({dj: registered_dj.username});
     }
     else{
       res.status(401);
