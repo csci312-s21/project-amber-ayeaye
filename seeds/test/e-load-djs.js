@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 
 exports.seed = function(knex, Promise) {

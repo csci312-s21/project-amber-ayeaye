@@ -9,12 +9,12 @@ import {verify_dj} from "../../lib/next-auth-utils";
 const handler = nc().get(async (req, res) => {
   const session = await getSession({ req });
   if (session) {
-    const registered_dj = await verify_dj(session.user.name); //checks whether signed in individual is a registered as dj
+    const registered_dj = await verify_dj(session.user.email); //checks whether signed in individual is a registered as dj
     if(registered_dj){
       res.status(200).json({dj: registered_dj});
     }
     else{
-      res.status(401)
+      res.status(401);
     }   
 } else {
   res.status(401); // not signed in, reject

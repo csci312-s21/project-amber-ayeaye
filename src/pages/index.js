@@ -3,13 +3,40 @@ import Head from "next/head";
 import LoginWidget from "../components/LoginWidget";
 import SecureItems from "../components/SecureItems";
 import PlayButton from "../components/PlayButton";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+
 import Link from "next/link";
 import PlaylistExplorer from "../components/PlaylistExplorer";
 import Button from "@material-ui/core/Button";
-
+import {useSession} from "next-auth/client";
 export default function Home() {
-const [user, setUser] = useState();
+
+const [showSecret, setShowSecret] = useState();
+const [session] = useSession();
+
+session && console.log(session.user.email)
+  useEffect(()=>{
+    const getUser = async ()=>{
+      if (session){
+        const response = await fetch("/api/secret");
+        if (response.ok){
+
+          const data = await response.json();
+          setShowSecret(data.username);
+        }
+        else{
+        setShowSecret(null);
+        }
+     }
+     else{
+       setShowSecret(null);
+     } 
+    };
+    getUser();
+  }, [session]);
+
+
+
     return (
         <div className={styles.container}>
     
@@ -26,17 +53,18 @@ const [user, setUser] = useState();
             Welcome to WRMC!
             </h1>
             <LoginWidget/>
-            <SecureItems setUser={setUser}/>
+            <SecureItems/>
             <PlaylistExplorer/>
-            {(user) &&
-          <Link href="/dj">
+           
+            {showSecret && <Link href="/dj">
               <Button
                 variant="contained"
                 color="secondary"
+                
                 >DJ Page
               </Button>
-          </Link>  
-            }
+            </Link>}  
+            
         <PlayButton/>
 
         </main>

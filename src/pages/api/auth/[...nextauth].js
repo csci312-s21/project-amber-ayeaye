@@ -10,16 +10,14 @@ const options = {
     Providers.Auth0({
       clientId: process.env.AUTH0_CLIENT_ID,
       clientSecret: process.env.AUTH0_CLIENT_SECRET,
-      domain: process.env.AUTH0_DOMAIN,
-      
-      
-    }),
-  //callbacks:{ signIn: singIn},
+      domain: process.env.AUTH0_DOMAIN
+    })
   ],
   secret: process.env.NEXTAUTH_SECRET,
   database: process.env.DATABASE_URL,
-  
+  //callbacks: ({signIn: singIn})
 };
+
 
 
 

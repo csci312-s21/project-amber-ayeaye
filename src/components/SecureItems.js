@@ -3,25 +3,23 @@ import {useState, useEffect} from "react";
 import Link from "next/link";
 import Button from "@material-ui/core/Button";
 
-export default function SecureItems({setUser}){
-  const [session] = useSession();
- // const [user, setUser] = useState();
-  //const [users, setUsers] = useState();
-    useEffect(()=>{
-    const getUser = async ()=>{
-      const response = await fetch("/api/secret");
-      if (response.ok){
-        const data = await response.json();
-        setUser(data.username);
-      }else{
-        setUser(response.statusText);
-      }
-    };
-    getUser();
-  }, [session]);
+export default function SecureItems({}){
+  //const [session] = useSession();
+ //const user= "";
+ 
+  //const [user, setUser] = useState();
+
+
     return (
         <div>
-        {(session) && setUser} 
+        {/*user && <Link href="/dj">
+              <Button
+                variant="contained"
+                color="secondary"
+                
+                >DJ Page
+              </Button>
+            </Link>*/}
         </div>
     )
 }

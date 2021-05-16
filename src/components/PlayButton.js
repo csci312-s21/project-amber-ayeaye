@@ -28,7 +28,7 @@ export default function PlayButton(/*{isPlaying, playOrPause }*/) {
         height="155" 
         frameBorder="0" 
         scrolling="no" 
-        style={{padding: "10px 20px"}}></iframe>
+        style={{padding: "10px 20px"}} />
     </div>
   );
 
