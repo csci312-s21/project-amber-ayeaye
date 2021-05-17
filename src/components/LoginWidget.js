@@ -1,3 +1,5 @@
+import Button from "@material-ui/core/Button";
+//import { positions } from "@material-ui/system";
 import {
   signIn, 
   signOut,
@@ -9,14 +11,25 @@ export default function LoginWidget() {
 
 
   if (session){
-    console.log("session")
 return (<div>
-          <p>Signed in as {session.user.email} <button onClick={signOut}>Sign out</button> </p>
+        <p>
+          Signed in as {session.user.name} 
+          <Button
+            variant="contained" 
+            color="primary"
+            size="small"
+           onClick={signOut}>Sign out
+          </Button> 
+        </p>
          </div>);
   }else{
-    console.log("no session")
+    
     return (<div>
-            <button onClick={signIn}>Sign in</button>
+            <Button
+              variant="contained" 
+              color="primary"
+             onClick={signIn}>Login as a Dj
+            </Button>
          </div>);
 
   }

@@ -6,9 +6,16 @@ exports.up = function (knex, Promise) {
         table.string('schedule').notNullable();
         table.string('dj_name').notNullable();
         table.string('title').notNullable();
+    })
+    .createTable("Dj", (table)=> {
+      table.increments('id').unique().notNullable();
+      table.string("email").notNullable().unique();
+      table.string("username");
     });
 };
 
 exports.down = function (knex, Promise) {
-    return knex.schema.dropTableIfExists('Show');
+    return knex.schema
+    .dropTableIfExists('Show')
+    .dropTableIfExists('Dj')
 }
