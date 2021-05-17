@@ -1,7 +1,5 @@
-import { render, screen , fireEvent } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
+import { render, screen , fireEvent, act } from "@testing-library/react";
 import path from "path";
-import request from "supertest";
 import fetchMock from "fetch-mock-jest";
 import {
   startApp,
@@ -120,15 +118,15 @@ describe("PlaylistExplorer tests", () => {
         localSongPlays = songPlays.map((sp) => ({...sp}));
 
         // Mock fetch calls for the component
-        fetchMock.get("api/shows", () => localShows);
+        fetchMock.get("/api/shows", () => localShows);
 
-        fetchMock.get("api/showplaylists/1", () => localPlaylists[0]);
-        fetchMock.get("api/showplaylists/2", () => [ localPlaylists[1], localPlaylists[2] ]);
-        fetchMock.get("api/showplaylists/3", () => []);
+        fetchMock.get("/api/showplaylists/1", () => [ localPlaylists[0] ]);
+        fetchMock.get("/api/showplaylists/2", () => [ localPlaylists[1], localPlaylists[2] ]);
+        fetchMock.get("/api/showplaylists/3", () => []);
 
-        fetchMock.get("api/playlistsongs/1", () => [ localSongs[0] ]);
-        fetchMock.get("api/playlistsongs/2", () => localSongs);
-        fetchMock.get("api/playlistsongs/3", () => []);
+        fetchMock.get("/api/playlistsongs/1", () => [ localSongs[0] ]);
+        fetchMock.get("/api/playlistsongs/2", () => [localSongs]);
+        fetchMock.get("/api/playlistsongs/3", () => []);
 
     });
     
@@ -139,14 +137,14 @@ describe("PlaylistExplorer tests", () => {
         await stopApp(server)
     });
 
-    test("PlaylistExplorer renders", () => {
+    test("PlaylistExplorer renders", async () => {
         render(<PlaylistExplorer/>);
-        expect(screen.queryByText("Click to Select a Show")).toBeInTheDocument();
+        expect(await screen.findByText("Click to Select a Show")).toBeInTheDocument();
     });
 
     test("Shows Appear in Dropdown", async () => {
         render(<PlaylistExplorer/>);
-        const showMenu = screen.queryByText("Click to Select a Show");
+        const showMenu = await screen.findByText("Click to Select a Show");
         fireEvent.click(showMenu);
         const show1Label = await screen.findByText("Show #1");
         expect(show1Label).toBeInTheDocument();
@@ -158,12 +156,64 @@ describe("PlaylistExplorer tests", () => {
 
     test("Selecting a Show Causes The Date Menu to Appear", async () => {
         render(<PlaylistExplorer/>);
-        const showMenu = screen.queryByText("Click to Select a Show");
+        const showMenu = await screen.findByText("Click to Select a Show");
         fireEvent.click(showMenu);
         const show1Label = await screen.findByText("Show #1");
         fireEvent.click(show1Label);
-        const dateMenu = screen.queryByText("Click to choose date of show");
+        const dateMenu = await screen.findByText("Click to choose date of show");
         expect(dateMenu).toBeInTheDocument();
+    });
+
+    test("Playlist Dates Appear in Dropdown", async () => {
+        render(<PlaylistExplorer/>);
+        const showMenu = await screen.findByText("Click to Select a Show");
+        fireEvent.click(showMenu);
+        const show1Label = await screen.findByText("Show #1");
+        fireEvent.click(show1Label);
+        const dateMenu = await screen.findByText("Click to choose date of show");
+        fireEvent.click(dateMenu);
+        const playlist1Label = await screen.findByText("01-01-2021");
+        expect(playlist1Label).toBeInTheDocument();
+    });
+
+    test("Selecting a Show without Playlists Displays a Message", async () => {
+        render(<PlaylistExplorer/>);
+        const showMenu = await screen.findByText("Click to Select a Show");
+        fireEvent.click(showMenu);
+        const show3Label = await screen.findByText("Show #3");
+        fireEvent.click(show3Label);
+        const dateMenu = await screen.findByText("Click to choose date of show");
+        fireEvent.click(dateMenu);
+        const noPlaylistLabel = await screen.findByText("This show has no playlists.");
+        expect(noPlaylistLabel).toBeInTheDocument();
+    });
+
+    test("Selecting a Playlist Displays the Songs", async () => {
+        render(<PlaylistExplorer/>);
+        const showMenu = await screen.findByText("Click to Select a Show");
+        fireEvent.click(showMenu);
+        const show1Label = await screen.findByText("Show #1");
+        fireEvent.click(show1Label);
+        const dateMenu = await screen.findByText("Click to choose date of show");
+        fireEvent.click(dateMenu);
+        const playlist1Label = await screen.findByText("01-01-2021");
+        fireEvent.click(playlist1Label);
+        const song = await screen.findByText("Piano Man");
+        expect(song).toBeInTheDocument();
+    });
+
+    test("Selecting an Empty Playlist Displays a Message", async () => {
+        render(<PlaylistExplorer/>);
+        const showMenu = await screen.findByText("Click to Select a Show");
+        fireEvent.click(showMenu);
+        const show2Label = await screen.findByText("Show #2");
+        fireEvent.click(show2Label);
+        const dateMenu = await screen.findByText("Click to choose date of show");
+        fireEvent.click(dateMenu);
+        const playlist1Label = await screen.findByText("10-10-2021");
+        fireEvent.click(playlist1Label);
+        const message = await screen.findByText("This playlist is empty.");
+        expect(message).toBeInTheDocument()
     });
 
 });

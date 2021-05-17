@@ -95,7 +95,7 @@ export default function PlaylistExplorer() {
         if (selected && selected.title) {
             setShow(selected);
             setSongs([]);
-            setCurrentPlaylist([]);
+            setCurrentPlaylist(null);
             setPlaylists([]);
 
         }
@@ -160,7 +160,7 @@ export default function PlaylistExplorer() {
             </Menu>
 
             {(show) ? <Button aria-controls="show-menu" aria-haspopup="true" onClick={handleDateClick}>
-                {(currentPlaylist.length !== 0) ? getDate(currentPlaylist) : "Click to choose date of show"}
+                {(currentPlaylist) ? getDate(currentPlaylist) : "Click to choose date of show"}
             </Button>: <></>}
             <Menu
                 id="date-selector"
