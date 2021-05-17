@@ -80,9 +80,22 @@ describe.only("Schedule tests", () => {
 
   // });
 
-  // test("title is displayed", () => {
-  //   const { getByText } = render(<Schedule/>);
-  //   expect(getByText(localShows[0].title)).toBeInTheDocument();
-  //   expect(getByText(localShows[0].title)).toBeVisible();
-  // });
+  test("title and DJ name are displayed", async () => {
+    const { getByText } = await render(<Schedule />);
+
+    await act(async () => {
+      await fetchMock.flush(true);
+    });
+
+    // pick a show on Sunday
+    const show = localShows.find((s) => s.schedule.charAt(1) === "1");
+    const displayedShow = getByText(`${show.title} -${show.dj_name}`);
+
+    // click the Sunday drop down
+    const sundayListItem = screen.queryByText("Sunday");
+    fireEvent.click(sundayListItem);
+
+    expect(displayedShow).toBeInTheDocument();
+    expect(displayedShow).toBeVisible();
+  });
 });
