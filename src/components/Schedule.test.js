@@ -2,10 +2,6 @@ import { render, screen, fireEvent, act } from "@testing-library/react";
 import fetchMock from "fetch-mock-jest";
 import Schedule from "./Schedule";
 
-// "clicking on a day opens the collapse"
-// "clicking on a day switches the expand arrow direction"
-// "shows for each day are sorted by time"
-
 const shows = require("../../data/showseed.json");
 
 describe.only("Schedule tests", () => {
@@ -16,13 +12,6 @@ describe.only("Schedule tests", () => {
 
     fetchMock.reset();
     fetchMock.get(`/api/shows/`, () => localShows);
-  });
-
-  test("Smoke test", async () => {
-    render(<Schedule />);
-    await act(async () => {
-      await fetchMock.flush(true);
-    });
   });
 
   test("Snapshot test", async () => {
@@ -63,22 +52,6 @@ describe.only("Schedule tests", () => {
     // expect(visibleShows[0]).not.toBeVisible()
     // expect(visibleShows).toHaveLength(0);
   });
-
-  // test("Shows are sorted by time", async () => {
-  //   render(<Schedule />);
-
-  //   await act(async () => {
-  //     await fetchMock.flush(true);
-  //   })
-
-  //   const timeString = /\d\d:\d\d - \d\d:\d\d/;
-  //   const saturdayListItem = screen.queryByText("Saturday");
-  //   fireEvent.click(saturdayListItem);
-  //   const visibleShows = screen.queryAllByText(timeString);
-
-  //   const saturdayShows = localShows.filter((show) => show.schedule.charAt(1) === "7")
-
-  // });
 
   test("title and DJ name are displayed", async () => {
     const { getByText } = await render(<Schedule />);

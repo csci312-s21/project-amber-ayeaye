@@ -4,7 +4,7 @@ exports[`Schedule tests Snapshot test 1`] = `
 <div>
   <nav
     aria-labelledby="nested-list-subheader"
-    class="MuiList-root makeStyles-root-7 MuiList-padding MuiList-subheader"
+    class="MuiList-root makeStyles-root-3 MuiList-padding MuiList-subheader"
   >
     <div
       class="MuiListSubheader-root MuiListSubheader-sticky MuiListSubheader-gutters"
