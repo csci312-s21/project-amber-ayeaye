@@ -8,9 +8,20 @@ import {
     getShows
 } from "../lib/database-utils";
 
+// import {
+//   knex,
+//     verify_dj,
+//     get_djs,
+//     get_dj,
+//     add_dj,
+//     delete_dj
+// } from "../lib/next-auth-utils";
+
+// const newUser = {email: "mmike@middlebury.edu", username: "Mike"}
+
 describe("Test of the database utility functions", () => {
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         await knex.migrate.rollback();
         await knex.migrate.latest();
         await knex.seed.run();
@@ -56,5 +67,4 @@ describe("Test of the database utility functions", () => {
         })
 
     });
-
 });
