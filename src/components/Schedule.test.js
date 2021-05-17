@@ -89,11 +89,12 @@ describe.only("Schedule tests", () => {
 
     // pick a show on Sunday
     const show = localShows.find((s) => s.schedule.charAt(1) === "1");
-    const displayedShow = getByText(`${show.title} -${show.dj_name}`);
 
     // click the Sunday drop down
     const sundayListItem = screen.queryByText("Sunday");
     fireEvent.click(sundayListItem);
+
+    const displayedShow = getByText(`${show.title} -${show.dj_name}`);
 
     expect(displayedShow).toBeInTheDocument();
     expect(displayedShow).toBeVisible();
