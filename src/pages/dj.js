@@ -199,6 +199,7 @@ export default function DJ() {
         <Head>
             <title>WRMC</title>
             <link rel="icon" href="/favicon.ico" />
+            <img src="https://wrmc.middlebury.edu/wp-content/themes/wrmc/images/logo_large.png" width="400"  alt="WRMC 91.1 FM Middlebury College Radio 91.1 FM"/>
         </Head>
     
         <main>
