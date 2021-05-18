@@ -36,3 +36,4 @@ yarn-error.log*
 # spotify API
 config.js
 
+.eslintcache
