@@ -5,6 +5,7 @@ import Playlist from "../components/Playlist";
 import SearchBar from "../components/SearchBar";
 import ManualEntry from "../components/ManualEntry";
 import PlayButton from "../components/PlayButton";
+import CurrentShowSetter from "../components/CurrentShowSetter";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
@@ -17,8 +18,10 @@ export default function DJ() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [editingPlaylistId, setEditingPlaylistId] = useState();
     const [editingPlaylistSongs, setEditingPlaylistSongs] = useState();
-    const [currentShowId] = useState(4);
+    const [currentShowId, setCurrentShowId] = useState();
     const [songPlayOrder, setSongPlayOrder] = useState();
+
+    const setCurrentShow = id => setCurrentShowId(id);
 
     const playOrPause = () => {
       if(isPlaying){
@@ -214,6 +217,8 @@ export default function DJ() {
             >
                 Home Page
             </Button>
+
+            <CurrentShowSetter setCurrentShow={setCurrentShow}/>
 
             {!editingPlaylistId ? <Button
               id="newPlaylistButton"

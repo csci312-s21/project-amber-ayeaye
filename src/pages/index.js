@@ -64,6 +64,17 @@ session && console.log(session.user.email)
               </Button>
             </Link>}
 
+            <Link href="/dj">
+              <Button
+                variant="contained"
+                color="secondary"
+
+                >DJ Page
+              </Button>
+            </Link>
+
+            
+
         <PlayButton/>
 
         </main>

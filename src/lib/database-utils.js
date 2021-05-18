@@ -29,7 +29,7 @@ export const knex = knexInitializer(
 
     getSongsFromPlaylist(playlist_id) - retrieves all songs corresponding to the specified playlist
 
-    getAllShows - retrieves all shows for presentation in the calendar
+    getShows - retrieves all shows for presentation in the calendar
 */
 
 /**
