@@ -73,9 +73,9 @@ export default function NestedList() {
         </ListItemIcon>
         <ListItemText primary="Monday" />
         {openMonday ? (
-          <ExpandLess data-testid="isNotExpanded" />
+          <ExpandLess data-testid="isExpanded" />
         ) : (
-          <ExpandMore data-testid="isExpanded" />
+          <ExpandMore data-testid="isNotExpanded" />
         )}
       </ListItem>
 

@@ -11,12 +11,11 @@ describe("RadioSchedule tests", () => {
   test("Radio schedule for the day displays shows when clicked", () => {
     const { getByTestId } = render(<RadioSchedule />);
     const mondaySection = getByTestId("mondaySection");
-    const isNotOpen = getByTestId("isExpanded");
+    const isNotOpen = getByTestId("isNotExpanded");
 
     expect(mondaySection).toBeInTheDocument();
     expect(isNotOpen).toBeInTheDocument();
 
-    fireEvent.click(mondaySection);
     fireEvent.click(mondaySection);
     const isOpen = getByTestId("isExpanded");
     expect(isOpen).toBeInTheDocument();
