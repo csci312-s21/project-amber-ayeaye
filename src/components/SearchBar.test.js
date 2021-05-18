@@ -2,12 +2,10 @@ import { render, screen, fireEvent, act } from "@testing-library/react";
 import SearchBar from "./SearchBar";
 import fetchMock from "fetch-mock-jest";
 import seedSongs from "../../data/songseed.json";
-// import { act } from "react-dom/test-utils";
 
 describe("SearchBar tests", () => {
   const localSongs = seedSongs;
   const song = localSongs[0];
-  //const spotifyQuery = "example search";
   const handler = jest.fn();
 
   beforeEach(() => {
@@ -40,25 +38,5 @@ describe("SearchBar tests", () => {
     fireEvent.change(searchText, { target: { value: "" } });
     expect(searchText).toHaveValue("");
     expect(searchButton).toBeDisabled();
-  });
-
-  test("Clicking search button displays search results", async () => {
-    const { container } = render(
-      <SearchBar addSong={handler} switchMode={handler} />
-    );
-
-    await act(async () => {
-      await fetchMock.flush(true);
-    });
-
-    const searchText = container.querySelector("input[id=keywordSearch");
-    const searchButton = screen.getByRole("button", { name: "Search" });
-
-    fireEvent.change(searchText, { target: { value: song.title } });
-    fireEvent.click(searchButton);
-
-    const searchResultsHeader = await screen.findByText("Search Results");
-
-    expect(searchResultsHeader).toBeVisible();
   });
 });
