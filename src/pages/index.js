@@ -6,7 +6,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import PlaylistExplorer from "../components/PlaylistExplorer";
 import Button from "@material-ui/core/Button";
+import Schedule from "../components/Schedule";
 import { useSession } from "next-auth/client";
+
 export default function Home() {
   const [showSecret, setShowSecret] = useState();
   const [session] = useSession();
@@ -46,7 +48,7 @@ export default function Home() {
       <main>
         <h1>Welcome to WRMC!</h1>
         <LoginWidget />
-
+        <Schedule />
         <PlaylistExplorer />
 
         {showSecret && (
