@@ -1,22 +1,29 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import SearchBar from "./SearchBar";
+import fetchMock from "fetch-mock-jest";
+import seedSongs from "../../data/songseed.json";
 
 describe("SearchBar tests", () => {
-  let song;
+  const localSongs = seedSongs;
+  const song = localSongs[0];
   const handler = jest.fn();
 
   beforeEach(() => {
-    song = {
-      title: "Sample title",
-      artist: "Sample artist",
-      album: "Sample album",
-    };
-
     handler.mockReset();
+
+    fetchMock.reset();
+    fetchMock.get("/api/spotifyauth", () => ({ token: "mocked_access_token" }));
+    fetchMock.get(/api.spotify.com/, () => localSongs);
   });
 
-  test("Search button is disabled when input is blank", () => {
-    const { container } = render(<SearchBar addSongToPlaylist={handler} switchMode={handler}/>);
+  test("Search button is disabled when input is blank", async () => {
+    const { container } = render(
+      <SearchBar addSong={handler} switchMode={handler} />
+    );
+
+    await act(async () => {
+      await fetchMock.flush(true);
+    });
 
     const searchText = container.querySelector("input[id=keywordSearch");
     expect(searchText).toHaveValue("");
@@ -28,24 +35,8 @@ describe("SearchBar tests", () => {
     expect(searchText).toHaveValue(song.title);
     expect(searchButton).toBeEnabled();
 
-    fireEvent.change(searchText, { target: { value: ""} });
+    fireEvent.change(searchText, { target: { value: "" } });
     expect(searchText).toHaveValue("");
     expect(searchButton).toBeDisabled();
   });
-
-//   test.only("Clicking search button displays search results", async () => {
-//     const { container } = render(<SearchBar addSong={handler} switchMode={handler}/>);
-
-//     const searchText = container.querySelector("input[id=keywordSearch");
-//     const searchButton = screen.getByRole("button", { name: "Search" }) ;
-
-//     fireEvent.change(searchText, { target: { value: song.title } });
-//     fireEvent.click(searchButton)
-
-//     const searchResultsHeader = await screen.findByText("Search Results");
-
-//     expect(searchResultsHeader).toBeVisible();
-
-//   });
-  
 });
