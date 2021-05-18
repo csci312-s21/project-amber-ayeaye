@@ -7,7 +7,7 @@ import seedSongs from "../../data/songseed.json";
 describe("SearchBar tests", () => {
   const localSongs = seedSongs;
   const song = localSongs[0];
-  const spotifyQuery = "example search";
+  //const spotifyQuery = "example search";
   const handler = jest.fn();
 
   beforeEach(() => {
@@ -15,13 +15,10 @@ describe("SearchBar tests", () => {
 
     fetchMock.reset();
     fetchMock.get("/api/spotifyauth", () => ({ token: "mocked_access_token" }));
-    fetchMock.get(
-      `https://api.spotify.com/v1/search?q=${spotifyQuery}&type=track&limit=10`,
-      () => localSongs
-    );
+    fetchMock.get(/api.spotify.com/, () => localSongs);
   });
 
-  test.only("Search button is disabled when input is blank", async () => {
+  test("Search button is disabled when input is blank", async () => {
     const { container } = render(
       <SearchBar addSong={handler} switchMode={handler} />
     );
@@ -45,18 +42,23 @@ describe("SearchBar tests", () => {
     expect(searchButton).toBeDisabled();
   });
 
-  //   test.only("Clicking search button displays search results", async () => {
-  //     const { container } = render(<SearchBar addSong={handler} switchMode={handler}/>);
+  test("Clicking search button displays search results", async () => {
+    const { container } = render(
+      <SearchBar addSong={handler} switchMode={handler} />
+    );
 
-  //     const searchText = container.querySelector("input[id=keywordSearch");
-  //     const searchButton = screen.getByRole("button", { name: "Search" }) ;
+    await act(async () => {
+      await fetchMock.flush(true);
+    });
 
-  //     fireEvent.change(searchText, { target: { value: song.title } });
-  //     fireEvent.click(searchButton)
+    const searchText = container.querySelector("input[id=keywordSearch");
+    const searchButton = screen.getByRole("button", { name: "Search" });
 
-  //     const searchResultsHeader = await screen.findByText("Search Results");
+    fireEvent.change(searchText, { target: { value: song.title } });
+    fireEvent.click(searchButton);
 
-  //     expect(searchResultsHeader).toBeVisible();
+    const searchResultsHeader = await screen.findByText("Search Results");
 
-  //   });
+    expect(searchResultsHeader).toBeVisible();
+  });
 });
