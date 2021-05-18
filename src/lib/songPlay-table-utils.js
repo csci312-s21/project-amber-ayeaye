@@ -32,3 +32,13 @@ export async function getSongPlay(id) {
     const songPlay = await knex("SongPlay").select().where({id:id});
     return songPlay[0] ? songPlay[0] : null;
 }
+
+/**
+ * Read all songPlays from the database
+ * 
+ * @returns array of songPlay objects
+ */
+export async function getAllSongPlays() {
+    const rows = await knex("SongPlay").select();
+    return rows;
+}

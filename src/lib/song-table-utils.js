@@ -57,7 +57,7 @@ export async function getSongBySpotifyId(spotify_id){
 export async function addSong(song) {
 
     // First, check if the song is already in the database
-    const songInDatabase = getSongBySpotifyId(song.spotify_id);
+    const songInDatabase = await getSongBySpotifyId(song.spotify_id);
 
     if (songInDatabase) { // Return the entry if the song is already in the database
         return songInDatabase;

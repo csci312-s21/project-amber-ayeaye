@@ -1,9 +1,8 @@
 /*
   Borrowed from the Next repo.
 https://github.com/vercel/next.js/blob/2e8068fcbea427bf50dd464c5565e676e4685ff0/test/lib/next-test-utils.js
-*/
 
-``
+*/
 
 import path from "path";
 import spawn from "cross-spawn";
@@ -41,14 +40,14 @@ export function runNextCommand(argv, options = {}) {
 
     let stderrOutput = "";
     if (options.stderr) {
-      instance.stderr.on("data", (chunk) => {
+      instance.stderr.on("data", function (chunk) {
         stderrOutput += chunk;
       });
     }
 
     let stdoutOutput = "";
     if (options.stdout) {
-      instance.stdout.on("data", (chunk) => {
+      instance.stdout.on("data", function (chunk) {
         stdoutOutput += chunk;
       });
     }
@@ -82,20 +81,6 @@ export function nextBuild(dir, args = [], opts = {}) {
   return runNextCommand(["build", dir, ...args], opts);
 }
 
-export function promiseCall(obj, method, ...args) {
-  return new Promise((resolve, reject) => {
-    const newArgs = [
-      ...args,
-      function (err, res) {
-        if (err) return reject(err);
-        resolve(res);
-      },
-    ];
-
-    obj[method](...newArgs);
-  });
-}
-
 export async function startApp(app) {
   await app.prepare();
   const handler = app.getRequestHandler();
@@ -113,7 +98,20 @@ export async function stopApp(server) {
   await promiseCall(server, "close");
 }
 
-/*
+export function promiseCall(obj, method, ...args) {
+  return new Promise((resolve, reject) => {
+    const newArgs = [
+      ...args,
+      function (err, res) {
+        if (err) return reject(err);
+        resolve(res);
+      },
+    ];
+
+    obj[method](...newArgs);
+  });
+}
+
 export function fetchViaHTTP(appPort, pathname, query, opts) {
   const url = `http://localhost:${appPort}${pathname}${
     query ? `?${qs.stringify(query)}` : ""
@@ -121,4 +119,3 @@ export function fetchViaHTTP(appPort, pathname, query, opts) {
 
   return fetch(url, opts);
 }
-*/

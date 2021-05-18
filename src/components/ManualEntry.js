@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ManualEntry({addSong, switchMode}) {
+export default function ManualEntry({addSongToPlaylist, switchMode}) {
 
   const classes = useStyles();
 
@@ -27,7 +27,7 @@ export default function ManualEntry({addSong, switchMode}) {
   const [album, setAlbum] = useState("");
 
   const addAndReset = (song) => {
-    addSong(song);
+    addSongToPlaylist(song);
     setTitle("");
     setArtist("");
     setAlbum("");
@@ -70,7 +70,7 @@ export default function ManualEntry({addSong, switchMode}) {
         size="small"
         className={classes.button}
         startIcon={<SaveIcon />}
-        onClick={() => addAndReset({ title: title, artist: artist, album: album })}
+        onClick={() => addAndReset({ title: title, artist: artist, album: album, spotify_id: `${title}${artist}${album}` })}
         disabled={title === "" || artist === "" || album === ""}>
         Save
       </Button>
@@ -104,6 +104,6 @@ export default function ManualEntry({addSong, switchMode}) {
 }
 
 ManualEntry.propTypes = {
-  addSong: PropTypes.func.isRequired,
+  addSongToPlaylist: PropTypes.func.isRequired,
   switchMode: PropTypes.func.isRequired,
 };

@@ -1,4 +1,3 @@
-
 import { render, screen, fireEvent } from "@testing-library/react";
 import SearchBar from "./SearchBar";
 
@@ -16,8 +15,8 @@ describe("SearchBar tests", () => {
     handler.mockReset();
   });
 
-  test.only("Search button is disabled when input is blank", () => {
-    const { container } = render(<SearchBar addSong={handler} switchMode={handler}/>);
+  test("Search button is disabled when input is blank", () => {
+    const { container } = render(<SearchBar addSongToPlaylist={handler} switchMode={handler}/>);
 
     const searchText = container.querySelector("input[id=keywordSearch");
     expect(searchText).toHaveValue("");

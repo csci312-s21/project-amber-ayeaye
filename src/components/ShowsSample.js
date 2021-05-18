@@ -19,7 +19,10 @@ export default function ShowsSample () {
     const showVisuals = shows ? shows.map( (show) =>
     <li key={show.id}>
         <h3> {show.title} </h3>
+        <p> {show.id} </p>
         <p> {show.dj_name} </p>
+        <p> {show.schedule} </p>
+        <p> {show.schedule.split("T").pop()} </p>
     </li>
     ) : "";
 
