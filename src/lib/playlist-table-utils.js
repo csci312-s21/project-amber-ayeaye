@@ -67,7 +67,7 @@ export async function createPlaylist(input_show_id) {
     const today = new Date();
     // THE +1 AFTER TODAY.GETDATE() SHOULD BE DELETED!
     // it was added for testing purposes so we can add more playlists
-    const dd = String(today.getDate() +1).padStart(2, "0");
+    const dd = String(today.getDate() -11).padStart(2, "0");
     const mm = String(today.getMonth() + 1).padStart(2, "0");
     const yyyy = today.getFullYear();
     const dateString = mm + dd + yyyy;
