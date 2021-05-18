@@ -1,3 +1,4 @@
+
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import LoginWidget from "../components/LoginWidget";
@@ -6,7 +7,9 @@ import {useState, useEffect} from "react";
 import Link from "next/link";
 import PlaylistExplorer from "../components/PlaylistExplorer";
 import Button from "@material-ui/core/Button";
+import Schedule from "../components/Schedule";
 import {useSession} from "next-auth/client";
+
 export default function Home() {
 
 const [showSecret, setShowSecret] = useState();
@@ -52,7 +55,7 @@ session && console.log(session.user.email)
             Welcome to WRMC!
             </h1>
             <LoginWidget/>
-
+            <Schedule/>
             <PlaylistExplorer/>
 
             {showSecret && <Link href="/dj">
