@@ -8,17 +8,17 @@ import clsx from "clsx";
 const styles = {
   root: {
     margin: 8,
-    width: '25ch',
-  }
+    width: "25ch",
+  },
 };
 
 export const TextFieldInput = withStyles(styles)(MuiTextField);
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   textFieldInput: {
     margin: theme.spacing(4),
-    minWidth: 250
-  }
+    minWidth: 250,
+  },
 }));
 
 export const TextFieldInput2 = ({ className, ...other }) => {

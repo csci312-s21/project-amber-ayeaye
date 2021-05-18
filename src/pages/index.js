@@ -1,89 +1,70 @@
-import { useState } from "react";
-import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Playlist from "../components/Playlist";
+import Head from "next/head";
+import LoginWidget from "../components/LoginWidget";
 import PlayButton from "../components/PlayButton";
-
-import Grid from "@material-ui/core/Grid";
-import RadioSchedule from "../components/RadioSchedule";
-
-//import SongAdder from "../components/SongAdder";
-
-//import SearchBar from "../components/SearchBar";
-
-import ManualEntry from "../components/ManualEntry";
-
-import sampleData from "../../data/songseed.json";
-
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import PlaylistExplorer from "../components/PlaylistExplorer";
+import Button from "@material-ui/core/Button";
+import { useSession } from "next-auth/client";
 export default function Home() {
-  const [currentSongs, setCurrentSongs] = useState(sampleData);
-  const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
-  // const [isPlaying, setIsPlaying] = useState(false);
+  const [showSecret, setShowSecret] = useState();
+  const [session] = useSession();
 
-  // const playOrPause = () => {
-  //   if(isPlaying){
-  //     setIsPlaying(false);
-  //   } else{
-  //     setIsPlaying(true);
-  //   }
-  // }
-
-  const switchMode = () => {
-    if (addingMode === "search") {
-      setAddingMode("manual");
-    } else {
-      setAddingMode("search");
-    }
-  };
-
-  const deleteSong = (song) => {
-    const newSongs = currentSongs.filter((s) => s.id !== song.id);
-    setCurrentSongs(newSongs);
-  };
-
-  const addSong = (newSong) => {
-    const newSongs = [newSong, ...currentSongs];
-    setCurrentSongs(newSongs);
-  };
-  const radioMode = true;
+  session && console.log(session.user.email);
+  useEffect(() => {
+    const getUser = async () => {
+      if (session) {
+        const response = await fetch("/api/secret");
+        if (response.ok) {
+          const username = await response.json();
+          setShowSecret(username);
+          console.log(username);
+        } else {
+          setShowSecret(null);
+        }
+      } else {
+        setShowSecret(null);
+      }
+    };
+    getUser();
+  }, [session]);
 
   return (
     <div className={styles.container}>
       <Head>
         <title>WRMC</title>
         <link rel="icon" href="/favicon.ico" />
+
+        <img
+          src="https://wrmc.middlebury.edu/wp-content/themes/wrmc/images/logo_large.png"
+          width="400"
+          alt="WRMC 91.1 FM Middlebury College Radio 91.1 FM"
+        />
       </Head>
 
       <main>
         <h1>Welcome to WRMC!</h1>
+        <LoginWidget />
 
-        <Grid container spacing={3}>
-          {/*<SongAdder addSong={addSong}/>*/}
-          {/*<SearchBar callback={addSong}/>*/}
-          {radioMode ? (
-            <RadioSchedule />
-          ) : (
-            <>
-              {
-                /*
-              <Grid item xs={12}justify="center" alignItems="center">
-            <PlayButton isPlaying = {isPlaying} playOrPause = {playOrPause}/>
-            </Grid>
-            */
-                <PlayButton />
-              }
+        <PlaylistExplorer />
 
-              <Grid item xs={6} justify="center" alignItems="center">
-                <ManualEntry addSong={addSong} switchMode={switchMode} />
-              </Grid>
-              <Grid item xs={6}>
-                <Playlist songs={currentSongs} deleteSong={deleteSong} />
-              </Grid>
-            </>
-          )}
-        </Grid>
+        {showSecret && (
+          <Link href="/dj">
+            <Button variant="contained" color="secondary">
+              DJ Page
+            </Button>
+          </Link>
+        )}
+
+        <Link href="/dj">
+          <Button variant="contained" color="secondary">
+            DJ Page
+          </Button>
+        </Link>
+
+        <PlayButton />
       </main>
-
       <footer>A CS 312 Project</footer>
     </div>
   );

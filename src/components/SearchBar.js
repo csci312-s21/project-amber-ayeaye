@@ -1,68 +1,125 @@
-import {useState, useEffect} from "react";
-export default function SearchBar({callback}){
-  const [track, setTrack] = useState("");
-  const [artist, setArtist] = useState(""); 
-  const [album, setAlbum] = useState("");
-  const [song, setSong] = useState()  //object
+import Playlist from "./Playlist";
+import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import SearchIcon from "@material-ui/icons/Search";
+import { makeStyles } from "@material-ui/core/styles";
 
-  const apikey ="c3c30675cd237fa2a114de419139da9b";
+const useStyles = makeStyles((theme) => ({
+  entryField: {
+    margin: "15px !important",
+    width: "25ch !important",
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
 
-  //const authenticate = `https://www.last.fm/api/auth/?api_key=${apikey}&cb=https://project-amber-ayeaye-1.ntare62.repl.co/`
-  //const getToken =` http://ws.audioscrobbler.com/2.0/?method=auth.gettoken&api_key=${apikey}&format=json`
+export default function SearchBar({ addSongToPlaylist, switchMode }) {
+  const classes = useStyles();
+  const [searchText, setSearchText] = useState("");
+  const [searchResults, setSearchResults] = useState();
+  const [token, setToken] = useState("");
 
+  const addAndReset = (song) => {
+    addSongToPlaylist(song);
+    setSearchText("");
+  };
 
-  const getAlbumcover = async () => {
-    const getAlbum = `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${apikey}&artist=${artist}&album=${album}&format=json`
-    const getData = async () =>{
-      const response = await fetch(getAlbum);
-      if(!response.ok){
-        throw new Error (response.statusText);
-      }
-      const albumFromServer = await response.json();
-
-      return albumFromServer.album.image[2]["#text"]
-    }
-    return await getData();
-  }
-
-  const searchTrack = async() => {
-    const url= `https://ws.audioscrobbler.com/2.0/?method=track.search&artist=${artist}&track=${track}&limit=1&api_key=${apikey}&format=json`
-    const artwork = await getAlbumcover();
-    
-    const getData = async () => {
-      const response = await fetch(url);
+  useEffect(() => {
+    const getToken = async () => {
+      const response = await fetch("/api/spotifyauth");
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      const songData = await response.json();
-      setSong({title : songData.results.trackmatches.track[0].name, 
-               artist: songData.results.trackmatches.track[0].artist, 
-               artwork: artwork, 
-               album: album, 
-               id:songData.results.trackmatches.track[0].mbid })
+      const tokenData = await response.json();
+      setToken(tokenData);
     };
-    
-    getData();
 
-  }
-  
+    getToken();
+  }, []);
 
-  useEffect(()=>{
-    song && callback(song);
-  }, [song])
+  const searchSong = async () => {
+    const url = `https://api.spotify.com/v1/search?q=${searchText}&type=track&limit=10`;
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Bearer ${token.access_token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
 
-    return(
-      <div>
-      <label>Song: 
-      <input type="text" name="songTitle" id="title" placeholder="Song"value={track} onChange={((event)=>setTrack(event.target.value))}/>
-      </label>
-      <label>Artist: 
-      <input type="text" name="artist" id="artist" placeholder="Artist" value={artist} onChange={((event)=>setArtist(event.target.value))}/>
-      </label>
-      <label>Album:
-      <input type="text" name="album" id="album" placeholder="Album" value={album} onChange={((event)=>setAlbum(event.target.value))}/>
-      </label>
-      <button  onClick={() => searchTrack()}> search song</button> 
-      </div>
-    )
+    const rawResults = await response.json();
+
+    setSearchResults(
+      rawResults.tracks.items.map((track) => ({
+        title: track.name,
+        artist: track.artists[0].name,
+        album: track.album.name,
+        artwork: track.album.images[0].url,
+        spotify_id: track.id,
+      }))
+    );
+  };
+
+  return (
+    <div>
+      <Button
+        id="switchButton"
+        variant="outlined"
+        size="small"
+        onClick={() => switchMode()}
+      >
+        Switch to Manual Entry
+      </Button>
+
+      <br />
+      <br />
+
+      <TextField
+        id="keywordSearch"
+        placeholder="Enter title, artist, and/or album"
+        className={classes.entryField}
+        required
+        label="Keyword search"
+        type="search"
+        variant="filled"
+        value={searchText}
+        fullWidth
+        onChange={(event) => setSearchText(event.target.value)}
+      />
+
+      <br />
+      <br />
+
+      <Button
+        id="addButton"
+        variant="contained"
+        color="primary"
+        size="small"
+        className={classes.button}
+        startIcon={<SearchIcon />}
+        onClick={() => searchSong()}
+        disabled={searchText === ""}
+      >
+        Search
+      </Button>
+
+      {searchResults && (
+        <Playlist
+          songs={searchResults}
+          addSong={addAndReset}
+          mode="inSearchResults"
+        />
+      )}
+    </div>
+  );
 }
+
+SearchBar.propTypes = {
+  addSongToPlaylist: PropTypes.func.isRequired,
+  switchMode: PropTypes.func.isRequired,
+};

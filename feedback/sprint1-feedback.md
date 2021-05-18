@@ -1,4 +1,4 @@
-# Feedback for alabaster-armadillo
+# Feedback for amber-ayeaye
 
 (X) tagged commit on main for sprint1
 (X) set of closed user stories
