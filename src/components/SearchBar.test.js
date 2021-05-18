@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import SearchBar from "./SearchBar";
 import fetchMock from "fetch-mock-jest";
 import seedSongs from "../../data/songseed.json";
@@ -19,13 +19,16 @@ describe("SearchBar tests", () => {
       `https://api.spotify.com/v1/search?q=${spotifyQuery}&type=track&limit=10`,
       () => localSongs
     );
-    console.log(localSongs.length);
   });
 
-  test.only("Search button is disabled when input is blank", () => {
+  test.only("Search button is disabled when input is blank", async () => {
     const { container } = render(
       <SearchBar addSong={handler} switchMode={handler} />
     );
+
+    await act(async () => {
+      await fetchMock.flush(true);
+    });
 
     const searchText = container.querySelector("input[id=keywordSearch");
     expect(searchText).toHaveValue("");
