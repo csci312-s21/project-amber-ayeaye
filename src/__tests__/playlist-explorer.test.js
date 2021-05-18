@@ -128,6 +128,8 @@ describe("PlaylistExplorer tests", () => {
         fetchMock.get("/api/playlistsongs/2", () => [localSongs]);
         fetchMock.get("/api/playlistsongs/3", () => []);
 
+        return server;
+
     });
     
     /**

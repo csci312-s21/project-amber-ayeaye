@@ -8,7 +8,7 @@ import {
     getShows
 } from "../lib/database-utils";
 
-describe.skip("Test of the database utility functions", () => {
+describe("Test of the database utility functions", () => {
 
     beforeEach(async () => {
         await knex.migrate.rollback();
