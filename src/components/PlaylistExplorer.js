@@ -22,7 +22,7 @@ export default function PlaylistExplorer() {
 
     // Define the styles
     // Note: This is inside of the function to avoid refresh bug
-    const useStyles = makeStyles((theme) => ({
+    const useStyles = makeStyles(() => ({
         paper: {
             margin: 0,
             padding: "4px",

@@ -1,4 +1,4 @@
-import { render, screen , fireEvent, act } from "@testing-library/react";
+import { render, screen , fireEvent } from "@testing-library/react";
 import path from "path";
 import fetchMock from "fetch-mock-jest";
 import {
@@ -70,34 +70,12 @@ const songs = [
     }
 ];
 
-const songPlays = [
-    {
-        id: 1,
-        playlist_id: 1,
-        song_id: 1,
-        order: 1
-    },
-    {
-        id: 2,
-        playlist_id: 2,
-        song_id: 1,
-        order: 1
-    },
-    {
-       id: 3,
-       playlist_id: 2,
-       song_id: 2,
-       order: 2 
-    }
-];
-
 describe("PlaylistExplorer tests", () => {
 
     let server;
     let localShows;
     let localPlaylists;
     let localSongs;
-    let localSongPlays;
 
     beforeAll( async () => {
 
@@ -115,7 +93,6 @@ describe("PlaylistExplorer tests", () => {
         localShows = shows.map((s) => ({ ...s}));
         localPlaylists = playlists.map((p) => ({...p}));
         localSongs = songs.map((s) => ({...s}));
-        localSongPlays = songPlays.map((sp) => ({...sp}));
 
         // Mock fetch calls for the component
         fetchMock.get("/api/shows", () => localShows);
