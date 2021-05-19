@@ -16,7 +16,31 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import ViewDayIcon from "@material-ui/icons/ViewDay";
 import QueueMusic from "@material-ui/icons/QueueMusic";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    minWidth: 500,
+    maxWidth: 500,
+  },
+  header: {
+    backgroundColor: "#42a5f5",
+    "&:hover": {
+      backgroundColor: "#81d4fa",
+    },
+    border: "1px solid rgb(212, 212, 212)",
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
+    backgroundColor: "#bbdefb",
+    "&:hover": {
+      backgroundColor: "#bbdefb",
+    },
+  },
+}));
+
 export default function Schedule() {
+  const classes = useStyles();
+
   const [shows, setShows] = useState();
   const [daysCollapsed, setDaysCollapsed] = useState(Array(7).fill(true));
 
@@ -42,18 +66,6 @@ export default function Schedule() {
     };
     getShows();
   }, []);
-
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      width: "100%",
-      minWidth: 400,
-    },
-    nested: {
-      paddingLeft: theme.spacing(4),
-    },
-  }));
-
-  const classes = useStyles();
 
   const changeDayCollapsed = (dayNum) => {
     const newDaysCollapsed = [...daysCollapsed];
@@ -97,12 +109,21 @@ export default function Schedule() {
 
     return (
       <div key={day.num}>
-        <ListItem button key={day} onClick={() => changeDayCollapsed(day.num)}>
+        <ListItem
+          button
+          key={day}
+          onClick={() => changeDayCollapsed(day.num)}
+          className={classes.header}
+        >
           <ListItemIcon>
             <ViewDayIcon />
           </ListItemIcon>
           <ListItemText primary={day.name} />
-          {isCollapsed ? <ExpandMore /> : <ExpandLess />}
+          {isCollapsed ? (
+            <ExpandMore data-testid="isNotExpanded" />
+          ) : (
+            <ExpandLess data-testid="isExpanded" />
+          )}
         </ListItem>
 
         <Collapse in={!isCollapsed} timeout="auto" unmountOnExit>
