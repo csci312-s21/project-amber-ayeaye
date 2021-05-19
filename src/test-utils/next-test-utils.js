@@ -1,9 +1,9 @@
-
 /*
   Borrowed from the Next repo.
 https://github.com/vercel/next.js/blob/2e8068fcbea427bf50dd464c5565e676e4685ff0/test/lib/next-test-utils.js
 
 */
+
 import path from "path";
 import spawn from "cross-spawn";
 
