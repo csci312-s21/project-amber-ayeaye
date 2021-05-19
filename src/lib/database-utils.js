@@ -99,9 +99,11 @@ export async function getSongsFromPlaylist(playlist_id) {
             "Song.album",
             "Song.artwork",
             "Song.spotify_id",
-            "SongPlay.id as songplay_id"
+            "SongPlay.id as songplay_id",
+            "SongPlay.order as order"
         )
-        .where("Playlist.id", "=", playlist_id);
+        .where("Playlist.id", "=", playlist_id)
+        .orderBy("order", "desc");
     return songs;
 }
 
@@ -133,6 +135,7 @@ export async function getPlaylists() {
  * @returns array of Playlist objects or an empty array if no playlists exist
  */
 export async function getShowPlaylists(show_id) {
-    const playlists = await knex("Playlist").select().where({show_id:show_id});
+    const playlists = await knex("Playlist").select().where({show_id:show_id})
+    .orderBy("time_window");
     return playlists;
 }

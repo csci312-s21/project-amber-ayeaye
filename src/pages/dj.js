@@ -11,7 +11,6 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import CancelIcon from "@material-ui/icons/Cancel";
 
-
 export default function DJ() {
 
     const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
@@ -76,13 +75,6 @@ export default function DJ() {
     
     const addSongToPlaylist = async (song) => {
 
-      // ideally, we would like to send the songPlayOrder as part of the request, but I can't figure out how to make that work
-
-      // const requestBody = {
-      //   song: song,
-      //   songPlayOrder: songPlayOrder
-      // };
-
       const response1 = await fetch(
         "/api/songs/",
         {
@@ -97,12 +89,15 @@ export default function DJ() {
       }
 
     const newSong = await response1.json();
+
+    const request2Body = [newSong, songPlayOrder];
       
     const response2 = await fetch(
       `/api/songplay/${editingPlaylistId}`,
       {
         method: "PUT",
-        body: JSON.stringify(newSong),
+        // body: JSON.stringify(newSong),
+        body: JSON.stringify(request2Body),
         headers: new Headers({"Content-type":"application/json"}),
       }
     );
@@ -218,27 +213,39 @@ export default function DJ() {
                 Home Page
             </Button>
 
-            <CurrentShowSetter setCurrentShow={setCurrentShow}/>
+            <Grid
+                container
+                spacing={6}
+                direction="row"
+            >
+                <Grid item xs={6}>
+                    <CurrentShowSetter setCurrentShow={setCurrentShow}/>
+                </Grid>
+    
+                <Grid item xs={6}>
+                    {!editingPlaylistId ? <Button
+                    id="newPlaylistButton"
+                    variant="contained"
+                    color="primary"
+                    size="medium"
+                    disabled={!currentShowId}
+                    startIcon={<AddIcon />}
+                    onClick={() => createNewPlaylist(currentShowId)}>
+                    New Playlist
+                    </Button> :
+                    <Button
+                    id="cancelButton"
+                    variant="contained"
+                    color="primary"
+                    size="medium"
+                    startIcon={<CancelIcon />}
+                    onClick={() => deletePlaylist(editingPlaylistId)}>
+                    Cancel
+                    </Button>
+                    }
+                </Grid>
 
-            {!editingPlaylistId ? <Button
-              id="newPlaylistButton"
-              variant="contained"
-              color="primary"
-              size="medium"
-              startIcon={<AddIcon />}
-              onClick={() => createNewPlaylist(currentShowId)}>
-              New Playlist
-            </Button> :
-            <Button
-              id="cancelButton"
-              variant="contained"
-              color="primary"
-              size="medium"
-              startIcon={<CancelIcon />}
-              onClick={() => deletePlaylist(editingPlaylistId)}>
-              Cancel
-            </Button>
-            }
+            </Grid>
 
           <Grid container spacing={3}>
 

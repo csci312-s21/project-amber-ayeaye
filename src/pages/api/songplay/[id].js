@@ -6,16 +6,12 @@ const handler = nc({ onError })
     .put(async (req, res) => {
       const { id } = req.query;
       const playlistId = +id;
-      const songToAdd = req.body;
 
-      // *****ideally, we would like to send the songPlayOrder as part of the request, but I can't figure out how to make that work***
+      const {body} = req;
+      const songToAdd = body[0];
+      const playOrder = body[1];
 
-      // const body = req.body;
-      // const songToAdd = body["song"];
-      // const playOrder = body["songPlayOrder"];
-
-      // the "1" parameter in addSongToPlaylist is a placeholder for songPlayOrder
-      const newSongInPlaylist = await addSongToPlaylist(songToAdd, playlistId, 1);
+      const newSongInPlaylist = await addSongToPlaylist(songToAdd, playlistId, playOrder);
       res.status(200).json(newSongInPlaylist);
     })
     .delete(async (req, res) => {
