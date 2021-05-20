@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
-// import { makeStyles } from "@material-ui/core/styles";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
+import { Menu, MenuItem, Button, List, Grid, Paper } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import Song from "./Song";
-
 
 const ITEM_HEIGHT = 48;
 
@@ -23,6 +19,19 @@ export default function PlaylistExplorer() {
 
     const showMenuIsOpen = Boolean(showAnchor);
     const dateMenuIsOpen = Boolean(dateAnchor);
+
+    // Define the styles
+    // Note: This is inside of the function to avoid refresh bug
+    const useStyles = makeStyles(() => ({
+        paper: {
+            margin: 0,
+            padding: "4px",
+            maxWidth: 400,
+            border: "1px solid black"
+        }
+    }));
+
+    const classes = useStyles();
 
     // Fetch shows from the sever
     useEffect( () => {
@@ -95,7 +104,7 @@ export default function PlaylistExplorer() {
         if (selected && selected.title) {
             setShow(selected);
             setSongs([]);
-            setCurrentPlaylist([]);
+            setCurrentPlaylist(null);
             setPlaylists([]);
 
         }
@@ -135,58 +144,87 @@ export default function PlaylistExplorer() {
     }
 
     return (
-        <div>
+        <Paper className={classes.paper}>
+            <Grid
+                container
+                spacing={1}
+                direction="column"
+                alignItems="center"
+                width={400}
+                justify="flex-start"
+            >
+    
+                <Grid item xs={12} >
+                    <h2>Playlist Explorer</h2>
+                </Grid>
 
-            <Button aria-controls="show-menu" aria-haspopup="true" onClick={handleShowClick}>
-                {show ? show.title : "Click to Select a Show"}
-            </Button>
-            {(show) ? <div>
-                Current Show Selected: {show.title}
-            </div>: <></>}
+                <Grid item xs={12}>
+                    <Button
+                        aria-controls="show-menu"
+                        aria-haspopup="true"
+                        onClick={handleShowClick}
+                        variant="outlined"
+                    >
+                        {show ? show.title : "Click to Select a Show"}
+                    </Button>
+                    
+                    <Menu
+                        id="show-selector"
+                        anchorEl={showAnchor}
+                        keepMounted
+                        open={showMenuIsOpen}
+                        onClose={showMenuClose}
+                        PaperProps={{
+                            style: {
+                                maxHeight: ITEM_HEIGHT * 4.5,
+                                width: "40ch",
+                            },
+                        }}
+                    >
+                        {showItems} 
+                    </Menu>
+                </Grid>
             
-            <Menu
-                id="show-selector"
-                anchorEl={showAnchor}
-                keepMounted
-                open={showMenuIsOpen}
-                onClose={showMenuClose}
-                PaperProps={{
-                    style: {
-                        maxHeight: ITEM_HEIGHT * 4.5,
-                        width: "40ch",
-                     },
-                 }}
-            >{showItems} 
-            </Menu>
+                <Grid item xs={12}>
+                    {(show) ?
+                    <Button
+                        aria-controls="show-menu"
+                        aria-haspopup="true"
+                        onClick={handleDateClick}
+                        variant="outlined"
+                    >
+                        {(currentPlaylist) ? getDate(currentPlaylist) : "Click to choose date of show"}
+                    </Button> : <></>}
 
-            {(show) ? <Button aria-controls="show-menu" aria-haspopup="true" onClick={handleDateClick}>
-                {(currentPlaylist.length !== 0) ? getDate(currentPlaylist) : "Click to choose date of show"}
-            </Button>: <></>}
-            <Menu
-                id="date-selector"
-                anchorEl={dateAnchor}
-                keepMounted
-                open={dateMenuIsOpen}
-                onClose={dateMenuClose}
-                PaperProps={{
-                    style: {
-                        maxHeight: ITEM_HEIGHT * 4.5,
-                        width: "40ch",
-                     },
-                 }}
-            >{(dateItems.length !== 0) ? dateItems : "This show has no playlists."}
-            </Menu>
-            {(currentPlaylist !== null && currentPlaylist.length !== 0) ? 
-            <div>
-            <p>Songs in the Playlist:</p>
-            <List>
-                {(songComponents.length !== 0) ? songComponents : "This playlist is empty."}
-            </List>
-            </div> : <></>}
-            
-
-            
-        </div>
+                    <Menu
+                        id="date-selector"
+                        anchorEl={dateAnchor}
+                        keepMounted
+                        open={dateMenuIsOpen}
+                        onClose={dateMenuClose}
+                        PaperProps={{
+                            style: {
+                                maxHeight: ITEM_HEIGHT * 4.5,
+                                width: "40ch",
+                            },
+                        }}
+                    >
+                        {(dateItems.length !== 0) ? dateItems : "This show has no playlists."}
+                    </Menu>
+                </Grid>
+        
+                <Grid item xs={12}>
+                    {(currentPlaylist !== null && currentPlaylist.length !== 0) ? 
+                    <div>
+                    <h3>Songs in the Playlist:</h3>
+                    <List>
+                        {(songComponents.length !== 0) ? songComponents : "This playlist is empty."}
+                    </List>
+                    </div> : <></>}
+                </Grid>
+                
+            </Grid>
+        </Paper>
     );
 
 }

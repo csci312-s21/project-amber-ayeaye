@@ -16,20 +16,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchBar({addSong, switchMode}) {
+export default function SearchBar({addSongToPlaylist, switchMode}) {
   const classes = useStyles();
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState();
   const [token, setToken] = useState("");
 
   const addAndReset = (song) => {
-    addSong(song);
+    addSongToPlaylist(song);
     setSearchText("");
   }
 
   useEffect(() => {
     const getToken = async () => {
-      const response = await fetch("/api/auth");
+      const response = await fetch("/api/spotifyauth");
       if(!response.ok){
         throw new Error(response.statusText);
       }
@@ -61,7 +61,7 @@ export default function SearchBar({addSong, switchMode}) {
           artist: track.artists[0].name,
           album: track.album.name,
           artwork: track.album.images[0].url,
-          id: `${track.name}${track.artists[0].name}${track.album.name}`
+          spotify_id: track.id
         })
       )
     );
@@ -114,6 +114,6 @@ export default function SearchBar({addSong, switchMode}) {
 }
 
 SearchBar.propTypes = {
-  addSong: PropTypes.func.isRequired,
+  addSongToPlaylist: PropTypes.func.isRequired,
   switchMode: PropTypes.func.isRequired,
 };
