@@ -34,5 +34,5 @@ yarn-error.log*
 .vercel
 
 # database
-.sqlite3
+database.sqlite3
 
