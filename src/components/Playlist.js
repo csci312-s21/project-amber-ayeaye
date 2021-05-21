@@ -14,31 +14,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Playlist({songs, deleteSong, addSong, mode}) {
-
+export default function Playlist({ songs, deleteSong, addSong, mode }) {
   const classes = useStyles();
 
-    const songComponents = songs.map( (song) =>
-      <Song key={song.id} song={song} deleteSong={deleteSong} addSong={addSong} mode={mode} />
-    );
+  const songComponents = songs.map((song) => (
+    <Song
+      key={song.id}
+      song={song}
+      deleteSong={deleteSong}
+      addSong={addSong}
+      mode={mode}
+    />
+  ));
 
-    return (
-        <div className={classes.root}>
-            <h2>
-              {mode==="inPlaylist" ? 
-                "Current Playlist" : "Search Results"}
-            </h2>
-            <List>
-                {songComponents}
-            </List>
-        </div>
-    );
+  return (
+    <div className={classes.root}>
+      <h2>{mode === "inPlaylist" ? "Current Playlist" : "Search Results"}</h2>
+      <List>{songComponents}</List>
+    </div>
+  );
 }
 
 Playlist.propTypes = {
-  songs:PropTypes.arrayOf(PropTypes.object).isRequired,
-  deleteSong:PropTypes.func,
-  addSong:PropTypes.func,
-  mode:PropTypes.string.isRequired,
+  songs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteSong: PropTypes.func,
+  addSong: PropTypes.func,
+  mode: PropTypes.string.isRequired,
 };
-

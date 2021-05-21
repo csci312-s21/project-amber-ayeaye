@@ -53,6 +53,28 @@ describe.only("Schedule tests", () => {
     // expect(visibleShows).toHaveLength(0);
   });
 
+  test("Schedule item expands on click", async () => {
+    const { getAllByTestId, queryByTestId } = render(<Schedule />);
+
+    await act(async () => {
+      await fetchMock.flush(true);
+    });
+
+    // click the Sunday drop down
+    const sundayListItem = screen.queryByText("Sunday");
+    expect(sundayListItem).toBeInTheDocument();
+
+    let isNotOpen = getAllByTestId("isNotExpanded");
+    expect(isNotOpen.length).toEqual(7);
+
+    fireEvent.click(sundayListItem);
+
+    const isOpen = queryByTestId("isExpanded");
+    isNotOpen = getAllByTestId("isNotExpanded");
+    expect(isNotOpen.length).toEqual(6);
+    expect(isOpen).toBeInTheDocument();
+  });
+
   test("title and DJ name are displayed", async () => {
     const { getByText } = await render(<Schedule />);
 

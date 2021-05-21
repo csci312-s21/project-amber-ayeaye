@@ -9,49 +9,57 @@ import {
   Avatar,
   ListItem,
   ListItemText,
-  ListItemAvatar
+  ListItemAvatar,
 } from "@material-ui/core";
 
-export default function Song({song, deleteSong, addSong, mode}) {
+export default function Song({ song, deleteSong, addSong, mode }) {
+  const defaultAvatar = (
+    <Avatar>
+      {" "}
+      <AlbumIcon />{" "}
+    </Avatar>
+  );
+  const customAvatar = (
+    <Avatar variant="square" alt="album artwork" src={song.artwork} />
+  );
 
-    const defaultAvatar = <Avatar> <AlbumIcon /> </Avatar>;
-    const customAvatar = <Avatar variant="square" alt="album artwork" src={song.artwork}/>;
+  const songInfo = `${song.artist}, ${song.album}`;
 
-    const songInfo = `${song.artist  }, ${  song.album}`;
-
-    let render;
-    if( mode === "inPlaylist") {
-        render = (
-            <IconButton color="secondary" size="small" onClick={() => deleteSong(song)}>
-            <DeleteIcon />
-            </IconButton>
-        );
-    } else if (mode === "inSearchResults" ) {
-        render = (
-            <IconButton color="primary" size="small" onClick={() => addSong(song)}>
-            <AddIcon />
-            </IconButton>
-        );
-    } else {
-        render = (<></>);
-    }
-    
-    return (
-      <ListItem key={song.id}>
-        <ListItemAvatar>
-          {song.artwork ? customAvatar : defaultAvatar}
-        </ListItemAvatar>
-        <ListItemText primary={song.title} secondary={songInfo} />
-        {render}
-      </ListItem>
+  let render;
+  if (mode === "inPlaylist") {
+    render = (
+      <IconButton
+        color="secondary"
+        size="small"
+        onClick={() => deleteSong(song)}
+      >
+        <DeleteIcon />
+      </IconButton>
     );
+  } else if (mode === "inSearchResults") {
+    render = (
+      <IconButton color="primary" size="small" onClick={() => addSong(song)}>
+        <AddIcon />
+      </IconButton>
+    );
+  } else {
+    render = <></>;
+  }
+
+  return (
+    <ListItem key={song.id}>
+      <ListItemAvatar>
+        {song.artwork ? customAvatar : defaultAvatar}
+      </ListItemAvatar>
+      <ListItemText primary={song.title} secondary={songInfo} />
+      {render}
+    </ListItem>
+  );
 }
 
-
-
 Song.propTypes = {
-  song:PropTypes.object.isRequired,
-  deleteSong:PropTypes.func,
-  addSong:PropTypes.func,
-  mode:PropTypes.string.isRequired,
+  song: PropTypes.object.isRequired,
+  deleteSong: PropTypes.func,
+  addSong: PropTypes.func,
+  mode: PropTypes.string.isRequired,
 };
