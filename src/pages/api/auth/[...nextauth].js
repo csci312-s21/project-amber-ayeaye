@@ -12,7 +12,7 @@ const options = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   database: process.env.DATABASE_URL,
-  callbacks: ({signIn: async function singIn(user) {
+  callbacks: ({signIn: async function signIn(user) {
     verify_dj(user.email)
   }})
 };
