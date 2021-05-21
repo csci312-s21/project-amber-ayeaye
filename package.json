@@ -15,7 +15,7 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "test": "jest",
-    "lint": "eslint src",
+    "lint": "eslint migrations src seeds",
     "heroku:start": "next start -p $PORT"
   },
   "dependencies": {
