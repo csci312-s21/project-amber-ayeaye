@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-
+import { verify_dj } from "../../../lib/next-auth-utils";
 
 
 
@@ -15,7 +15,10 @@ const options = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   database: process.env.DATABASE_URL,
-  //callbacks: ({signIn: singIn})
+  callbacks: ({signIn: async function singIn(user) {
+    verify_dj(user.email)
+  }
+  })
 };
 
 
