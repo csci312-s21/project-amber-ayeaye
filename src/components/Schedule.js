@@ -118,7 +118,9 @@ export default function Schedule() {
         component="nav"
         aria-labelledby="nested-list-subheader"
         subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
+          <ListSubheader component="div" 
+          disableSticky={true}
+          id="nested-list-subheader">
             Schedule for the Week
           </ListSubheader>
         }

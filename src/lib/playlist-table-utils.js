@@ -69,7 +69,8 @@ export async function createPlaylist(input_show_id) {
     // it was added for testing purposes so we can add more playlists
     const dd = String(today.getDate()).padStart(2, "0");
     const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const yyyy = today.getFullYear();
+    // const yyyy = today.getFullYear();
+    const yyyy = 2004;
     const dateString = mm + dd + yyyy;
 
     // Get the show's time window from the database

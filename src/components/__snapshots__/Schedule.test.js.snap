@@ -7,7 +7,7 @@ exports[`Schedule tests Snapshot test 1`] = `
     class="MuiList-root makeStyles-root-3 MuiList-padding MuiList-subheader"
   >
     <div
-      class="MuiListSubheader-root MuiListSubheader-sticky MuiListSubheader-gutters"
+      class="MuiListSubheader-root MuiListSubheader-gutters"
       id="nested-list-subheader"
     >
       Schedule for the Week

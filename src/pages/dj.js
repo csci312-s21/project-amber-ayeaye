@@ -201,9 +201,6 @@ export default function DJ() {
         </Head>
     
         <main>
-            <h1>
-            Welcome to WRMC!
-            </h1>
 
             <Button
                 variant="contained"

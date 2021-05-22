@@ -50,10 +50,7 @@ session && console.log(session.user.email)
         </Head>
 
         <main>
-            <h1>
 
-            Welcome to WRMC!
-            </h1>
             <LoginWidget/>
             <Schedule/>
             <PlaylistExplorer/>
