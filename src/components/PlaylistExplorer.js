@@ -32,18 +32,18 @@ export default function PlaylistExplorer() {
 
   const classes = useStyles();
 
-  // Fetch shows from the sever
-  // useEffect(() => {
-  //   const getShows = async () => {
-  //     const response = await fetch("/api/shows");
-  //     if (!response.ok) {
-  //       throw new Error(response.statusText);
-  //     }
-  //     const fetchedShows = await response.json();
-  //     setShows(fetchedShows);
-  //   };
-  //   getShows();
-  // }, []);
+  //Fetch shows from the sever
+  useEffect(() => {
+    const getShows = async () => {
+      const response = await fetch("/api/shows");
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const fetchedShows = await response.json();
+      setShows(fetchedShows);
+    };
+    getShows();
+  }, []);
 
   // Fetch playlists corresponding to the selected show
   useEffect(() => {

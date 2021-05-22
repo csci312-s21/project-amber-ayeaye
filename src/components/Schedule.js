@@ -54,18 +54,18 @@ export default function Schedule() {
     { name: "Saturday", num: 6 },
   ];
 
-  // get show data from server
-  // useEffect(() => {
-  //   const getShows = async () => {
-  //     const response = await fetch("/api/shows/");
-  //     if (!response.ok) {
-  //       throw new Error(response.statusText);
-  //     }
-  //     const showResults = await response.json();
-  //     setShows(showResults);
-  //   };
-  //   getShows();
-  // }, []);
+  //get show data from server
+  useEffect(() => {
+    const getShows = async () => {
+      const response = await fetch("/api/shows/");
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const showResults = await response.json();
+      setShows(showResults);
+    };
+    getShows();
+  }, []);
 
   const changeDayCollapsed = (dayNum) => {
     const newDaysCollapsed = [...daysCollapsed];
