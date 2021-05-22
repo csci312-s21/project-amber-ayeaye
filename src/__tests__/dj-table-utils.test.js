@@ -33,7 +33,7 @@ describe("verify_dj", () => {
   test("verify_dj returns true if user is a dj", async () => {
     const user = "anzigamasabo@middlebury.edu";
     const returned_dj = await verify_dj(user);
-    expect(returned_dj.id).toEqual(true);
+    expect(returned_dj).toEqual(true);
   });
   test("verify_dj returns false if user is not a dj", async () => {
     const returned_dj = await verify_dj(newUser.email);
