@@ -25,7 +25,7 @@ export default function Playlist({songs, deleteSong, addSong, mode}) {
     return (
         <div className={classes.root}>
             <h2>
-              {mode==="inPlaylist" ? 
+              {mode==="inPlaylist" || mode==="inListenerPlaylist" ? 
                 "Current Playlist" : "Search Results"}
             </h2>
             <List>
