@@ -1,6 +1,6 @@
 import Playlist from "./Playlist";
 import PropTypes from "prop-types";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchBar({addSongToPlaylist, switchMode}) {
+export default function SearchBar({ addSongToPlaylist, switchMode }) {
   const classes = useStyles();
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState();
@@ -25,12 +25,12 @@ export default function SearchBar({addSongToPlaylist, switchMode}) {
   const addAndReset = (song) => {
     addSongToPlaylist(song);
     setSearchText("");
-  }
+  };
 
   useEffect(() => {
     const getToken = async () => {
       const response = await fetch("/api/spotifyauth");
-      if(!response.ok){
+      if (!response.ok) {
         throw new Error(response.statusText);
       }
       const tokenData = await response.json();
@@ -45,72 +45,78 @@ export default function SearchBar({addSongToPlaylist, switchMode}) {
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": `Bearer ${token.access_token}`
-      }
+        Authorization: `Bearer ${token.access_token}`,
+      },
     });
-    if(!response.ok){
+    if (!response.ok) {
       throw new Error(response.statusText);
     }
 
     const rawResults = await response.json();
 
     setSearchResults(
-      rawResults.tracks.items.map((track) =>
-        ({
-          title: track.name,
-          artist: track.artists[0].name,
-          album: track.album.name,
-          artwork: track.album.images[0].url,
-          spotify_id: track.id
-        })
-      )
+      rawResults.tracks.items.map((track) => ({
+        title: track.name,
+        artist: track.artists[0].name,
+        album: track.album.name,
+        artwork: track.album.images[0].url,
+        spotify_id: track.id,
+      }))
     );
-  }
+  };
 
-  return(
-      <div>
-
-        <Button
+  return (
+    <div>
+      <Button
         id="switchButton"
         variant="outlined"
         size="small"
-        onClick={() => switchMode()}>
+        onClick={() => switchMode()}
+      >
         Switch to Manual Entry
-        </Button>
+      </Button>
 
-        <br/><br/>
+      <br />
+      <br />
 
-        <TextField 
-          id="keywordSearch" 
-          placeholder="Enter title, artist, and/or album" 
-          className={classes.entryField}
-          required 
-          label="Keyword search"
-          type="search"
-          variant="filled"
-          value={searchText} 
-          fullWidth
-          onChange={((event)=>setSearchText(event.target.value))}/>
-   
-        <br/><br/>
+      <TextField
+        id="keywordSearch"
+        placeholder="Enter title, artist, and/or album"
+        className={classes.entryField}
+        required
+        label="Keyword search"
+        type="search"
+        variant="filled"
+        value={searchText}
+        fullWidth
+        onChange={(event) => setSearchText(event.target.value)}
+      />
 
-        <Button
-          id="addButton"
-          variant="contained"
-          color="primary"
-          size="small"
-          className={classes.button}
-          startIcon={<SearchIcon />}
-          onClick={() => searchSong()} 
-          disabled={searchText === ""}>
-          Search
-        </Button>
+      <br />
+      <br />
 
-        {searchResults && <Playlist songs={searchResults} addSong={addAndReset} mode="inSearchResults" />}
+      <Button
+        id="addButton"
+        variant="contained"
+        color="primary"
+        size="small"
+        className={classes.button}
+        startIcon={<SearchIcon />}
+        onClick={() => searchSong()}
+        disabled={searchText === ""}
+      >
+        Search
+      </Button>
 
-      </div>
-    )
-  
+      {searchResults && (
+        <Playlist
+          songs={searchResults}
+          addSong={addAndReset}
+          mode="inSearchResults"
+        />
+      )}
+    </div>
+  );
 }
 
 SearchBar.propTypes = {

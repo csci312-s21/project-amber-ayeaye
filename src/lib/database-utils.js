@@ -6,7 +6,7 @@ import { addSong } from "./song-table-utils";
 
 export const knex = knexInitializer(
   knexConfig[process.env.NODE_ENV || "development"]
-)
+);
 
 /*
 
@@ -34,105 +34,104 @@ export const knex = knexInitializer(
 
 /**
  * Adds the provided song to the playlist, adding to the Song database if first play
- * 
+ *
  * @param {object} song
  * @param {number} playlist_id
- * 
+ *
  * @returns new Song object with songId and songPlayId attached
  */
 export async function addSongToPlaylist(song, playlist_id, order) {
+  // Check that the playlist exists
+  const playlist = await getPlaylist(playlist_id);
+  if (!playlist) {
+    return "Error: Playlist not found"; // Make this an actual Error
+  }
 
-    // Check that the playlist exists
-    const playlist = await getPlaylist(playlist_id);
-    if(!playlist) {
-        return "Error: Playlist not found"; // Make this an actual Error
-    }
+  // Attempt to add the new song to the Song table
+  // Note: if song already in database, its entry is returned
+  const newSong = await addSong(song);
 
-    // Attempt to add the new song to the Song table 
-    // Note: if song already in database, its entry is returned
-    const newSong = await addSong(song);
+  // Add the SongPlay to the database
+  const songPlay = {
+    playlist_id: playlist_id,
+    song_id: newSong.id,
+    order: order,
+  };
+  const songplay_id = await knex("SongPlay").insert(songPlay);
 
-    // Add the SongPlay to the database
-    const songPlay = {
-        playlist_id: playlist_id,
-        song_id : newSong.id,
-        order: order
-    };
-    const songplay_id = await knex("SongPlay").insert(songPlay);
+  // Attach the songPlayID to the Song object
+  const songWithBothIds = { ...newSong, songplay_id };
 
-    // Attach the songPlayID to the Song object
-    const songWithBothIds = { ...newSong, songplay_id };
-
-    // Return the new Song object with both IDs
-    return songWithBothIds;
-
+  // Return the new Song object with both IDs
+  return songWithBothIds;
 }
 
 /**
  * Deletes a SongPlay entry from the SongPlay table
- * 
+ *
  * @param {number} songPlay_id
- * 
+ *
  * @returns boolean indicating success of deletion
  */
 export async function deleteSongFromPlaylist(songplay_id) {
-    const numDeleted = await knex("SongPlay").where({id:+songplay_id}).del();
-    return numDeleted ? true : false;
+  const numDeleted = await knex("SongPlay")
+    .where({ id: +songplay_id })
+    .del();
+  return numDeleted ? true : false;
 }
 
 /**
  * Gets all songs for a specified playlist
- * 
+ *
  * @param {number} playlist_id
- * 
+ *
  * @returns array of Song objects with IDs
  */
 export async function getSongsFromPlaylist(playlist_id) {
-
-    const songs = await knex("Playlist")
-        .join("SongPlay", "SongPlay.playlist_id", "Playlist.id")
-        .join("Song", "Song.id", "SongPlay.song_id")
-        .select(
-            "Song.id",
-            "Song.title",
-            "Song.artist",
-            "Song.album",
-            "Song.artwork",
-            "Song.spotify_id",
-            "SongPlay.id as songplay_id"
-        )
-        .where("Playlist.id", "=", playlist_id);
-    return songs;
+  const songs = await knex("Playlist")
+    .join("SongPlay", "SongPlay.playlist_id", "Playlist.id")
+    .join("Song", "Song.id", "SongPlay.song_id")
+    .select(
+      "Song.id",
+      "Song.title",
+      "Song.artist",
+      "Song.album",
+      "Song.artwork",
+      "Song.spotify_id",
+      "SongPlay.id as songplay_id"
+    )
+    .where("Playlist.id", "=", playlist_id);
+  return songs;
 }
 
 /**
  * Read all shows from the database
- * 
+ *
  * @returns array of Show objects
  */
 export async function getShows() {
-    const rows = await knex("Show").select();
-    return rows;
+  const rows = await knex("Show").select();
+  return rows;
 }
 
 /**
  * Read all playlists from the database
- * 
+ *
  * @returns array of Playlist objects
  */
 export async function getPlaylists() {
-    const rows = await knex("Playlist").select();
-    return rows;
+  const rows = await knex("Playlist").select();
+  return rows;
 }
 
 /**
  * Gets all playlists from a specified show
- * 
+ *
  * @param {number} show_id
- * 
+ *
  * @returns array of Playlist objects or an empty array if no playlists exist
  */
 export async function getShowPlaylists(show_id) {
-    const playlists = await knex("Playlist").select().where({show_id:show_id});
-    return playlists;
+  const playlists = await knex("Playlist").select().where({ show_id: show_id });
+  return playlists;
 }
