@@ -10,8 +10,8 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import CancelIcon from "@material-ui/icons/Cancel";
-import CircularProgress from '@material-ui/core/CircularProgress';
-import WarningIcon from '@material-ui/icons/Warning';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import WarningIcon from "@material-ui/icons/Warning";
 import { useRouter } from "next/router"
 import { useSession } from "next-auth/client"
 
@@ -162,7 +162,26 @@ export default function DJ() {
       setEditingPlaylistSongs();
     }
   };
-
+  if (!session){ //unauthorized
+    return (
+      <div className={styles.container}>
+      <Head>
+        <title>WRMC</title>
+        <link rel="icon" href="/favicon.ico" />
+        <img
+          src="https://wrmc.middlebury.edu/wp-content/themes/wrmc/images/logo_large.png"
+          width="400"
+          alt="WRMC 91.1 FM Middlebury College Radio 91.1 FM"
+        />
+      </Head>
+      <Grid>
+      <h3 color="red"><WarningIcon color="secondary"/> ACCESS DENIED</h3>
+      <h3>Redirecting <CircularProgress color="secondary" /></h3>
+      </Grid>
+      </div>
+    )
+  }
+  else{ //authorized
   return (
     <div className={styles.container}>
       <Head>
@@ -176,12 +195,6 @@ export default function DJ() {
       </Head>
 
       <main>
-      {!session && 
-      <Grid>
-      <h3 color="red"><WarningIcon color="secondary"/> ACCESS DENIED</h3>
-      <h3>Redirecting <CircularProgress color="secondary" /></h3>
-      </Grid>}
-      {session && <div>
         <h1>Welcome to WRMC!</h1>
 
         <Button variant="contained" color="secondary" href="/">
@@ -243,10 +256,10 @@ export default function DJ() {
             )}
           </Grid>
         </Grid>
-        </div>}
       </main>
 
       <footer>A CS 312 Project</footer>
     </div>
   );
+  }
 }

@@ -5,6 +5,7 @@ import {
   get_dj,
   add_dj,
   delete_dj,
+  get_username
 } from "../lib/next-auth-utils";
 
 const newUser = { email: "mmike@middlebury.edu", username: "Mike" };
@@ -29,14 +30,14 @@ describe("get_djs", () => {
   });
 });
 describe("verify_dj", () => {
-  test("verify_dj returns a user object if user is a dj", async () => {
+  test("verify_dj returns true if user is a dj", async () => {
     const user = "anzigamasabo@middlebury.edu";
     const returned_dj = await verify_dj(user);
-    expect(returned_dj.id).toEqual(1);
+    expect(returned_dj.id).toEqual(true);
   });
-  test("verify_dj returns null if user is not a dj", async () => {
+  test("verify_dj returns false if user is not a dj", async () => {
     const returned_dj = await verify_dj(newUser.email);
-    expect(returned_dj).toBeNull();
+    expect(returned_dj).toEqual(false);
   });
 });
 describe("add_dj", () => {
