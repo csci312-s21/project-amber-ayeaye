@@ -1,15 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import path from "path";
 import fetchMock from "fetch-mock-jest";
-import {
-  startApp,
-  stopApp,
-  nextBuild,
-  nextServer,
-} from "../test-utils/next-test-utils";
 import PlaylistExplorer from "../components/PlaylistExplorer";
 
-const appDir = path.join(__dirname, "../../");
 jest.setTimeout(120 * 1000);
 
 const shows = [
@@ -71,22 +63,11 @@ const songs = [
 ];
 
 describe("PlaylistExplorer tests", () => {
-  let server;
   let localShows;
   let localPlaylists;
   let localSongs;
 
   beforeAll(async () => {
-    // Start the server
-    await nextBuild(appDir);
-    const app = nextServer({
-      dir: appDir,
-      dev: false,
-      quiet: true,
-    });
-
-    server = await startApp(app);
-
     // Establish local version of data
     localShows = shows.map((s) => ({ ...s }));
     localPlaylists = playlists.map((p) => ({ ...p }));
@@ -105,15 +86,6 @@ describe("PlaylistExplorer tests", () => {
     fetchMock.get("/api/playlistsongs/1", () => [localSongs[0]]);
     fetchMock.get("/api/playlistsongs/2", () => [localSongs]);
     fetchMock.get("/api/playlistsongs/3", () => []);
-
-    return server;
-  });
-
-  /**
-   * Shut down the server
-   */
-  afterAll(async () => {
-    await stopApp(server);
   });
 
   test("PlaylistExplorer renders", async () => {
