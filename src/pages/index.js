@@ -13,7 +13,15 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   header: {
-    padding: 10,
+    padding: 20,
+    backgroundColor: "#90d7ed",
+    width: "100%",
+  },
+  body: {
+    padding: 60,
+  },
+  logo: {
+    margin: "auto",
   },
 }));
 
@@ -49,45 +57,57 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <div className={classes.header}>
+        <Grid container justify="center">
+          <img
+            className="logo"
+            src="https://wrmc.middlebury.edu/wp-content/themes/wrmc/images/logo_large.png"
+            width="400"
+            alt="WRMC 91.1 FM Middlebury College Radio 91.1 FM"
+          />
+        </Grid>
+        {showSecret && (
+          <Link href="/dj">
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ position: "absolute", top: 20, right: 20 }}
+            >
+              Go to DJ Page
+            </Button>
+          </Link>
+        )}
+        <LoginWidget className={classes.login} />
+      </div>
+
       <main>
         <Grid
           container
           direction="column"
           alignItems="center"
           spacing={5}
-          className={classes.header}
+          justify="center"
         >
-          <Grid container justify="center" spacing={8} direction="row">
-            <Grid item xs={12}>
-              <img
-                className="logo"
-                src="https://wrmc.middlebury.edu/wp-content/themes/wrmc/images/logo_large.png"
-                width="400"
-                alt="WRMC 91.1 FM Middlebury College Radio 91.1 FM"
-              />
+          <div className={classes.body}>
+            <Grid
+              container
+              direction="row"
+              alignItems="flex-start"
+              justify="center"
+              spacing={4}
+            >
+              <Grid item>
+                <PlayButton />
+              </Grid>
+              <Grid item>
+                <Schedule />
+              </Grid>
+              <Grid item>
+                <PlaylistExplorer />
+              </Grid>
             </Grid>
-          </Grid>
-          <LoginWidget className={classes.login} />
-
-          <Link href="/dj">
-            <Button variant="contained" color="secondary">
-              DJ Page
-            </Button>
-          </Link>
-
-          <Schedule />
-          <PlaylistExplorer />
-
-          {showSecret && (
-            <Link href="/dj">
-              <Button variant="contained" color="secondary">
-                DJ Page
-              </Button>
-            </Link>
-          )}
+          </div>
         </Grid>
-
-        <PlayButton />
       </main>
       <footer>A CS 312 Project</footer>
     </div>

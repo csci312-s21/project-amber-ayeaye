@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() => ({
   login: {
     color: "white",
-    backgroundColor: "blue",
+    backgroundColor: "#e390bd",
     position: "absolute",
     top: 20,
     right: 20,
@@ -20,18 +20,17 @@ export default function LoginWidget() {
 
   if (session) {
     return (
-      <div>
-        <p>
-          Signed in as {session.user.name}
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={signOut}
-          >
-            Sign out
-          </Button>
-        </p>
+      <div style={{ position: "absolute", top: 70, right: 20 }}>
+        <span style={{ padding: 10 }}>Signed in as {session.user.name}</span>
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={signOut}
+          padding={50}
+        >
+          Sign out
+        </Button>
       </div>
     );
   } else {

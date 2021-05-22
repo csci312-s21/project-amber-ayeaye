@@ -10,8 +10,21 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import CancelIcon from "@material-ui/icons/Cancel";
+import LoginWidget from "../components/LoginWidget";
+
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+  header: {
+    padding: 20,
+    backgroundColor: "#90d7ed",
+    width: "100%",
+  },
+}));
 
 export default function DJ() {
+  const classes = useStyles();
+
   const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
   const [isPlaying, setIsPlaying] = useState(false);
   const [editingPlaylistId, setEditingPlaylistId] = useState();
@@ -164,20 +177,29 @@ export default function DJ() {
       <Head>
         <title>WRMC</title>
         <link rel="icon" href="/favicon.ico" />
-        <img
-          src="https://wrmc.middlebury.edu/wp-content/themes/wrmc/images/logo_large.png"
-          width="400"
-          alt="WRMC 91.1 FM Middlebury College Radio 91.1 FM"
-        />
       </Head>
 
-      <main>
-        <h1>Welcome to WRMC!</h1>
-
-        <Button variant="contained" color="secondary" href="/">
+      <div className={classes.header}>
+        <Grid container justify="center">
+          <img
+            className="logo"
+            src="https://wrmc.middlebury.edu/wp-content/themes/wrmc/images/logo_large.png"
+            width="400"
+            alt="WRMC 91.1 FM Middlebury College Radio 91.1 FM"
+          />
+        </Grid>
+        <Button
+          variant="contained"
+          color="secondary"
+          href="/"
+          style={{ position: "absolute", top: 20, left: 20 }}
+        >
           Home Page
         </Button>
+        <LoginWidget className={classes.login} />
+      </div>
 
+      <main>
         <CurrentShowSetter setCurrentShow={setCurrentShow} />
 
         {!editingPlaylistId ? (
