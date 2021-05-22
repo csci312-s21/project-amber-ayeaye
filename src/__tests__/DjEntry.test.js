@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, act, getByRole } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import DjEntry from "../components/DjEntry";
 import fetchMock from "fetch-mock-jest";
 
@@ -37,10 +37,8 @@ describe("DJ Entry tests", () => {
       await fetchMock.flush(true);
     });
 
-    const addPlaylistButton = screen.getByRole('button', {name: /New Playlist/i});
-    // const addPlaylistButton = screen.getElementById("newPlaylistButton");
+    const addPlaylistButton = screen.getByRole("button", {name: /New Playlist/i});
 
-    // const addPlaylistButton = screen.queryByText("New Playlist");
     expect(addPlaylistButton).toBeDisabled();
 
     const selectButton = screen.queryByText("Select a Show");
@@ -53,24 +51,27 @@ describe("DJ Entry tests", () => {
 
   });
 
-  // test("Creating a new playlist brings up the search bar", async () => {
+  // test.only("Creating a new playlist brings up the search bar", async () => {
   //   render(<DjEntry />);
   //   await act(async () => {
   //     await fetchMock.flush(true);
   //   });
 
-  //   const selectButton = await screen.queryByText("Select a Show");
+  //   const addPlaylistButton = screen.getByRole('button', {name: /New Playlist/i});
+
+  //   const selectButton = screen.queryByText("Select a Show");
   //   fireEvent.click(selectButton);
 
   //   const show1 = await screen.queryByText("Show #1");
   //   fireEvent.click(show1);
 
-  //   const addPlaylistButton = await screen.getByRole('button', {name: /New Playlist/i});
-  //   fireEvent.click(addPlaylistButton);
+  //   act(() => fireEvent.click(addPlaylistButton));
 
-  //   expect(addPlaylistButton).not.toBeInTheDocument();
+  //   // await act(async () =>  clickPlaylist());
+ 
+  //   // expect(addPlaylistButton).not.toBeInTheDocument();
 
-  //   // const searchButton = screen.getByRole('button', {name: /Search/i});
+  //   const searchButton = screen.getByRole('button', {name: /Search/i});
 
   //   // expect(searchButton).toBeInTheDocument();
   //   // expect(searchButton).toBeDisabled();

@@ -12,8 +12,6 @@ import {
 import AddIcon from "@material-ui/icons/Add";
 import CancelIcon from "@material-ui/icons/Cancel";
 
-import { makeStyles } from "@material-ui/core/styles";
-
 export default function DjEntry() {
     
     // Establish component states
@@ -22,6 +20,7 @@ export default function DjEntry() {
     const [editingPlaylistSongs, setEditingPlaylistSongs] = useState();
     const [currentShowId, setCurrentShowId] = useState();
     const [songPlayOrder, setSongPlayOrder] = useState();
+    const [lastCurrentPlaylistId, setLastCurrentPlaylistId] = useState();
 
     // Set the current show based on an ID
     const setCurrentShow = id => setCurrentShowId(id);
@@ -130,9 +129,26 @@ export default function DjEntry() {
     // Function to create a new playlist for a show
     const createNewPlaylist = async (show_id) => {
 
+      // we need to fetch the current playlist id and store it in state in case the new playlist is deleted 
+        const response1 = await fetch(
+          "/api/currentplaylist/",
+          {
+            method: "GET",
+            headers: new Headers(
+              {"Content-type":"application/json"}),
+          }
+        );
+
+        if (!response1.ok) {
+          throw new Error(response1.statusText);
+        }
+
+        const lastId = await response1.json();
+        setLastCurrentPlaylistId(lastId);
+
         setSongPlayOrder(1);
     
-        const response1 = await fetch(
+        const response2 = await fetch(
             "/api/playlists/",
             {
                 method: "PUT",
@@ -141,15 +157,15 @@ export default function DjEntry() {
             }
         );
     
-        if (!response1.ok) {
-          throw new Error(response1.statusText);
+        if (!response2.ok) {
+          throw new Error(response2.statusText);
         }
     
-        const newPlaylist = await response1.json();
+        const newPlaylist = await response2.json();
         const newPlaylistId = newPlaylist.id;
     
         // Set the current playlist 
-        const response2 = await fetch(
+        const response3 = await fetch(
           `/api/currentplaylist/${newPlaylistId}`,
           {
             method: "PUT",
@@ -158,8 +174,8 @@ export default function DjEntry() {
           }
         );
     
-        if(!response2.ok){
-          throw new Error(response2.statusText);
+        if(!response3.ok){
+          throw new Error(response3.statusText);
         }
     
         setEditingPlaylistId(newPlaylistId);
@@ -169,7 +185,7 @@ export default function DjEntry() {
     // Function to delete a playlist
     const deletePlaylist = async (id) => {
 
-        const response = await fetch(
+        const response1 = await fetch(
             "/api/playlists/",
             {
                 method: "DELETE",
@@ -178,27 +194,35 @@ export default function DjEntry() {
             }
         );
   
-        if (!response.ok) {
-            throw new Error(response.statusText);
+        if (!response1.ok) {
+            throw new Error(response1.statusText);
         }
   
-        const deleted = await response.json();
+        const deleted = await response1.json();
+
+        const resetCurrentPlaylistId = async () => {
+
+          const response2 = await fetch(`/api/currentplaylist/${lastCurrentPlaylistId}`,
+            {
+              method: "PUT",
+              headers: new Headers(
+                {"Content-type":"application/json"}),
+            }
+          );
+    
+          if(!response2.ok){
+            throw new Error(response2.statusText);
+          }
+
+        }
   
         if(deleted) {
             setEditingPlaylistId();
             setEditingPlaylistSongs();
+            resetCurrentPlaylistId();
         }
   
     }
-
-    const useStyles = makeStyles(() => ({
-        container: {
-            margin: 0,
-            maxWidth: 700,
-        },
-    }));
-    
-    const classes = useStyles();
 
     return (
         <Container>

@@ -119,7 +119,7 @@ export default function Schedule() {
         aria-labelledby="nested-list-subheader"
         subheader={
           <ListSubheader component="div" 
-          disableSticky={true}
+          disableSticky
           id="nested-list-subheader">
             Schedule for the Week
           </ListSubheader>
