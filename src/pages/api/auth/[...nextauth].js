@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
+import { verify_dj } from "../../../lib/next-auth-utils";
 
 const options = {
   providers: [
@@ -11,7 +12,9 @@ const options = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   database: process.env.DATABASE_URL,
-  //callbacks: ({signIn: singIn})
+  callbacks: ({signIn: async function signIn(user) {
+    verify_dj(user.email)
+  }})
 };
 
 export default (req, res) => NextAuth(req, res, options);
