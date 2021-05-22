@@ -41,31 +41,16 @@ export default function CurrentShowSetter({ setCurrentShow }) {
     </MenuItem>
   ));
 
-            <Button
-                aria-controls="show-menu"
-                aria-haspopup="true"
-                onClick={handleShowClick}
-                variant="outlined">
-                {show ? show.title : "Select a Show"}
-            </Button>
-
-            <Menu
-                id="show-selector"
-                anchorEl={showAnchor}
-                keepMounted
-                open={showMenuIsOpen}
-                onClose={showMenuClose}
-                PaperProps={{
-                    style: {
-                        maxHeight: ITEM_HEIGHT * 4.5,
-                        width: "40ch",
-                     },
-                 }}
-            >{showItems}
-            </Menu>
-
-        </div>
-    );
+  return (
+    <div>
+      <Button
+        aria-controls="show-menu"
+        aria-haspopup="true"
+        onClick={handleShowClick}
+        variant="outlined"
+      >
+        {show ? show.title : "Select a Show"}
+      </Button>
 
       <Menu
         id="show-selector"
