@@ -49,9 +49,9 @@ export default function Home() {
       <main>
         <h1>Welcome to WRMC!</h1>
         <LoginWidget />
-        <CurrentPlaylist />
         <Schedule />
         <PlaylistExplorer />
+        <CurrentPlaylist />
 
         {showSecret && (
           <Link href="/dj">
