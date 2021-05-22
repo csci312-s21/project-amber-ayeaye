@@ -5,7 +5,7 @@ import { getShow } from "./show-table-utils";
 
 export const knex = knexInitializer(
   knexConfig[process.env.NODE_ENV || "development"]
-)
+);
 
 /*
 
@@ -25,52 +25,49 @@ export const knex = knexInitializer(
 
 /**
  * Read all playlists from the database
- * 
+ *
  * @returns array of Playlist objects
  */
 export async function getPlaylists() {
-    const rows = await knex("Playlist").select();
-    return rows;
+  const rows = await knex("Playlist").select();
+  return rows;
 }
 
 /**
  * Read the playlist with the specified id
- * 
+ *
  * @param {number} id
  * @returns a Playlist object, or null if the playlist can't be found
  */
 export async function getPlaylist(id) {
-    const playlist = await knex("Playlist").select().where({id:id});
-    return playlist[0] ? playlist[0] : null;
+  const playlist = await knex("Playlist").select().where({ id: id });
+  return playlist[0] ? playlist[0] : null;
 }
 
 /**
  * Delete the playlist with the specified id
- * 
+ *
  * @param {number} id
  * @returns a Boolean indicating success
  */
 export async function deletePlaylist(id) {
-    const numDeleted = await knex("Playlist").where({id:id}).del();
-    return numDeleted ? true : false;
+  const numDeleted = await knex("Playlist").where({ id: id }).del();
+  return numDeleted ? true : false;
 }
 
 /**
  * Create a new playlist entry in the database
- * 
- * @param {number} input_show_id 
+ *
+ * @param {number} input_show_id
  * @returns the playlist entry in the database with an ID
  */
 export async function createPlaylist(input_show_id) {
 
     // Construct the date string for the database
     const today = new Date();
-    // THE NUMBER AFTER TODAY.GETDATE() SHOULD BE DELETED!
-    // it was added for testing purposes so we can add more playlists
     const dd = String(today.getDate()).padStart(2, "0");
     const mm = String(today.getMonth() + 1).padStart(2, "0");
-    // const yyyy = today.getFullYear();
-    const yyyy = 2004;
+    const yyyy = today.getFullYear();
     const dateString = mm + dd + yyyy;
 
     // Get the show's time window from the database
@@ -91,5 +88,5 @@ export async function createPlaylist(input_show_id) {
     const newPlaylist = await getPlaylist(playlistId);
 
     // Return the playlist entry
-    return newPlaylist; 
+    return newPlaylist;
 }

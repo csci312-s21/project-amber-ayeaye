@@ -15,12 +15,13 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "test": "jest",
-    "lint": "eslint src",
+    "lint": "eslint migrations src seeds",
     "heroku:start": "next start -p $PORT"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/styles": "^4.11.4",
     "@material-ui/system": "^4.11.3",
     "clsx": "^1.1.1",
     "cross-spawn": "^7.0.3",

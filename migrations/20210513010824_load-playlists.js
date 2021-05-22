@@ -1,4 +1,4 @@
-exports.up = function (knex, Promise) {
+exports.up = function (knex) {
     return knex.schema
     .createTable('Playlist', (table) => {
         table.increments('id').unique().notNullable();
@@ -7,6 +7,6 @@ exports.up = function (knex, Promise) {
     });
 };
 
-exports.down = function (knex, Promise) {
-    return knex.schema.dropTableIfExists('Playlist');
+exports.down = function (knex) {
+  return knex.schema.dropTableIfExists("Playlist");
 };

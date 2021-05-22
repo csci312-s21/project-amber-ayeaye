@@ -1,5 +1,9 @@
 import nc from "next-connect";
-import { addSongToPlaylist, getSongsFromPlaylist, deleteSongFromPlaylist } from "../../../lib/database-utils";
+import {
+  addSongToPlaylist,
+  getSongsFromPlaylist,
+  deleteSongFromPlaylist,
+} from "../../../lib/database-utils";
 import { onError } from "../../../lib/middleware";
 
 const handler = nc({ onError })
@@ -24,5 +28,5 @@ const handler = nc({ onError })
       const deleted = await deleteSongFromPlaylist(songplay_id);
       res.status(200).json(deleted);
     });
-    
+
 export default handler;
