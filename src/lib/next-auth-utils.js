@@ -26,7 +26,23 @@ export async function add_dj(user) {
  */
 export async function verify_dj(user) {
   const dj = await knex("Dj").select().where("email", "=", user);
-  return dj[0] ? dj[0] : null;
+  if (dj[0]){
+    return true
+  }
+  else{
+    return false
+  }
+}
+
+/*
+ * @param { string } user: email of the user
+ * @return username (nickname) of the dj
+ */
+export async function get_username(user) {
+    const rows = await knex("DJ").select()
+        .where("email", "=", user)
+
+    return rows[0].username
 }
 
 /*

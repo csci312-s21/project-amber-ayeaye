@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Playlist from "../components/Playlist";
@@ -10,24 +10,28 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import CancelIcon from "@material-ui/icons/Cancel";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import WarningIcon from '@material-ui/icons/Warning';
+import { useRouter } from "next/router"
+import { useSession } from "next-auth/client"
 
 export default function DJ() {
   const [addingMode, setAddingMode] = useState("search"); // other option is "manual"
-  const [isPlaying, setIsPlaying] = useState(false);
   const [editingPlaylistId, setEditingPlaylistId] = useState();
   const [editingPlaylistSongs, setEditingPlaylistSongs] = useState();
   const [currentShowId, setCurrentShowId] = useState();
   const [songPlayOrder, setSongPlayOrder] = useState();
 
-  const setCurrentShow = (id) => setCurrentShowId(id);
+  const router = useRouter();
+  const [session] = useSession();
 
-  const playOrPause = () => {
-    if (isPlaying) {
-      setIsPlaying(false);
-    } else {
-      setIsPlaying(true);
+  useEffect(()=>{
+    if (!session){
+      return router.push("/");
     }
-  };
+  }, [session])
+
+  const setCurrentShow = (id) => setCurrentShowId(id);
 
   const switchMode = () => {
     if (addingMode === "search") {
@@ -172,6 +176,12 @@ export default function DJ() {
       </Head>
 
       <main>
+      {!session && 
+      <Grid>
+      <h3 color="red"><WarningIcon color="secondary"/> ACCESS DENIED</h3>
+      <h3>Redirecting <CircularProgress color="secondary" /></h3>
+      </Grid>}
+      {session && <div>
         <h1>Welcome to WRMC!</h1>
 
         <Button variant="contained" color="secondary" href="/">
@@ -205,9 +215,7 @@ export default function DJ() {
         )}
 
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <PlayButton isPlaying={isPlaying} playOrPause={playOrPause} />
-          </Grid>
+          <PlayButton/>
 
           {editingPlaylistId && (
             <Grid item xs={6}>
@@ -235,6 +243,7 @@ export default function DJ() {
             )}
           </Grid>
         </Grid>
+        </div>}
       </main>
 
       <footer>A CS 312 Project</footer>

@@ -55,17 +55,17 @@ export default function Schedule() {
   ];
 
   // get show data from server
-  useEffect(() => {
-    const getShows = async () => {
-      const response = await fetch("/api/shows/");
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      const showResults = await response.json();
-      setShows(showResults);
-    };
-    getShows();
-  }, []);
+  // useEffect(() => {
+  //   const getShows = async () => {
+  //     const response = await fetch("/api/shows/");
+  //     if (!response.ok) {
+  //       throw new Error(response.statusText);
+  //     }
+  //     const showResults = await response.json();
+  //     setShows(showResults);
+  //   };
+  //   getShows();
+  // }, []);
 
   const changeDayCollapsed = (dayNum) => {
     const newDaysCollapsed = [...daysCollapsed];

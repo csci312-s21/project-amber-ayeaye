@@ -53,3 +53,10 @@ describe("delete_dj", () => {
     expect(deleted).toEqual(true);
   });
 });
+
+describe("get_username", ()=>{
+  test("gets the username/nickname of the dj", async()=>{
+    const nickname = await get_username("mcannavo@middlebury.edu");
+    expect(nickname).toEqual("Maja")
+  })
+})
