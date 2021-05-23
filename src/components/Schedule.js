@@ -19,8 +19,8 @@ import QueueMusic from "@material-ui/icons/QueueMusic";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    minWidth: 500,
-    maxWidth: 500,
+    minWidth: 400,
+    maxWidth: 400,
   },
   header: {
     backgroundColor: "#42a5f5",
@@ -139,9 +139,11 @@ export default function Schedule() {
         component="nav"
         aria-labelledby="nested-list-subheader"
         subheader={
-          <ListSubheader component="div" 
-          disableSticky
-          id="nested-list-subheader">
+          <ListSubheader
+            component="div"
+            disableSticky
+            id="nested-list-subheader"
+          >
             Schedule for the Week
           </ListSubheader>
         }

@@ -24,8 +24,8 @@ export default function PlaylistExplorer() {
   const useStyles = makeStyles(() => ({
     paper: {
       margin: 0,
-      padding: "4px",
-      maxWidth: 400,
+      padding: "20px",
+      minWidth: 300,
       border: "1px solid black",
     },
   }));
@@ -159,7 +159,7 @@ export default function PlaylistExplorer() {
     <Paper className={classes.paper}>
       <Grid
         container
-        spacing={1}
+        spacing={2}
         direction="column"
         alignItems="flex-start"
         width={400}
