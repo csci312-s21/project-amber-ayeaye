@@ -98,16 +98,14 @@ export default function Home() {
             >
               <Grid item>
                 <PlayButton />
+                <CurrentPlaylist />
               </Grid>
               <Grid item>
                 <Schedule />
               </Grid>
               <Grid item>
                 <PlaylistExplorer />
-              <Grid item>
-                <CurrentPlaylist />
               </Grid>
-            </Grid>
             </Grid>
           </div>
         </Grid>
