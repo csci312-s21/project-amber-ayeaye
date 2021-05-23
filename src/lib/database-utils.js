@@ -24,12 +24,13 @@ export const knex = knexInitializer(
     deleteSongFromPlaylist(songPlay_id) - deletes a song from the playlist
         - Removes an entry in SongPlay only
 
-        changePlaylistOrder(playlist_id, new_order) - changes the order of songs in the playlist
-            - Need to figure out how this will work
-
     getSongsFromPlaylist(playlist_id) - retrieves all songs corresponding to the specified playlist
 
-    getShows - retrieves all shows for presentation in the calendar
+    getShows() - retrieves all shows for presentation in the calendar
+
+    getPlaylists() - retrieves all playlists
+
+    getShowPlaylists(show_id) - retrieves the playlists associated with a given show id
 */
 
 /**
