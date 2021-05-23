@@ -4,6 +4,7 @@ import LoginWidget from "../components/LoginWidget";
 import PlayButton from "../components/PlayButton";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import CurrentPlaylist from "../components/CurrentPlaylist";
 import PlaylistExplorer from "../components/PlaylistExplorer";
 import Schedule from "../components/Schedule";
 import { useSession } from "next-auth/client";
@@ -104,7 +105,10 @@ export default function Home() {
               </Grid>
               <Grid item>
                 <PlaylistExplorer />
+              <Grid item>
+                <CurrentPlaylist />
               </Grid>
+            </Grid>
             </Grid>
           </div>
         </Grid>
