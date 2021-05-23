@@ -1,7 +1,6 @@
 const fs = require("fs");
 
-exports.seed = function(knex) {
-
+exports.seed = function (knex) {
   const contents = fs.readFileSync("./data/songplayseed.json");
   const data = JSON.parse(contents);
   // Deletes ALL existing entries
