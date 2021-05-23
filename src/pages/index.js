@@ -105,10 +105,10 @@ export default function Home() {
               </Grid>
               <Grid item>
                 <PlaylistExplorer />
-              <Grid Item>
+              <Grid item>
                 <CurrentPlaylist />
-              </Grid Item>
               </Grid>
+            </Grid>
             </Grid>
           </div>
         </Grid>
