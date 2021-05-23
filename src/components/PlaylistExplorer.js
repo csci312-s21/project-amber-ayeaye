@@ -161,7 +161,7 @@ export default function PlaylistExplorer() {
         container
         spacing={1}
         direction="column"
-        alignItems="center"
+        alignItems="flex-start"
         width={400}
         justify="flex-start"
       >
