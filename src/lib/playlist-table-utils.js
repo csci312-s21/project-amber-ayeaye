@@ -62,32 +62,31 @@ export async function deletePlaylist(id) {
  * @returns the playlist entry in the database with an ID
  */
 export async function createPlaylist(input_show_id) {
-  // Construct the date string for the database
-  const today = new Date();
-  // THE +1 AFTER TODAY.GETDATE() SHOULD BE DELETED!
-  // it was added for testing purposes so we can add more playlists
-  const dd = String(today.getDate() - 11).padStart(2, "0");
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const yyyy = today.getFullYear();
-  const dateString = mm + dd + yyyy;
 
-  // Get the show's time window from the database
-  const show = await getShow(input_show_id);
-  const showTimeWindow = show.schedule.split("T").pop();
+    // Construct the date string for the database
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+    const dateString = mm + dd + yyyy;
 
-  // Combine the date and time window strings
-  const playlistTimeWindow = `D${dateString}T${showTimeWindow}`;
+    // Get the show's time window from the database
+    const show = await getShow(input_show_id);
+    const showTimeWindow = show.schedule.split("T").pop();
 
-  // Construct the new Playlist object
-  const playlist = {
-    show_id: input_show_id,
-    time_window: playlistTimeWindow,
-  };
+    // Combine the date and time window strings
+    const playlistTimeWindow = `D${dateString}T${showTimeWindow}`;
 
-  // Add the playlist to the Playlist table
-  const playlistId = await knex("Playlist").insert(playlist);
-  const newPlaylist = await getPlaylist(playlistId);
+    // Construct the new Playlist object
+    const playlist = {
+        show_id: input_show_id,
+        time_window: playlistTimeWindow
+    };
 
-  // Return the playlist entry
-  return newPlaylist;
+    // Add the playlist to the Playlist table
+    const playlistId = await knex("Playlist").insert(playlist);
+    const newPlaylist = await getPlaylist(playlistId);
+
+    // Return the playlist entry
+    return newPlaylist;
 }

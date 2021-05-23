@@ -18,7 +18,7 @@ describe("SearchBar tests", () => {
 
   test("Search button is disabled when input is blank", async () => {
     const { container } = render(
-      <SearchBar addSong={handler} switchMode={handler} />
+      <SearchBar addSongToPlaylist={handler} switchMode={handler} />
     );
 
     await act(async () => {

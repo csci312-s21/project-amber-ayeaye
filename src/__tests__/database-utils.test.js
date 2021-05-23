@@ -40,6 +40,7 @@ describe("Test of the database utility functions", () => {
       const expectedSongs2 = seedSongs.filter(
         (song) => song.id === 2 || song.id === 4
       );
+      expectedSongs2.reverse();
       expect(returnedSongs2.map((s) => s.title)).toEqual(
         expectedSongs2.map((s) => s.title)
       );

@@ -91,6 +91,21 @@ export default function PlaylistExplorer() {
     return datePresentation;
   };
 
+  const getDateObject = (playlist) => {
+    const playlistCopy = { ...playlist };
+    const time = playlistCopy.time_window;
+    const date = time.substring(
+      time.lastIndexOf("D") + 1,
+      time.lastIndexOf("T")
+    );
+    const month = date.substring(0, 2);
+    const day = date.substring(2, 4);
+    const year = date.substring(4, 8);
+    const datePresentation = `${year}-${month}-${day}`;
+    const asDateObject = new Date(datePresentation);
+    return asDateObject;
+  };
+
   const handleShowClick = (event) => {
     setShowAnchor(event.currentTarget);
   };
@@ -121,6 +136,11 @@ export default function PlaylistExplorer() {
       {showItem.title}
     </MenuItem>
   ));
+
+  // Sort playlists by date (descending)
+  playlists.sort((a, b) => {
+    return getDateObject(b) - getDateObject(a);
+  });
 
   const dateItems = playlists.map((playlist) => (
     <MenuItem key={playlist.id} onClick={() => dateMenuClose(playlist)}>

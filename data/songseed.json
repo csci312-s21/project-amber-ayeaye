@@ -1,82 +1,82 @@
 [
   {
-    "id": 1,
     "title": "Piano Man",
     "artist": "Billy Joel",
-    "album": "Piano Man",
-    "artwork": "https://i.scdn.co/image/ab67616d00001e02db9c8abe838bbfb28ed5cc06",
-    "spotify_id": "a"
+    "album": "Piano Man (Legacy Edition)",
+    "artwork": "https://i.scdn.co/image/ab67616d0000b273aff4aef671b2510be7c115b3",
+    "spotify_id": "70C4NyhjD5OZUMzvWZ3njJ",
+    "id": 1
   },
   {
-    "id": 2,
     "title": "House Of The Rising Sun",
     "artist": "The Animals",
-    "album": "Power Company",
-    "artwork": "https://i.scdn.co/image/ab67616d00001e023c534611bd3658006378a2d7",
-    "spotify_id": "b"
+    "album": "The Animals",
+    "artwork": "https://i.scdn.co/image/ab67616d0000b2733c534611bd3658006378a2d7",
+    "spotify_id": "7BY005dacJkbO6EPiOh2wb",
+    "id": 2
   },
   {
-    "id": 3,
     "title": "Memories",
     "artist": "Maroon 5",
-    "album": "Memories-Single",
-    "artwork": "https://i.scdn.co/image/ab67616d00001e02b8c0135a218de2d10a8435f5",
-    "spotify_id": "c"
+    "album": "Memories",
+    "artwork": "https://i.scdn.co/image/ab67616d0000b273b8c0135a218de2d10a8435f5",
+    "spotify_id": "2b8fOow8UzyDFAE27YhOZM",
+    "id": 3
   },
   {
-    "id": 4,
-    "title": "All You Need is Love",
+    "title": "All You Need Is Love - Remastered 2009",
     "artist": "The Beatles",
-    "album": "Magical Mystery Tour",
-    "artwork": "https://i.scdn.co/image/ab67616d00001e02692d9189b2bd75525893f0c1",
-    "spotify_id": "d"
+    "album": "Magical Mystery Tour (Remastered)",
+    "artwork": "https://i.scdn.co/image/ab67616d0000b273692d9189b2bd75525893f0c1",
+    "spotify_id": "68BTFws92cRztMS1oQ7Ewj",
+    "id": 4
   },
   {
-    "id": 5,
     "title": "Bad Liar",
     "artist": "Imagine Dragons",
-    "album": "Origins (Deluxe)",
-    "artwork": "https://i.scdn.co/image/ab67616d00001e02da6f73a25f4c79d0e6b4a8bd",
-    "spotify_id": "e"
+    "album": "Malaysia Hot & Viral - May 2021",
+    "artwork": "https://i.scdn.co/image/ab67616d0000b273b050c6e10dbea6c117648ec5",
+    "spotify_id": "20ND9zyuM1x4Psy4fuXfmo",
+    "id": 5
   },
   {
-    "id": 6,
     "title": "Shameless",
     "artist": "Camila Cabello",
     "album": "Romance",
-    "artwork": "https://i.scdn.co/image/ab67616d00001e025f53c0dbe5190a0af0fa28f3",
-    "spotify_id": "f"
+    "artwork": "https://i.scdn.co/image/ab67616d0000b2735f53c0dbe5190a0af0fa28f3",
+    "spotify_id": "2ogKhhoMClkFXek7ZgxAhN",
+    "id": 6
   },
   {
-    "id": 7,
     "title": "2002",
     "artist": "Anne-Marie",
     "album": "Speak Your Mind (Deluxe)",
-    "artwork": "https://i.scdn.co/image/ab67616d00001e0238aae75dc37fb42457866ffd",
-    "spotify_id": "g"
+    "artwork": "https://i.scdn.co/image/ab67616d0000b27338aae75dc37fb42457866ffd",
+    "spotify_id": "2BgEsaKNfHUdlh97KmvFyo",
+    "id": 7
   },
   {
-    "id": 8,
-    "title": "Bohemian Rhapsody",
+    "title": "Bohemian Rhapsody - Remastered 2011",
     "artist": "Queen",
-    "album": "Queen: Greatest Hits",
-    "artwork": "https://i.scdn.co/image/ab67616d00001e02ba84c3e2d930822ae1c3ce22",
-    "spotify_id": "h"
+    "album": "A Night At The Opera (Deluxe Remastered Version)",
+    "artwork": "https://i.scdn.co/image/ab67616d0000b273ce4f1737bc8a646c8c4bd25a",
+    "spotify_id": "7tFiyTwD0nx5a1eklYtX2J",
+    "id": 8
   },
   {
-    "id": 9,
-    "title": "Bicycle Race",
+    "title": "Bicycle Race - Remastered 2011",
     "artist": "Queen",
-    "album": "Queen: Greatest Hits",
-    "artwork": "https://i.scdn.co/image/ab67616d00001e02ba84c3e2d930822ae1c3ce22",
-    "spotify_id": "i"
+    "album": "Jazz (Deluxe Remastered Version)",
+    "artwork": "https://i.scdn.co/image/ab67616d0000b273008b06ec71019afd70153889",
+    "spotify_id": "3lUx27TOwV2nAiKwnYYXxe",
+    "id": 9
   },
   {
-    "id": 10,
-    "title": "Killer Queen",
+    "title": "Killer Queen - Remastered 2011",
     "artist": "Queen",
-    "album": "Queen: Greatest Hits",
-    "artwork": "https://i.scdn.co/image/ab67616d00001e02ba84c3e2d930822ae1c3ce22",
-    "spotify_id": "j"
+    "album": "Sheer Heart Attack (Deluxe Remastered Version)",
+    "artwork": "https://i.scdn.co/image/ab67616d0000b27359998815d706661e2c404d9f",
+    "spotify_id": "7GqWnsKhMtEW0nzki5o0d8",
+    "id": 10
   }
 ]
