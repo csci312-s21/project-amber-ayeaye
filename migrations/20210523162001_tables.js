@@ -1,5 +1,40 @@
 exports.up = function (knex) {
   return knex.schema
+    .createTable("Show", (table) => {
+      table.increments("id").unique().notNullable();
+      table.string("description", 10000);
+      table.string("schedule").notNullable();
+      table.string("dj_name").notNullable();
+      table.string("title").notNullable();
+    })
+    .createTable("Dj", (table) => {
+      table.increments("id").unique().notNullable();
+      table.string("email").notNullable().unique();
+      table.string("username");
+    })
+    .createTable("Song", (table) => {
+      table.increments("id").unique().notNullable();
+      table.string("title").notNullable();
+      table.string("artist").notNullable();
+      table.string("album").notNullable();
+      table.string("spotify_id").unique();
+      table.string("artwork");
+    })
+    .createTable("Playlist", (table) => {
+      table.increments("id").unique().notNullable();
+      table.integer("show_id").references("id").inTable("Show").notNullable();
+      table.string("time_window").unique().notNullable();
+    })
+    .createTable("SongPlay", (table) => {
+      table.increments("id").unique().notNullable();
+      table
+        .integer("playlist_id")
+        .references("id")
+        .inTable("Playlist")
+        .notNullable();
+      table.integer("song_id").references("id").inTable("Song").notNullable();
+      table.integer("order").notNullable();
+    })
     .createTable("accounts", (table) => {
       table.increments("id").primary();
       table.string("compound_id", 255).notNullable();
@@ -46,13 +81,21 @@ exports.up = function (knex) {
       table.string("identifier", 255).notNullable();
       table.string("token", 255).notNullable();
       table.timestamp("expires").notNullable();
+    })
+    .createTable("CurrentPlaylist", (table) => {
+      table.integer("id").unique().notNullable();
     });
 };
-
 exports.down = function (knex) {
   return knex.schema
+    .dropTableIfExists("Show")
+    .dropTableIfExists("Dj")
+    .dropTableIfExists("Song")
+    .dropTableIfExists("Playlist")
+    .dropTableIfExists("SongPlay")
     .dropTableIfExists("accounts")
     .dropTableIfExists("sessions")
     .dropTableIfExists("users")
-    .dropTableIfExists("verification_requests");
+    .dropTableIfExists("verification_requests")
+    .dropTableIfExists("CurrentPlaylist");
 };
