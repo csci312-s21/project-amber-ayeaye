@@ -8,7 +8,6 @@ import CurrentPlaylist from "../components/CurrentPlaylist";
 import PlaylistExplorer from "../components/PlaylistExplorer";
 import Schedule from "../components/Schedule";
 import { useSession } from "next-auth/client";
-
 import { Grid, Button } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -74,7 +73,7 @@ export default function Home() {
               color="secondary"
               style={{ position: "absolute", top: 20, right: 20 }}
             >
-              Go to DJ Page
+              DJ Page
             </Button>
           </Link>
         )}

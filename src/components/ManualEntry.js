@@ -99,7 +99,7 @@ export default function ManualEntry({ addSongToPlaylist, switchMode }) {
       <Button
         id="switchButton"
         variant="outlined"
-        size="small"
+        size="medium"
         onClick={() => switchMode()}
       >
         Switch to Song Search

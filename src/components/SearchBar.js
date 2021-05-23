@@ -70,7 +70,7 @@ export default function SearchBar({ addSongToPlaylist, switchMode }) {
       <Button
         id="switchButton"
         variant="outlined"
-        size="small"
+        size="medium"
         onClick={() => switchMode()}
       >
         Switch to Manual Entry

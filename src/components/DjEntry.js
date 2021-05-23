@@ -6,7 +6,6 @@ import CurrentShowSetter from "../components/CurrentShowSetter";
 import {
     Grid,
     Button,
-    Container
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import CancelIcon from "@material-ui/icons/Cancel";
@@ -14,6 +13,7 @@ import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import LoginWidget from "../components/LoginWidget";
 import { makeStyles } from "@material-ui/core/styles";
+import Link from "next/link";
 
 export default function DjEntry() {
     
@@ -32,7 +32,10 @@ export default function DjEntry() {
         width: "100%",
       },
       body: {
-        padding: 60,
+        padding: 40,
+      },
+      body2: {
+        padding: 0,
       },
       logo: {
         margin: "auto",
@@ -265,9 +268,67 @@ export default function DjEntry() {
               color="secondary"
               style={{ position: "absolute", top: 20, right: 20 }}
             >
-              Home
+              Home Page
             </Button>
           </Link>
+        <LoginWidget className={classes.login} />
+      </div>
+
+      <div className={classes.body}>
+      <Grid container justify="center" direction="row">
+        <Grid item xs={6}>
+        <Grid container justify="center" direction="column" spacing={2}>
+          <Grid item >
+            <CurrentShowSetter setCurrentShow={setCurrentShow}/>
+          </Grid>
+              <Grid item>
+                {editingPlaylistId && 
+                  (addingMode==="search" ? 
+                    <SearchBar addSongToPlaylist={addSongToPlaylist} switchMode={switchMode}/> :
+                    <ManualEntry addSongToPlaylist={addSongToPlaylist} switchMode={switchMode}/>)
+                }
+              </Grid>
+          </Grid>
+          { !editingPlaylistId ?
+            <Button
+                id="newPlaylistButton"
+                variant="contained"
+                color="primary"
+                size="medium"
+                disabled={!currentShowId}
+                startIcon={<AddIcon />}
+                onClick={() => createNewPlaylist(currentShowId)}
+            >
+                New Playlist
+            </Button>
+                :
+            <Button
+                id="cancelButton"
+                variant="contained"
+                color="primary"
+                size="medium"
+                startIcon={<CancelIcon />}
+                onClick={() => deletePlaylist(editingPlaylistId)}
+                >
+                Cancel
+            </Button>
+          }
+        
+      </Grid>
+
+      <Grid
+              container
+              direction="column"
+              justify="center"
+            >
+              <Grid item>
+                {editingPlaylistSongs ? 
+                  <Playlist songs={editingPlaylistSongs} mode={"inListenerPlaylist"} /> : <p>there are no songs</p>
+                }
+              </Grid>
+            </Grid>
+            
+      </Grid>
       </div>
 
       <main>
@@ -279,55 +340,7 @@ export default function DjEntry() {
           justify="center"
         >
           <div className={classes.body}>
-            <Grid
-              container
-              direction="row"
-              alignItems="flex-start"
-              justify="center"
-              spacing={4}
-            >
-              <Grid item>
-                <CurrentShowSetter setCurrentShow={setCurrentShow}/>
-              </Grid>
-              <Grid item>
-                { !editingPlaylistId ?
-                  <Button
-                      id="newPlaylistButton"
-                      variant="contained"
-                      color="primary"
-                      size="medium"
-                      disabled={!currentShowId}
-                      startIcon={<AddIcon />}
-                      onClick={() => createNewPlaylist(currentShowId)}
-                  >
-                      New Playlist
-                  </Button>
-                      :
-                  <Button
-                      id="cancelButton"
-                      variant="contained"
-                      color="primary"
-                      size="medium"
-                      startIcon={<CancelIcon />}
-                      onClick={() => deletePlaylist(editingPlaylistId)}
-                      >
-                      Cancel
-                  </Button>
-                }
-              </Grid>
-              <Grid item>
-                {editingPlaylistId && <Grid 
-                  item xs={6}>
-                  {addingMode==="search" ? 
-                      <SearchBar addSongToPlaylist={addSongToPlaylist} switchMode={switchMode}/> :
-                      <ManualEntry addSongToPlaylist={addSongToPlaylist} switchMode={switchMode}/>
-                  }
-                </Grid>}
-              <Grid item>
-                <CurrentPlaylist />
-              </Grid>
-            </Grid>
-            </Grid>
+            
           </div>
         </Grid>
       </main>
