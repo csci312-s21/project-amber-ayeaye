@@ -11,7 +11,7 @@ export default function CurrentPlaylist() {
     const getId = async () => {
       const response = await fetch("api/currentplaylist");
       if (!response.ok) {
-        throw new Error(response.statusText);
+        return;
       }
       const id = await response.json();
       console.log(id)
@@ -25,7 +25,7 @@ export default function CurrentPlaylist() {
     const getPlaylistSongs = async () => {
       const response = await fetch(`api/playlistsongs/${currentPlaylistId}`);
       if (!response.ok) {
-        throw new Error(response.statusText);
+        return;
       }
       const data = await response.json();
       currentPlaylistId && setPlaylistSongs(data);
