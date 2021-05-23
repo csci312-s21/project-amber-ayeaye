@@ -243,8 +243,8 @@ export default function DjEntry() {
           <Grid item xs={6}>
             <Grid
               container
-              justify="center"
-              alignItems="center"
+              justify="right"
+              alignItems="left"
               direction="column"
               spacing={2}
             >
@@ -301,7 +301,7 @@ export default function DjEntry() {
                   <Playlist
                     songs={editingPlaylistSongs}
                     deleteSong={deleteSongFromPlaylist}
-                    mode={"inListenerPlaylist"}
+                    mode={"inPlaylist"}
                   />
                 ) : (
                   <div className={classes.root}>

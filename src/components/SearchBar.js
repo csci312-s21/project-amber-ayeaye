@@ -8,7 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   entryField: {
-    margin: "15px !important",
+    // margin: "15px !important",
+    margin: "0px !important",
     width: "25ch !important",
   },
   button: {
