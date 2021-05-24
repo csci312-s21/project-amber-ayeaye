@@ -85,7 +85,7 @@ export async function createPlaylist(input_show_id) {
 
     // Add the playlist to the Playlist table
     // the next line will return a number in SQLite but an object in PostgreSQL, so we need to account for this difference, which is why we use the ternary operator to decide how to get the id
-    const playlistInsert = await knex("Playlist").insert(playlist, ["id"]);
+    const [playlistInsert] = await knex("Playlist").insert(playlist, ["id"]);
     const playlistId = playlistInsert.id ? playlistInsert.id : playlistInsert;
     const newPlaylist = await getPlaylist(playlistId);
 
