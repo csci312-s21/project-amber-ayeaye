@@ -12,7 +12,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 
 
+
 export default function Home() { 
+
   const [session] = useSession();
   const useStyles = makeStyles(() => ({
   header: {
@@ -46,8 +48,10 @@ return (
             alt="WRMC 91.1 FM Middlebury College Radio 91.1 FM"
           />
         </Grid>
+
             {session &&
             <Link href="/dj">
+
             <Button
               variant="contained"
               color="secondary"
@@ -55,6 +59,7 @@ return (
             >
               DJ Page
             </Button>
+
           </Link>}
             <LoginWidget className={classes.login} />
       </div>

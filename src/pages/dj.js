@@ -1,3 +1,4 @@
+
 import Head from "next/head";
 import DjEntry from "../components/DjEntry";
 import styles from "../styles/Home.module.css";
@@ -38,3 +39,4 @@ export default function DJ() {
     </div>
     
 )}
+

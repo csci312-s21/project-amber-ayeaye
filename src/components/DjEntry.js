@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+
 import Playlist from "../components/Playlist";
 import SearchBar from "../components/SearchBar";
 import ManualEntry from "../components/ManualEntry";
@@ -41,8 +42,6 @@ export default function DjEntry() {
   }));
 
   const classes = useStyles();
-
-
 
   // Set the current show based on an ID
   const setCurrentShow = (id) => setCurrentShowId(id);
