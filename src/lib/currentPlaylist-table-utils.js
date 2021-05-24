@@ -28,7 +28,7 @@ export const knex = knexInitializer(
  * @returns a message indicating whether a record was updated or whether a record was inserted
  */
 export async function makeCurrentPlaylist(id) {
-  const currentExists = await knex("CurrentPlaylist").select("id").count();
+  const currentExists = await knex("CurrentPlaylist").groupBy("id").select("id").count();
 
   const count = currentExists[0]["count(*)"];
 
