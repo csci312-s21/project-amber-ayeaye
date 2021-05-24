@@ -11,10 +11,10 @@ This application will serve as a new website for the WRMC radio station. The cur
 https://project-amber-ayeaye.herokuapp.com/
 
 #### Running development server
-After cloning the reposity, add the environment variables. Then, run the following commands:
-`npm install`
-`npx knex migate:latest`
-`npx knex seed:run`
-`export PORT=3000`
-`npm run build`
-`npm start`
+After cloning the reposity, add the environment variables. Then, run the following commands:<br/>
+`npm install`<br/>
+`npx knex migate:latest`<br/>
+`npx knex seed:run`<br/>
+`export PORT=3000`<br/>
+`npm run build`<br/>
+`npm start`<br/>
