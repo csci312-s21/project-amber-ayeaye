@@ -51,7 +51,8 @@ export async function getPlaylist(id) {
  * @returns a Boolean indicating success
  */
 export async function deletePlaylist(id) {
-  const numDeleted = await knex("Playlist").where({ id: id }).del();
+  real_id = +id;
+  const numDeleted = await knex("Playlist").where({ id: real_id }).del();
   return numDeleted ? true : false;
 }
 
