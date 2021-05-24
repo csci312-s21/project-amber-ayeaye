@@ -50,7 +50,10 @@ export const knex = knexInitializer(
 //   }
 // }
 export async function makeCurrentPlaylist(id){
-  const updated = await knex("CurrentPlaylist").update({ id: id });
+  const currentId = await getCurrentPlaylistId();
+  const updated = await knex("CurrentPlaylist")
+    .where({id : currentId})
+    .update({ id: id });
   return updated ? true : false;
 }
 
