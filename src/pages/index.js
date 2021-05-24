@@ -2,7 +2,6 @@ import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import LoginWidget from "../components/LoginWidget";
 import PlayButton from "../components/PlayButton";
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import CurrentPlaylist from "../components/CurrentPlaylist";
 import PlaylistExplorer from "../components/PlaylistExplorer";
@@ -11,7 +10,13 @@ import { useSession } from "next-auth/client";
 import { Grid, Button } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() => ({
+
+
+
+export default function Home() { 
+
+  const [session] = useSession();
+  const useStyles = makeStyles(() => ({
   header: {
     padding: 20,
     backgroundColor: "#90d7ed",
@@ -25,33 +30,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function Home() {
-  const classes = useStyles();
+const classes = useStyles(); 
 
-  const [showSecret, setShowSecret] = useState();
-  const [session] = useSession();
-
-  session && console.log(session.user.email);
-  useEffect(() => {
-    const getUser = async () => {
-      if (session) {
-        const response = await fetch("/api/secret");
-        if (response.ok) {
-          const username = await response.json();
-          setShowSecret(username);
-          console.log(username);
-        } else {
-          setShowSecret(null);
-        }
-      } else {
-        setShowSecret(null);
-      }
-    };
-    getUser();
-  }, [session]);
-
-  return (
-    <div className={styles.container}>
+return ( 
+ <div className={styles.container}>
       <Head>
         <title>WRMC</title>
         <link rel="icon" href="/favicon.ico" />
@@ -66,8 +48,10 @@ export default function Home() {
             alt="WRMC 91.1 FM Middlebury College Radio 91.1 FM"
           />
         </Grid>
-        {showSecret && (
-          <Link href="/dj">
+
+            {session &&
+            <Link href="/dj">
+
             <Button
               variant="contained"
               color="secondary"
@@ -75,9 +59,9 @@ export default function Home() {
             >
               DJ Page
             </Button>
-          </Link>
-        )}
-        <LoginWidget className={classes.login} />
+
+          </Link>}
+            <LoginWidget className={classes.login} />
       </div>
 
       <main>
@@ -112,5 +96,5 @@ export default function Home() {
       </main>
       <footer>A CS 312 Project</footer>
     </div>
-  );
+);
 }

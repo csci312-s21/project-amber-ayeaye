@@ -1,18 +1,20 @@
 import { useState } from "react";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+
 import Playlist from "../components/Playlist";
 import SearchBar from "../components/SearchBar";
 import ManualEntry from "../components/ManualEntry";
 import CurrentShowSetter from "../components/CurrentShowSetter";
-import { Grid, Button } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import CancelIcon from "@material-ui/icons/Cancel";
-import styles from "../styles/Home.module.css";
-import Head from "next/head";
 import LoginWidget from "../components/LoginWidget";
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "next/link";
-
 export default function DjEntry() {
+
   // Establish component states
   const [addingMode, setAddingMode] = useState("search");
   const [editingPlaylistId, setEditingPlaylistId] = useState();

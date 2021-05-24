@@ -54,7 +54,7 @@ export default function Schedule() {
     { name: "Saturday", num: 6 },
   ];
 
-  // get show data from server
+  //get show data from server
   useEffect(() => {
     const getShows = async () => {
       const response = await fetch("/api/shows/");

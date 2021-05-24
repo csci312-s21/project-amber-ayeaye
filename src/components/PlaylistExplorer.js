@@ -32,7 +32,7 @@ export default function PlaylistExplorer() {
 
   const classes = useStyles();
 
-  // Fetch shows from the sever
+  //Fetch shows from the sever
   useEffect(() => {
     const getShows = async () => {
       const response = await fetch("/api/shows");
