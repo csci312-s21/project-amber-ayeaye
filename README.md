@@ -15,4 +15,6 @@ https://project-amber-ayeaye.herokuapp.com/
 `npm install`
 `npx knex migate:latest`
 `npx knex seed:run`
-`npm start` TODO THIS IS NOT WORKING!!! - node UnhandledPromiseRejectionWarning, I think something to do with the $PORT env variable??
+`export PORT=3000`
+`npm run build`
+`npm start`
