@@ -60,7 +60,8 @@ export async function deleteShow(id) {
  * @returns the show with a new id attached
  */
 export async function addShow(show) {
-  const newId = await knex("Show").insert(show);
+  const [result] = await knex("Show").insert(show, ["id"]);
+  const newId = result.id ? result.id : result;
   const newShow = getShow(newId[0]);
   return newShow;
 }

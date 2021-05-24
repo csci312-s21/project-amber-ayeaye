@@ -60,8 +60,11 @@ export async function addSong(song) {
     return songInDatabase;
   } else {
     // If not, add the song and return the entry with the new ID attached
-    const newId = await knex("Song").insert(song);
-    const newSong = await getSong(newId[0]);
+    const [newId] = await knex("Song").insert(song, ["id"]);
+    const songId = newId.id ? newId.id : newId;
+    const newSong = await getSong(songId);
     return newSong;
   }
 }
+
+

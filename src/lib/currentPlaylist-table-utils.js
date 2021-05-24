@@ -50,6 +50,7 @@ export async function makeCurrentPlaylist(id) {
   }
 }
 
+
 /**
  * Read the current playlist id from the database
  *
