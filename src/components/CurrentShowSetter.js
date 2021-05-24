@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Button from "@material-ui/core/Button";
+import { Menu, MenuItem, Button } from "@material-ui/core";
 
-const ITEM_HEIGHT = 480;
+const ITEM_HEIGHT = 48;
 
 export default function CurrentShowSetter({ setCurrentShow }) {
   const [showAnchor, setShowAnchor] = useState(null);
@@ -49,10 +47,10 @@ export default function CurrentShowSetter({ setCurrentShow }) {
         aria-controls="show-menu"
         aria-haspopup="true"
         onClick={handleShowClick}
+        variant="outlined"
       >
-        {show ? show.title : "Click to Select a Show"}
+        {show ? show.title : "Select a Show"}
       </Button>
-      {show ? <div>Current Show Selected: {show.title}</div> : <></>}
 
       <Menu
         id="show-selector"

@@ -24,12 +24,13 @@ export const knex = knexInitializer(
     deleteSongFromPlaylist(songPlay_id) - deletes a song from the playlist
         - Removes an entry in SongPlay only
 
-        changePlaylistOrder(playlist_id, new_order) - changes the order of songs in the playlist
-            - Need to figure out how this will work
-
     getSongsFromPlaylist(playlist_id) - retrieves all songs corresponding to the specified playlist
 
-    getShows - retrieves all shows for presentation in the calendar
+    getShows() - retrieves all shows for presentation in the calendar
+
+    getPlaylists() - retrieves all playlists
+
+    getShowPlaylists(show_id) - retrieves the playlists associated with a given show id
 */
 
 /**
@@ -88,20 +89,23 @@ export async function deleteSongFromPlaylist(songplay_id) {
  * @returns array of Song objects with IDs
  */
 export async function getSongsFromPlaylist(playlist_id) {
-  const songs = await knex("Playlist")
-    .join("SongPlay", "SongPlay.playlist_id", "Playlist.id")
-    .join("Song", "Song.id", "SongPlay.song_id")
-    .select(
-      "Song.id",
-      "Song.title",
-      "Song.artist",
-      "Song.album",
-      "Song.artwork",
-      "Song.spotify_id",
-      "SongPlay.id as songplay_id"
-    )
-    .where("Playlist.id", "=", playlist_id);
-  return songs;
+
+    const songs = await knex("Playlist")
+        .join("SongPlay", "SongPlay.playlist_id", "Playlist.id")
+        .join("Song", "Song.id", "SongPlay.song_id")
+        .select(
+            "Song.id",
+            "Song.title",
+            "Song.artist",
+            "Song.album",
+            "Song.artwork",
+            "Song.spotify_id",
+            "SongPlay.id as songplay_id",
+            "SongPlay.order as order"
+        )
+        .where("Playlist.id", "=", playlist_id)
+        .orderBy("order", "desc");
+    return songs;
 }
 
 /**
@@ -132,6 +136,7 @@ export async function getPlaylists() {
  * @returns array of Playlist objects or an empty array if no playlists exist
  */
 export async function getShowPlaylists(show_id) {
-  const playlists = await knex("Playlist").select().where({ show_id: show_id });
-  return playlists;
+    const playlists = await knex("Playlist").select().where({show_id:show_id})
+    .orderBy("time_window");
+    return playlists;
 }

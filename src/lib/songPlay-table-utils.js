@@ -16,9 +16,7 @@ export const knex = knexInitializer(
 
     getSongPlay(id) - gets the songPlay element with the specified id
 
-    deleteSongPlay(id) - delete the songPlay element corresponding to the provided id
-
-    changeOrder(id_list) - reorders songPlay elements for a given playlist based on the provided list of id's
+    getAllSongPlays() - gets all songPlay objects from the database
 
 */
 

@@ -8,7 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   entryField: {
-    margin: "15px !important",
+    // margin: "15px !important",
+    margin: "0px !important",
     width: "25ch !important",
   },
   button: {
@@ -70,7 +71,7 @@ export default function SearchBar({ addSongToPlaylist, switchMode }) {
       <Button
         id="switchButton"
         variant="outlined"
-        size="small"
+        size="medium"
         onClick={() => switchMode()}
       >
         Switch to Manual Entry
