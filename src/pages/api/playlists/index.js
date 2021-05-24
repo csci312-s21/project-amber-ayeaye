@@ -13,12 +13,14 @@ const handler = nc({ onError })
   })
   .put(async (req, res) => {
     const show_id = req.body;
-    const newPlaylist = await createPlaylist(show_id);
+    const num_show_id = +show_id;
+    const newPlaylist = await createPlaylist(num_show_id);
     res.status(200).json(newPlaylist);
   })
   .delete(async (req, res) => {
     const id = req.body;
-    const deleted = await deletePlaylist(id);
+    const num_id = +id;
+    const deleted = await deletePlaylist(num_id);
     res.status(200).json(deleted);
   });
 
