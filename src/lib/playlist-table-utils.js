@@ -84,7 +84,8 @@ export async function createPlaylist(input_show_id) {
     };
 
     // Add the playlist to the Playlist table
-    const playlistId = await knex("Playlist").insert(playlist);
+    const playlistIdArray = await knex("Playlist").insert(playlist).returning("id");
+    const playlistId = playlistIdArray[0];
     const newPlaylist = await getPlaylist(playlistId);
 
     // Return the playlist entry
