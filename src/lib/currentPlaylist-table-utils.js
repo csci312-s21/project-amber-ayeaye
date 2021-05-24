@@ -27,29 +27,32 @@ export const knex = knexInitializer(
  *
  * @returns a message indicating whether a record was updated or whether a record was inserted
  */
-export async function makeCurrentPlaylist(id) {
-  const currentExists = await knex("CurrentPlaylist").groupBy("id").select("id").count();
+// export async function makeCurrentPlaylist(id) {
+//   const currentExists = await knex("CurrentPlaylist").groupBy("id").select("id").count();
 
-  const count = currentExists[0]["count(*)"];
+//   const count = currentExists[0]["count(*)"];
 
-  // check to see if we have a current entry in the database
-  if (count > 0) {
-    const updated = await knex("CurrentPlaylist").update({ id: id });
-    if (updated) {
-      // have any records have been updated? if so, return true
-      return "records updated";
-    }
-    // if none have been updated, return false
-    return "no records updated";
-  } else {
-    const inserted = await knex("CurrentPlaylist").insert({ id: id });
-    if (inserted) {
-      return "inserted";
-    }
-    return "not inserted";
-  }
+//   // check to see if we have a current entry in the database
+//   if (count > 0) {
+//     const updated = await knex("CurrentPlaylist").update({ id: id });
+//     if (updated) {
+//       // have any records have been updated? if so, return true
+//       return "records updated";
+//     }
+//     // if none have been updated, return false
+//     return "no records updated";
+//   } else {
+//     const inserted = await knex("CurrentPlaylist").insert({ id: id });
+//     if (inserted) {
+//       return "inserted";
+//     }
+//     return "not inserted";
+//   }
+// }
+export async function makeCurrentPlaylist(id){
+  const updated = await knex("CurrentPlaylist").update({ id: id });
+  return updated ? true : false;
 }
-
 
 /**
  * Read the current playlist id from the database
