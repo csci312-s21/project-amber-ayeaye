@@ -31,6 +31,7 @@ exports.up = function (knex) {
         .integer("playlist_id")
         .references("id")
         .inTable("Playlist")
+        .onDelete("CASCADE")
         .notNullable();
       table.integer("song_id").references("id").inTable("Song").notNullable();
       table.integer("order").notNullable();
