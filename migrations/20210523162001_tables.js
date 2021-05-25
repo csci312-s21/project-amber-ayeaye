@@ -28,9 +28,8 @@ exports.up = function (knex) {
     .createTable("SongPlay", (table) => {
       table.increments("id").unique().notNullable();
       table
-        .integer("playlist_id")
+        .foreign("playlist_id")
         .references("id")
-        .inTable("Playlist")
         .onDelete("CASCADE")
         .notNullable();
       table.integer("song_id").references("id").inTable("Song").notNullable();
