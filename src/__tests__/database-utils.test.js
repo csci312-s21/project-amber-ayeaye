@@ -8,17 +8,6 @@ import {
   getShows,
 } from "../lib/database-utils";
 
-// import {
-//   knex,
-//     verify_dj,
-//     get_djs,
-//     get_dj,
-//     add_dj,
-//     delete_dj
-// } from "../lib/next-auth-utils";
-
-// const newUser = {email: "mmike@middlebury.edu", username: "Mike"}
-
 describe("Test of the database utility functions", () => {
   beforeAll(async () => {
     await knex.migrate.rollback();
@@ -28,6 +17,10 @@ describe("Test of the database utility functions", () => {
 
   describe("getSongsFromPlaylist", () => {
     test("getSongsFromPlaylist returns expected list of Song objects", async () => {
+      // Assign expected ID's to each song in the seed
+      for (let i = 1; i <= seedSongs.length; i++) {
+        seedSongs[i - 1].id = i;
+      }
       const playlist_id1 = 1;
       const returnedSongs1 = await getSongsFromPlaylist(playlist_id1);
       const expectedSongs1 = seedSongs.filter((song) => song.id === 1);
@@ -56,6 +49,10 @@ describe("Test of the database utility functions", () => {
 
   describe("getPlaylists", () => {
     test("getPlaylists returns the list of playlists", async () => {
+      // Assign expected ID's to each playlist in the seed
+      for (let i = 1; i <= seedPlaylists.length; i++) {
+        seedPlaylists[i - 1].id = i;
+      }
       const playlists = await getPlaylists();
       expect(playlists).toEqual(seedPlaylists);
     });
