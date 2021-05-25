@@ -30,6 +30,7 @@ exports.up = function (knex) {
       table
         .foreign("playlist_id")
         .references("id")
+        .inTable("Playlist")
         .onDelete("CASCADE")
         .notNullable();
       table.integer("song_id").references("id").inTable("Song").notNullable();
