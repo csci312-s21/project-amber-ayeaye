@@ -49,13 +49,7 @@ export const knex = knexInitializer(
 //     return "not inserted";
 //   }
 // }
-export async function makeCurrentPlaylist(id){
-  const currentId = await getCurrentPlaylistId();
-  const updated = await knex("CurrentPlaylist")
-    .where({id : currentId})
-    .update({ id: id });
-  return updated ? true : false;
-}
+//
 
 /**
  * Read the current playlist id from the database
@@ -65,4 +59,12 @@ export async function makeCurrentPlaylist(id){
 export async function getCurrentPlaylistId() {
   const rows = await knex("CurrentPlaylist").select();
   return rows[0].id;
+}
+
+export async function makeCurrentPlaylist(id) {
+  const currentId = await getCurrentPlaylistId();
+  const updated = await knex("CurrentPlaylist")
+    .where({ id: currentId })
+    .update({ id: id });
+  return updated ? true : false;
 }
