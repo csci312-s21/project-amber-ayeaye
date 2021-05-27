@@ -54,14 +54,15 @@ export async function addSongToPlaylist(song, playlist_id, order) {
 
   // Add the SongPlay to the database
   const songPlay = {
-    playlist_id: playlist_id,
-    song_id: newSong.id,
-    order: order,
+    playlist_id: +playlist_id,
+    song_id: +newSong.id,
+    order: +order,
   };
-  const songplay_id = await knex("SongPlay").insert(songPlay);
+  const [songplay_id] = await knex("SongPlay").insert(songPlay, ["id"]);
+  const real_id = songplay_id.id ? songplay_id.id : songplay_id;
 
   // Attach the songPlayID to the Song object
-  const songWithBothIds = { ...newSong, songplay_id };
+  const songWithBothIds = { ...newSong, real_id };
 
   // Return the new Song object with both IDs
   return songWithBothIds;

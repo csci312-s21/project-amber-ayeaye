@@ -27,11 +27,11 @@ exports.up = function (knex) {
     })
     .createTable("SongPlay", (table) => {
       table.increments("id").unique().notNullable();
+      table.integer("playlist_id").notNullable();
       table
-        .integer("playlist_id")
-        .references("id")
-        .inTable("Playlist")
-        .notNullable();
+        .foreign("playlist_id")
+        .references("Playlist.id")
+        .onDelete("CASCADE");
       table.integer("song_id").references("id").inTable("Song").notNullable();
       table.integer("order").notNullable();
     })
